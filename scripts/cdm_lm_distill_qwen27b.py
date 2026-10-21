@@ -794,6 +794,7 @@ def load_teacher(model_id, device, log, load_4bit=False, cache_dir=None):
             bnb_4bit_compute_dtype=torch.bfloat16,
             bnb_4bit_use_double_quant=True,
             bnb_4bit_quant_type="nf4",
+            llm_int8_enable_fp32_cpu_offload=True,
             llm_int8_skip_modules=["lm_head", "visual", "model.visual", "mtp"],
         )
         dev_map = (
