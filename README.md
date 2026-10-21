@@ -140,6 +140,19 @@ Multi-agent Crystal Telepathy (`N` agents sharing slot routing):
 > 🧪 **Prototype / Experimental Status (Engineered by Kestrel, DuoNeural Lab):**  
 > Both published CDM v1 models ([`Sub-Lattice-17M-Poincare-Instruct`](https://huggingface.co/DuoNeural/Sub-Lattice-17M-Poincare-Instruct) and [`Lattice-1-107M-Poincare-Preview`](https://huggingface.co/DuoNeural/Lattice-1-107M-Poincare-Preview)) now include tokenizer-equipped **GGUF** artifacts (`F32`, `Q8_0`, `Q6_K`, `Q4_K_M`, `Q4_K_S`) and execute on **CPU and NVIDIA CUDA GPUs** via our patched `llama.cpp` backend (`cdm-gguf/llama-cdm.patch`) with **zero custom GGML operators**.
 
+### 🚀 Quickstart (`llama cli -hf ...`) & Why Stock `llama.cpp` Needs `llama-cdm.patch`
+Because `cdm` (`LLM_ARCH_CDM`) is a new architecture not yet merged into upstream `ggml-org/llama.cpp`, running an unpatched stock `llama` binary will report `error loading model: unknown model architecture: 'cdm'`. Build our patched `llama.cpp` in 3 commands:
+
+```bash
+cd cdm-gguf
+./setup_backend.sh   # clones pinned llama.cpp & applies llama-cdm.patch
+./build.sh           # builds CPU binaries (or ./build-cuda.sh for NVIDIA CUDA)
+
+# Run interactive chat on Sub-Lattice (Q8_0) or text completion on Lattice-1 directly from HF Hub:
+./llama.cpp/build/bin/llama cli -hf DuoNeural/Sub-Lattice-17M-Poincare-Instruct:Q8_0
+./llama.cpp/build/bin/llama-completion -hf DuoNeural/Lattice-1-107M-Poincare-Preview:Q8_0 -p "The geometry of hyperbolic space allows" -n 60 -no-cnv
+```
+
 ### 1. CPU (Core i7-6700HQ, 4T) vs. GPU (GTX 1070 8GB CUDA `sm_61`) Benchmarks
 `160`-token prefill (all-position logits) and `32`-token KV-cached decode tail after a `128`-token prefix (`F32` KV cache, full layer offload on CUDA: `4/4` layers for Sub-Lattice, `5/5` layers for Lattice-1):
 
