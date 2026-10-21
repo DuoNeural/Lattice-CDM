@@ -1,0 +1,35 @@
+{
+  "raw_log": "research/gpu-scheduler-sub.log",
+  "note": "Counts cover scheduler reserve/probe graphs and executed graph; CPU assignments are only embedding GET_ROWS; all geometric routing operators assigned CUDA0.",
+  "offload": [
+    "offloaded 4/4 layers to GPU"
+  ],
+  "backend_assignments": {
+    "CPU": 14,
+    "CUDA0": 1848
+  },
+  "cpu_operators": {
+    "GET_ROWS": 14
+  },
+  "cuda_operators": {
+    "ADD": 189,
+    "NORM": 56,
+    "MUL": 203,
+    "MUL_MAT": 238,
+    "SET_ROWS": 42,
+    "CONT": 42,
+    "SOFT_MAX": 42,
+    "SILU": 42,
+    "SQR": 147,
+    "SUM_ROWS": 126,
+    "CLAMP": 189,
+    "SQRT": 84,
+    "DIV": 84,
+    "SCALE": 252,
+    "TANH": 21,
+    "REPEAT": 42,
+    "SUB": 21,
+    "LOG": 21,
+    "GET_ROWS": 7
+  }
+}

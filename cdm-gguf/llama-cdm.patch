@@ -1,0 +1,302 @@
+diff --git a/src/llama-arch.cpp b/src/llama-arch.cpp
+index 03b7951c3..fb9728311 100644
+--- a/src/llama-arch.cpp
++++ b/src/llama-arch.cpp
+@@ -12,6 +12,7 @@ static const std::map<llm_arch, const char *> LLM_ARCH_NAMES = {
+     { LLM_ARCH_DECI,             "deci"             },
+     { LLM_ARCH_FALCON,           "falcon"           },
+     { LLM_ARCH_GROK,             "grok"             },
++    { LLM_ARCH_CDM, "cdm" },
+     { LLM_ARCH_GPT2,             "gpt2"             },
+     { LLM_ARCH_GPTJ,             "gptj"             },
+     { LLM_ARCH_GPTNEOX,          "gptneox"          },
+@@ -471,6 +472,12 @@ static const std::map<llm_tensor, const char *> LLM_TENSOR_NAMES = {
+     { LLM_TENSOR_FFN_LATENT_DOWN,                        "blk.%d.ffn_latent_down" },
+     { LLM_TENSOR_FFN_LATENT_UP,                          "blk.%d.ffn_latent_up" },
+     { LLM_TENSOR_ATTN_NORM_2,                            "blk.%d.attn_norm_2" },
++    { LLM_TENSOR_CDM_SLOTS, "blk.%d.cdm_slots" },
++    { LLM_TENSOR_CDM_TELE, "blk.%d.cdm_tele" },
++    { LLM_TENSOR_CDM_SLOT_EXPERT, "blk.%d.cdm_slot_expert" },
++    { LLM_TENSOR_CDM_GATE, "blk.%d.cdm_expert_%d_gate" },
++    { LLM_TENSOR_CDM_UP, "blk.%d.cdm_expert_%d_up" },
++    { LLM_TENSOR_CDM_DOWN, "blk.%d.cdm_expert_%d_down" },
+     { LLM_TENSOR_ATTN_QKV,                               "blk.%d.attn_qkv" },
+     { LLM_TENSOR_LAYER_OUT_NORM,                         "blk.%d.layer_output_norm" },
+     { LLM_TENSOR_LAYER_OUT_SCALE,                        "blk.%d.layer_output_scale" },
+@@ -738,6 +745,12 @@ static const std::map<llm_tensor, llm_tensor_info> LLM_TENSOR_INFOS = {
+     {LLM_TENSOR_ATTN_Q,                     {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+     {LLM_TENSOR_ATTN_K,                     {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+     {LLM_TENSOR_ATTN_V,                     {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_SLOTS, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_TELE, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_SLOT_EXPERT, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_GATE, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_UP, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
++    {LLM_TENSOR_CDM_DOWN, {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+     {LLM_TENSOR_ATTN_QKV,                   {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+     {LLM_TENSOR_ATTN_OUT,                   {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+     {LLM_TENSOR_ATTN_GATE,                  {LLM_TENSOR_LAYER_REPEATING, GGML_OP_MUL_MAT}},
+diff --git a/src/llama-arch.h b/src/llama-arch.h
+index af64f4ec5..608f988bd 100644
+--- a/src/llama-arch.h
++++ b/src/llama-arch.h
+@@ -18,6 +18,7 @@ enum llm_arch {
+     LLM_ARCH_FALCON,
+     LLM_ARCH_BAICHUAN,
+     LLM_ARCH_GROK,
++    LLM_ARCH_CDM,
+     LLM_ARCH_GPT2,
+     LLM_ARCH_GPTJ,
+     LLM_ARCH_GPTNEOX,
+@@ -710,6 +711,12 @@ enum llm_tensor {
+     LLM_TENSOR_DFLASH_FFN_CONV_PROJ,
+     LLM_TENSOR_DFLASH_SELECTOR_PREV,
+     LLM_TENSOR_DFLASH_SELECTOR_NEXT,
++    LLM_TENSOR_CDM_SLOTS,
++    LLM_TENSOR_CDM_TELE,
++    LLM_TENSOR_CDM_SLOT_EXPERT,
++    LLM_TENSOR_CDM_GATE,
++    LLM_TENSOR_CDM_UP,
++    LLM_TENSOR_CDM_DOWN,
+     LLM_TENSOR_DFLASH_SELECTOR_HIDDEN,
+ };
+ 
+diff --git a/src/llama-context.cpp b/src/llama-context.cpp
+index ef53728d1..d7fd7125a 100644
+--- a/src/llama-context.cpp
++++ b/src/llama-context.cpp
+@@ -130,6 +130,9 @@ llama_context::llama_context(
+     cparams.pooling_type      = params.pooling_type;
+ 
+     cparams.n_ctx            = params.n_ctx           == 0    ? hparams.n_ctx_train           : params.n_ctx;
++    if (model.arch == LLM_ARCH_CDM && uint64_t(cparams.n_ctx) > uint64_t(hparams.n_ctx_train) * cparams.n_seq_max) {
++        throw std::runtime_error("CDM context exceeds the learned absolute-position table per sequence");
++    }
+     cparams.rope_freq_base   = params.rope_freq_base  == 0.0f ? hparams.rope_freq_base_train  : params.rope_freq_base;
+     cparams.rope_freq_scale  = params.rope_freq_scale == 0.0f ? hparams.rope_freq_scale_train : params.rope_freq_scale;
+ 
+@@ -1719,6 +1722,16 @@ int llama_context::decode(const llama_batch & batch_inp) {
+         return -1;
+     }
+ 
++    if (model.arch == LLM_ARCH_CDM) {
++        const auto & batch = balloc->get_batch();
++        for (int32_t i = 0; i < batch.n_tokens; ++i) {
++            if (batch.pos[i] < 0 || uint32_t(batch.pos[i]) >= hparams.n_ctx_train) {
++                LLAMA_LOG_ERROR("%s: CDM position %d exceeds learned position range [0, %u)\n", __func__, batch.pos[i], hparams.n_ctx_train);
++                return -1;
++            }
++        }
++    }
++
+     const uint32_t n_tokens_all  = balloc->get_n_tokens();
+     const uint32_t n_outputs_all = balloc->get_n_outputs();
+ 
+@@ -2316,7 +2329,10 @@ void llama_context::output_reorder() {
+ 
+ uint32_t llama_context::graph_max_nodes(uint32_t n_tokens) const {
+     uint32_t res;
+-    if (model.arch == LLM_ARCH_KIMI_K3) {
++    if (model.arch == LLM_ARCH_CDM) {
++        // Dense geometric routing unrolls several scalar operations per slot.
++        res = std::max<uint32_t>(4096u, 64u * model.n_tensors());
++    } else if (model.arch == LLM_ARCH_KIMI_K3) {
+         // the n_tokens*40 budget below is exhausted at ubatch 3840
+         res = std::max<uint32_t>(n_tokens * 160, 64u * model.n_tensors());
+     } else if (model.arch == LLM_ARCH_HRM_TEXT) {
+diff --git a/src/llama-kv-cache.cpp b/src/llama-kv-cache.cpp
+index a342ee119..fe863afe6 100644
+--- a/src/llama-kv-cache.cpp
++++ b/src/llama-kv-cache.cpp
+@@ -1186,6 +1186,10 @@ void llama_kv_cache::apply_ubatch(const slot_info & sinfo, const llama_ubatch &
+ }
+ 
+ bool llama_kv_cache::get_can_shift() const {
++    // CDM uses learned absolute positions: shifted K/V would encode old positions.
++    if (model.arch == LLM_ARCH_CDM) {
++        return false;
++    }
+     // Step35 uses per-layer RoPE dims; K-shift assumes a single global n_rot.
+     if (model.arch == LLM_ARCH_STEP35) {
+         return false;
+diff --git a/src/llama-model.cpp b/src/llama-model.cpp
+index de3b2e38f..4d5970bf2 100644
+--- a/src/llama-model.cpp
++++ b/src/llama-model.cpp
+@@ -132,6 +132,8 @@ static llama_model * llama_model_mapping(llm_arch arch, const llama_model_params
+             return new llama_model_plamo2(params);
+         case LLM_ARCH_PLAMO3:
+             return new llama_model_plamo3(params);
++        case LLM_ARCH_CDM:
++            return new llama_model_cdm(params);
+         case LLM_ARCH_GPT2:
+             return new llama_model_gpt2(params);
+         case LLM_ARCH_CODESHELL:
+@@ -2902,6 +2904,7 @@ llama_rope_type llama_model_rope_type(const llama_model * model) {
+     switch (model->arch) {
+         // these models do not use RoPE
+         case LLM_ARCH_CLIP:
++        case LLM_ARCH_CDM:
+         case LLM_ARCH_GPT2:
+         case LLM_ARCH_GPTJ:
+         case LLM_ARCH_MPT:
+diff --git a/src/models/cdm.cpp b/src/models/cdm.cpp
+new file mode 100644
+index 000000000..325e66610
+--- /dev/null
++++ b/src/models/cdm.cpp
+@@ -0,0 +1,131 @@
++#include "models.h"
++#include <stdexcept>
++#include <cmath>
++#include <cstdlib>
++
++void llama_model_cdm::load_arch_hparams(llama_model_loader & ml) {
++    ml.get_key(LLM_KV_ATTENTION_LAYERNORM_EPS, hparams.f_norm_eps);
++    ml.get_key("cdm.cdm.slot_count", slots_count);
++    ml.get_key("cdm.cdm.expert_count", experts_count);
++    auto array = [&](const char *key, std::vector<float> & out) {
++        int id = gguf_find_key(ml.metadata, key);
++        if (id < 0 || gguf_get_kv_type(ml.metadata,id) != GGUF_TYPE_ARRAY || gguf_get_arr_type(ml.metadata,id) != GGUF_TYPE_FLOAT32 || gguf_get_arr_n(ml.metadata,id) != hparams.n_layer()) throw std::runtime_error(std::string("invalid CDM array: ")+key);
++        auto data = (const float *)gguf_get_arr_data(ml.metadata,id);
++        out.assign(data,data+hparams.n_layer());
++    };
++    array("cdm.cdm.curvature_per_layer",curvature);
++    array("cdm.cdm.temperature_per_layer",temperature);
++    array("cdm.cdm.telepathy_beta_per_layer",beta);
++    if (!slots_count || !experts_count || slots_count > 4096 || experts_count > 256) throw std::runtime_error("invalid CDM slot/expert count");
++    if (!hparams.n_head() || hparams.n_embd % hparams.n_head()) throw std::runtime_error("invalid CDM attention dimensions");
++    for (size_t i=0;i<curvature.size();++i) if (!std::isfinite(curvature[i]) || curvature[i]<=0 || !std::isfinite(temperature[i]) || temperature[i]<=0 || !std::isfinite(beta[i])) throw std::runtime_error("invalid CDM routing scalar");
++    type = LLM_TYPE_UNKNOWN;
++}
++void llama_model_cdm::load_arch_tensors(llama_model_loader &) {
++    LLAMA_LOAD_LOCALS;
++    tok_embd = create_tensor(tn(LLM_TENSOR_TOKEN_EMBD,"weight"),{n_embd,n_vocab},0);
++    pos_embd = create_tensor(tn(LLM_TENSOR_POS_EMBD,"weight"),{n_embd,n_ctx_train},0);
++    embed_norm = create_tensor(tn(LLM_TENSOR_TOKEN_EMBD_NORM,"weight",0),{n_embd},TENSOR_NOT_REQUIRED);
++    embed_norm_b = create_tensor(tn(LLM_TENSOR_TOKEN_EMBD_NORM,"bias",0),{n_embd},TENSOR_NOT_REQUIRED);
++    output_norm = create_tensor(tn(LLM_TENSOR_OUTPUT_NORM,"weight"),{n_embd},0);
++    output_norm_b = create_tensor(tn(LLM_TENSOR_OUTPUT_NORM,"bias"),{n_embd},0);
++    output = create_tensor(tn(LLM_TENSOR_OUTPUT,"weight"),{n_embd,n_vocab},TENSOR_NOT_REQUIRED);
++    if (!output) output = create_tensor(tn(LLM_TENSOR_TOKEN_EMBD,"weight"),{n_embd,n_vocab},TENSOR_DUPLICATED);
++    routing.resize(n_layer);
++    for(int i=0;i<n_layer;++i) {
++        auto & l=layers[i]; auto & r=routing[i];
++        l.attn_norm=create_tensor(tn(LLM_TENSOR_ATTN_NORM,"weight",i),{n_embd},0);
++        l.attn_norm_b=create_tensor(tn(LLM_TENSOR_ATTN_NORM,"bias",i),{n_embd},0);
++        l.wqkv=create_tensor(tn(LLM_TENSOR_ATTN_QKV,"weight",i),{n_embd,3*n_embd},0);
++        l.wqkv_b=create_tensor(tn(LLM_TENSOR_ATTN_QKV,"bias",i),{3*n_embd},0);
++        l.wo=create_tensor(tn(LLM_TENSOR_ATTN_OUT,"weight",i),{n_embd,n_embd},0);
++        l.wo_b=create_tensor(tn(LLM_TENSOR_ATTN_OUT,"bias",i),{n_embd},0);
++        l.ffn_norm=create_tensor(tn(LLM_TENSOR_FFN_NORM,"weight",i),{n_embd},0);
++        l.ffn_norm_b=create_tensor(tn(LLM_TENSOR_FFN_NORM,"bias",i),{n_embd},0);
++        r.slots=create_tensor(tn(LLM_TENSOR_CDM_SLOTS,"weight",i),{n_embd,slots_count},0);
++        r.tele=create_tensor(tn(LLM_TENSOR_CDM_TELE,"weight",i),{slots_count,slots_count},0);
++        r.mapping=create_tensor(tn(LLM_TENSOR_CDM_SLOT_EXPERT,"weight",i),{slots_count,experts_count},0);
++        for(int e=0;e<experts_count;++e) {
++            r.gate.push_back(create_tensor(tn(LLM_TENSOR_CDM_GATE,"weight",i,e),{n_embd,n_ff},0));
++            r.up.push_back(create_tensor(tn(LLM_TENSOR_CDM_UP,"weight",i,e),{n_embd,n_ff},0));
++            r.down.push_back(create_tensor(tn(LLM_TENSOR_CDM_DOWN,"weight",i,e),{n_ff,n_embd},0));
++        }
++    }
++}
++std::unique_ptr<llm_graph_context> llama_model_cdm::build_arch_graph(const llm_graph_params &params) const { return std::make_unique<graph>(*this,params); }
++llama_model_cdm::graph::graph(const llama_model_cdm &model,const llm_graph_params &params):llm_graph_context(params) {
++    auto * x=build_inp_embd(model.tok_embd);
++    x=ggml_add(ctx0,x,ggml_get_rows(ctx0,model.pos_embd,build_inp_pos()));
++    if(model.embed_norm) x=build_norm(x,model.embed_norm,model.embed_norm_b,LLM_NORM,-1);
++    auto * attn=build_attn_inp_kv();
++    auto * out_ids=build_inp_out_ids();
++    ggml_tensor *prev=nullptr;
++    auto norm=[&](ggml_tensor *a,float eps) { return ggml_sqrt(ctx0,ggml_clamp(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,a)),eps*eps,INFINITY)); };
++    for(int il=0;il<n_layer;++il) {
++        auto &l=model.layers[il]; auto &r=model.routing[il];
++        auto *h=build_norm(x,l.attn_norm,l.attn_norm_b,LLM_NORM,il);
++        auto [q,k,v]=build_qkv(l,h,hparams.n_embd_head_k(),n_head,n_head_kv,il);
++        auto *a=build_attn(attn,l.wo,l.wo_b,l.wo_s,q,k,v,nullptr,nullptr,nullptr,1.0f/sqrtf(hparams.n_embd_head_k()),il);
++        x=ggml_add(ctx0,x,a);
++        h=build_norm(x,l.ffn_norm,l.ffn_norm_b,LLM_NORM,il);
++        float c=model.curvature[il],sc=sqrtf(c);
++        auto *xt=ggml_scale(ctx0,ggml_div(ctx0,h,norm(h,1e-12f)),0.3f);
++        auto *xn=norm(xt,1e-12f);
++        auto *z=ggml_scale(ctx0,xn,sc);
++        auto *hyp=ggml_mul(ctx0,xt,ggml_div(ctx0,ggml_tanh(ctx0,ggml_clamp(ctx0,z,0,8)),z));
++        auto *hypn=norm(hyp,1e-12f);
++        auto *clip=ggml_clamp(ctx0,ggml_scale(ctx0,ggml_div(ctx0,ggml_scale_bias(ctx0,hypn,0,(1-1e-5f)/sc),hypn),1),0,1);
++        hyp=ggml_mul(ctx0,hyp,clip);
++        auto *cx=ggml_clamp(ctx0,ggml_scale(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,hyp)),c),0,1-1e-5f);
++        auto *denx=ggml_scale_bias(ctx0,cx,-1,1);
++        ggml_tensor *logits=nullptr;
++        if (getenv("CDM_UNROLLED_ROUTER") && std::string(getenv("CDM_UNROLLED_ROUTER")) == "1") {
++        for(int s=0;s<model.slots_count;++s) {
++            auto *slot=ggml_view_2d(ctx0,r.slots,n_embd,1,r.slots->nb[1],s*r.slots->nb[1]);
++            auto *diff=ggml_sub(ctx0,hyp,slot);
++            auto *cy=ggml_clamp(ctx0,ggml_scale(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,slot)),c),0,1-1e-5f);
++            auto *deny=ggml_scale_bias(ctx0,cy,-1,1);
++            auto *den=ggml_clamp(ctx0,ggml_mul(ctx0,denx,deny),1e-5f,INFINITY);
++            auto *arg=ggml_scale_bias(ctx0,ggml_div(ctx0,ggml_scale(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,diff)),2*c),den),1,1);
++            arg=ggml_clamp(ctx0,arg,1+1e-5f,INFINITY);
++            auto *acosh=ggml_log(ctx0,ggml_add(ctx0,arg,ggml_sqrt(ctx0,ggml_scale_bias(ctx0,ggml_sqr(ctx0,arg),1,-1))));
++            auto *sim=ggml_scale(ctx0,acosh,-2/sc*model.temperature[il]);
++            logits=logits?ggml_concat(ctx0,logits,sim,0):sim;
++        }
++        } else {
++        // Evaluate all slot distances in one broadcast. The literal squared
++        // difference preserves the training arithmetic without dot-product cancellation.
++        const int64_t nt = hyp->ne[1];
++        auto *hyp3 = ggml_reshape_3d(ctx0,hyp,n_embd,1,nt);
++        auto *hyp_slots = ggml_repeat_4d(ctx0,hyp3,n_embd,model.slots_count,nt,1);
++        auto *slot3 = ggml_reshape_3d(ctx0,r.slots,n_embd,model.slots_count,1);
++        auto *diff = ggml_sub(ctx0,hyp_slots,slot3);
++        auto *cy = ggml_clamp(ctx0,ggml_scale(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,slot3)),c),0,1-1e-5f);
++        auto *deny = ggml_scale_bias(ctx0,cy,-1,1);
++        auto *denx3 = ggml_reshape_3d(ctx0,denx,1,1,nt);
++        auto *den_slots = ggml_repeat_4d(ctx0,denx3,1,model.slots_count,nt,1);
++        auto *den = ggml_clamp(ctx0,ggml_mul(ctx0,den_slots,deny),1e-5f,INFINITY);
++        auto *arg = ggml_scale_bias(ctx0,ggml_div(ctx0,ggml_scale(ctx0,ggml_sum_rows(ctx0,ggml_sqr(ctx0,diff)),2*c),den),1,1);
++        arg = ggml_clamp(ctx0,arg,1+1e-5f,INFINITY);
++        auto *acosh = ggml_log(ctx0,ggml_add(ctx0,arg,ggml_sqrt(ctx0,ggml_scale_bias(ctx0,ggml_sqr(ctx0,arg),1,-1))));
++        logits = ggml_reshape_2d(ctx0,ggml_scale(ctx0,acosh,-2/sc*model.temperature[il]),model.slots_count,nt);
++        }
++        if(prev && model.beta[il]!=0) logits=ggml_add(ctx0,logits,ggml_scale(ctx0,ggml_mul_mat(ctx0,r.tele,prev),model.beta[il]));
++        prev=ggml_soft_max(ctx0,logits);
++        auto *weights=ggml_mul_mat(ctx0,r.mapping,prev);
++        ggml_tensor *moe=nullptr;
++        for(int e=0;e<model.experts_count;++e) {
++            auto *f=ggml_mul(ctx0,ggml_silu(ctx0,ggml_mul_mat(ctx0,r.gate[e],h)),ggml_mul_mat(ctx0,r.up[e],h));
++            f=ggml_mul_mat(ctx0,r.down[e],f);
++            auto *w=ggml_view_2d(ctx0,weights,1,weights->ne[1],weights->nb[1],e*weights->nb[0]);
++            f=ggml_mul(ctx0,f,w); moe=moe?ggml_add(ctx0,moe,f):f;
++        }
++        x=ggml_add(ctx0,x,moe);
++        cb(x,"l_out",il);
++    }
++    if(out_ids) x=ggml_get_rows(ctx0,x,out_ids);
++    x=build_norm(x,model.output_norm,model.output_norm_b,LLM_NORM,-1);
++    res->t_embd=x;
++    res->t_logits=build_lora_mm(model.output,x,model.output_s);
++    ggml_build_forward_expand(gf,res->t_logits);
++}
+diff --git a/src/models/models.h b/src/models/models.h
+index 3f9c67c63..846921845 100644
+--- a/src/models/models.h
++++ b/src/models/models.h
+@@ -2660,3 +2660,18 @@ struct llama_model_spark2_5 : public llama_model_base {
+ 
+     std::unique_ptr<llm_graph_context> build_arch_graph(const llm_graph_params & params) const override;
+ };
++
++struct llama_model_cdm : public llama_model_base {
++    llama_model_cdm(const llama_model_params & params) : llama_model_base(params) {}
++    uint32_t slots_count = 8, experts_count = 2;
++    std::vector<float> curvature, temperature, beta;
++    struct routing_layer { ggml_tensor * slots, *tele, *mapping; std::vector<ggml_tensor *> gate, up, down; };
++    std::vector<routing_layer> routing;
++    ggml_tensor * embed_norm = nullptr, *embed_norm_b = nullptr;
++    void load_arch_hparams(llama_model_loader & ml) override;
++    void load_arch_tensors(llama_model_loader & ml) override;
++    struct graph : public llm_graph_context {
++        graph(const llama_model_cdm & model, const llm_graph_params & params);
++    };
++    std::unique_ptr<llm_graph_context> build_arch_graph(const llm_graph_params & params) const override;
++};

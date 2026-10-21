@@ -1,0 +1,151 @@
+{
+  "method": "Deterministic identical IDs, CPU 4 threads, GTX1070 full offload, five measured runs after one warmup, median, F32 KV, all-position logits; decode is 32 teacher-forced steps following a 128-token prefill. Single process runs, no compiler/correctness contention.",
+  "rows": [
+    {
+      "model": "sub17m",
+      "format": "f32",
+      "cpu_prefill32_tps": 2851.8099724942927,
+      "cuda_prefill32_tps": 10269.37863840876,
+      "prefill_speedup": 3.6010038317619046,
+      "cpu_decode_after128_tps": 297.89740381760924,
+      "cuda_decode_after128_tps": 760.837325252607,
+      "decode_speedup": 2.5540246927376296
+    },
+    {
+      "model": "sub17m",
+      "format": "q8_0",
+      "cpu_prefill32_tps": 2371.020205537814,
+      "cuda_prefill32_tps": 12554.913031725087,
+      "prefill_speedup": 5.2951522734397285,
+      "cpu_decode_after128_tps": 634.3543352260947,
+      "cuda_decode_after128_tps": 758.0474195615748,
+      "decode_speedup": 1.1949905241703658
+    },
+    {
+      "model": "sub17m",
+      "format": "q6_k",
+      "cpu_prefill32_tps": 1514.5281347975476,
+      "cuda_prefill32_tps": 12385.583335816902,
+      "prefill_speedup": 8.177849622762226,
+      "cpu_decode_after128_tps": 656.5102883778886,
+      "cuda_decode_after128_tps": 876.9804445145297,
+      "decode_speedup": 1.335821326854421
+    },
+    {
+      "model": "sub17m",
+      "format": "q4_k_m",
+      "cpu_prefill32_tps": 1391.3226164969644,
+      "cuda_prefill32_tps": 12403.240191459518,
+      "prefill_speedup": 8.914711832032221,
+      "cpu_decode_after128_tps": 751.3943472274524,
+      "cuda_decode_after128_tps": 795.6874535703938,
+      "decode_speedup": 1.0589478833669395
+    },
+    {
+      "model": "sub17m",
+      "format": "q4_k_s",
+      "cpu_prefill32_tps": 3393.833722298495,
+      "cuda_prefill32_tps": 11676.040946416095,
+      "prefill_speedup": 3.440369181819675,
+      "cpu_decode_after128_tps": 930.4721006082264,
+      "cuda_decode_after128_tps": 931.7778466905145,
+      "decode_speedup": 1.0014033156732314
+    },
+    {
+      "model": "lattice107m",
+      "format": "f32",
+      "cpu_prefill32_tps": 664.2894928770417,
+      "cuda_prefill32_tps": 4084.9772281667865,
+      "prefill_speedup": 6.149393106422211,
+      "cpu_decode_after128_tps": 53.21425605862223,
+      "cuda_decode_after128_tps": 259.0261905509496,
+      "decode_speedup": 4.867608978045272
+    },
+    {
+      "model": "lattice107m",
+      "format": "q8_0",
+      "cpu_prefill32_tps": 380.9989263212132,
+      "cuda_prefill32_tps": 4589.59352695203,
+      "prefill_speedup": 12.046211182974902,
+      "cpu_decode_after128_tps": 145.2559910788128,
+      "cuda_decode_after128_tps": 510.7637474257307,
+      "decode_speedup": 3.5163007297138003
+    },
+    {
+      "model": "lattice107m",
+      "format": "q6_k",
+      "cpu_prefill32_tps": 297.6036941248948,
+      "cuda_prefill32_tps": 4170.309714567062,
+      "prefill_speedup": 14.012963538069913,
+      "cpu_decode_after128_tps": 146.35561439620415,
+      "cuda_decode_after128_tps": 479.88426391265085,
+      "decode_speedup": 3.278892073204245
+    },
+    {
+      "model": "lattice107m",
+      "format": "q4_k_m",
+      "cpu_prefill32_tps": 351.02502763471955,
+      "cuda_prefill32_tps": 4683.636457309093,
+      "prefill_speedup": 13.34274222230939,
+      "cpu_decode_after128_tps": 168.9860414519697,
+      "cuda_decode_after128_tps": 410.2617489189122,
+      "decode_speedup": 2.427784835918057
+    },
+    {
+      "model": "lattice107m",
+      "format": "q4_k_s",
+      "cpu_prefill32_tps": 566.6494198652093,
+      "cuda_prefill32_tps": 4960.8126803332925,
+      "prefill_speedup": 8.75464177041483,
+      "cpu_decode_after128_tps": 239.18659277226104,
+      "cuda_decode_after128_tps": 544.8894486568466,
+      "decode_speedup": 2.278093610270444
+    }
+  ],
+  "router_comparison": [
+    {
+      "model": "sub17m",
+      "format": "q8_0",
+      "mode": "prefill",
+      "unrolled_tps": 15868.341953644804,
+      "vector_tps": 18239.128425009083,
+      "speedup": 1.1494035406024088
+    },
+    {
+      "model": "sub17m",
+      "format": "q8_0",
+      "mode": "incremental_kv",
+      "unrolled_tps": 372.30945626693733,
+      "vector_tps": 758.0474195615748,
+      "speedup": 2.0360681331125585
+    },
+    {
+      "model": "lattice107m",
+      "format": "q8_0",
+      "mode": "prefill",
+      "unrolled_tps": 5778.489270320545,
+      "vector_tps": 5718.1554760041,
+      "speedup": 0.9895588982701186
+    },
+    {
+      "model": "lattice107m",
+      "format": "q8_0",
+      "mode": "incremental_kv",
+      "unrolled_tps": 283.83890378860804,
+      "vector_tps": 510.7637474257307,
+      "speedup": 1.7994846393788473
+    }
+  ],
+  "gguf_sha256": {
+    "models/sub17m-f32-text.gguf": "0ab60dfeb352d14e1b1bcc30813f9f3532ce9332dbe5fb08bf4c6e19be5295b5",
+    "models/sub17m-q8_0-text.gguf": "8a87d56bc140100054b3c27e03daef0fb24055553985eb4b3a42ab3d2e20dbfa",
+    "models/sub17m-q6_k-text.gguf": "4401d7ef07ff48000fa9b8767959525d7765d4b58dc03b5a890ca47a3c8856d2",
+    "models/sub17m-q4_k_m-text.gguf": "4c821dc91dd131d5c5eab07bd95459f3d32ffe47dd46460f8a2da54fbebdf3d0",
+    "models/sub17m-q4_k_s-text.gguf": "bf1b99b437502fe12d510283fde00607174e9ff3a33e157597f568a847fd3f3e",
+    "models/lattice107m-f32-text.gguf": "2f2d92affe1a486483026a4ae485afe66b9e7a00104adf27bc65769f653a9fa7",
+    "models/lattice107m-q8_0-text.gguf": "e6838cea0bd93279bd5c9cb63cf9567e5c29f1726b70517eadb6f2417da38e8d",
+    "models/lattice107m-q6_k-text.gguf": "5e8f60628131bc795f323838e9899d3f691bca73e289c820f2d3600cb276f7c2",
+    "models/lattice107m-q4_k_m-text.gguf": "e089dd3200c6308be1b737b99c996d7c69903e0d9c829230ccca6689930b1c5e",
+    "models/lattice107m-q4_k_s-text.gguf": "3fa02cf92b4aee6074a1b42f97a602cec23a4672074cb0d87d632ada2395fe7b"
+  }
+}

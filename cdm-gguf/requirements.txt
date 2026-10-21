@@ -1,0 +1,8 @@
+# gguf is imported from the pinned llama.cpp/gguf-py tree by the tools.
+numpy
+torch
+transformers
+huggingface-hub
+sentencepiece
+protobuf
+tqdm

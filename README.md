@@ -128,6 +128,53 @@ Multi-agent Crystal Telepathy (`N` agents sharing slot routing):
   - 4-of-7 **Hyperbolic Josephson Junction** layer map anchoring `L00–L03` onto Qwen's syntactic full-attention layers `[7, 15, 23, 31]`
 - [`scripts/launch_qwen27b_lattice5.sh`](scripts/launch_qwen27b_lattice5.sh) — Launch script for **Lattice-5-Prometheus** (`Qwen/Qwen3.6-27B` teacher).
 - [`scripts/launch_qwen38_27b_lattice6.sh`](scripts/launch_qwen38_27b_lattice6.sh) — Launch script for **Lattice-6-Prometheus** (`Qwen/Qwen3.8-27B` teacher).
+- [`cdm-gguf/`](cdm-gguf/) — **Native `llama.cpp` / GGUF Backend (`LLM_ARCH_CDM`), Converter & CUDA Validation Suite** (engineered by **Kestrel**):
+  - [`cdm-gguf/llama-cdm.patch`](cdm-gguf/llama-cdm.patch) — Patch for `llama.cpp` implementing `LLM_ARCH_CDM` (`"cdm"`), vectorized 4D Poincaré geodesic routing (`58%` graph node reduction, `2.04× / 1.80×` CUDA Q8 decode speedup), and fail-closed 512-token position guards with **zero custom C++/CUDA kernels**.
+  - [`cdm-gguf/cdm_tools.py`](cdm-gguf/cdm_tools.py), [`cdm-gguf/add_tokenizer.py`](cdm-gguf/add_tokenizer.py), [`cdm-gguf/quantize_cdm.py`](cdm-gguf/quantize_cdm.py) — End-to-end PyTorch → GGUF exporter, tokenizer injector, and mixed-precision quantizer (`F32` Poincaré slots/positions/norms + `Q8_0`/`Q6_K`/`Q4_K_M`/`Q4_K_S` weights).
+  - [`cdm-gguf/README.md`](cdm-gguf/README.md) — Full reproduction guide, 15 red-team tests, and GTX 1070 CUDA + CPU benchmarks.
+
+---
+
+## ⚡ Experimental Native `llama.cpp` / GGUF Support (`LLM_ARCH_CDM`)
+
+> 🧪 **Prototype / Experimental Status (Engineered by Kestrel, DuoNeural Lab):**  
+> Both published CDM v1 models ([`Sub-Lattice-17M-Poincare-Instruct`](https://huggingface.co/DuoNeural/Sub-Lattice-17M-Poincare-Instruct) and [`Lattice-1-107M-Poincare-Preview`](https://huggingface.co/DuoNeural/Lattice-1-107M-Poincare-Preview)) now include tokenizer-equipped **GGUF** artifacts (`F32`, `Q8_0`, `Q6_K`, `Q4_K_M`, `Q4_K_S`) and execute on **CPU and NVIDIA CUDA GPUs** via our patched `llama.cpp` backend (`cdm-gguf/llama-cdm.patch`) with **zero custom GGML operators**.
+
+### 1. CPU (Core i7-6700HQ, 4T) vs. GPU (GTX 1070 8GB CUDA `sm_61`) Benchmarks
+`160`-token prefill (all-position logits) and `32`-token KV-cached decode tail after a `128`-token prefix (`F32` KV cache, full layer offload on CUDA: `4/4` layers for Sub-Lattice, `5/5` layers for Lattice-1):
+
+| Model & GGUF Format | GGUF Size | CPU Prefill (`tok/s`) | GTX 1070 CUDA Prefill (`tok/s`) | CUDA Prefill Speedup | CPU Cached Decode (`tok/s`) | GTX 1070 CUDA Cached Decode (`tok/s`) | CUDA Decode Speedup |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Sub-Lattice `F32`** | `66.7 MiB` | `3,407` | **`16,103`** | `4.73×` | `298` | **`761`** | `2.55×` |
+| **Sub-Lattice `Q8_0`** | `19.4 MiB` | `2,442` | **`18,239`** | `7.47×` | `634` | **`758`** | `1.20×` |
+| **Sub-Lattice `Q6_K`** | `15.5 MiB` | `1,333` | **`18,055`** | `13.55×` | `657` | **`877`** | `1.33×` |
+| **Sub-Lattice `Q4_K_M`** | `14.7 MiB` | `1,428` | **`17,829`** | `12.48×` | `751` | **`796`** | `1.06×` |
+| **Sub-Lattice `Q4_K_S`** | `11.3 MiB` | `3,308` | **`17,915`** | `5.42×` | `931` | **`932`** | `1.00×` |
+| **Lattice-1 `F32`** | `415.6 MiB` | `666` | **`4,665`** | `7.00×` | `53` | **`259`** | `4.89×` |
+| **Lattice-1 `Q8_0`** | `115.4 MiB` | `329` | **`5,718`** | `17.38×` | `145` | **`511`** | `3.52×` |
+| **Lattice-1 `Q6_K`** | `90.6 MiB` | `278` | **`5,649`** | `20.32×` | `146` | **`480`** | `3.29×` |
+| **Lattice-1 `Q4_K_M`** | `85.5 MiB` | `312` | **`5,546`** | `17.78×` | `169` | **`410`** | `2.43×` |
+| **Lattice-1 `Q4_K_S`** | `64.3 MiB` | `580` | **`5,878`** | `10.13×` | `239` | **`545`** | `2.28×` |
+
+### 2. 512-Position Numerical Fidelity Screen (CUDA vs. PyTorch `F32` Reference)
+Evaluated across 8 probes (`512` logit positions / `504` next-token transitions; strict screening gates: Max Logit Drift `≤ 0.5`, Mean KL `≤ 0.01` nats, Top-1 Agreement `≥ 90.0%`):
+
+| Model | Format | Max Logit Drift | Mean KL (nats) | Top-1 Agreement | Relative Probe PPL | Gate Notes |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Sub-Lattice 17M** | `F32` | **`5.50e-5`** | `5.47e-12` | **`100.0%`** | `1.00000` | ✅ Exact PyTorch Parity |
+| **Sub-Lattice 17M** | `Q8_0` | `0.546` | **`0.000883`** | **`97.7%`** | `1.00252` | ⭐ Recommended (`19.4 MiB`); passes KL & Top-1 gates |
+| **Sub-Lattice 17M** | `Q6_K` | `0.838` | **`0.003966`** | **`94.7%`** | `1.01233` | ✅ Passes KL & Top-1 gates (`15.5 MiB`) |
+| **Sub-Lattice 17M** | `Q4_K_M` | `2.133` | `0.036154` | `85.4%` | `1.04084` | ⚠️ Experimental (`4.33M` backbone sensitivity at 4-bit) |
+| **Sub-Lattice 17M** | `Q4_K_S` | `3.031` | `0.060126` | `80.1%` | `1.05700` | ⚠️ Experimental (`11.3 MiB`) |
+| **Lattice-1 107M** | `F32` | **`1.91e-5`** | `1.86e-12` | **`100.0%`** | `1.00000` | ✅ Exact PyTorch Parity |
+| **Lattice-1 107M** | `Q8_0` | **`0.261`** | **`0.000246`** | **`99.0%`** | `1.00048` | ⭐ **Passes all 3 strict gates (`115.4 MiB`)** |
+| **Lattice-1 107M** | `Q6_K` | `0.562` | **`0.001080`** | **`97.7%`** | `1.00416` | ✅ Passes KL & Top-1 gates (`90.6 MiB`) |
+| **Lattice-1 107M** | `Q4_K_M` | `1.522` | **`0.007642`** | **`91.8%`** | `1.00239` | ✅ Passes KL & Top-1 gates (`85.5 MiB`) |
+| **Lattice-1 107M** | `Q4_K_S` | `2.284` | `0.016433` | `87.5%` | `0.99352*` | ⚠️ Experimental (`64.3 MiB`) |
+
+### 3. Compatibility & Prototype Scope
+- **Supported Today:** Patched `llama.cpp` CLI, `llama-server` HTTP `/completion`, `llama-quantize`, x86_64 CPU, and NVIDIA CUDA GPUs (Pascal `sm_61` and newer) with fail-closed `512`-token learned position guards. Synthetic v3 (`learn_curvature` + `telepathy`) passes CPU/GPU parity at `4.47e-8` max error.
+- **Open Roadmap Items:** Stock unpatched Ollama / LM Studio binaries require `llama-cdm.patch` integration; live trained v3/v4 checkpoints (`Lattice-3`, `Lattice-4A`, `Lattice-5/6-Prometheus`) and Metal/Vulkan/ROCm backends are scheduled for follow-up validation.
 
 ---
 
@@ -145,6 +192,7 @@ Multi-agent Crystal Telepathy (`N` agents sharing slot routing):
 - **Jesse Caldwell** — DuoNeural Co-Founder & Principal Researcher
 - **Archon** — AI Lab Director (Claude), Architecture & Training Operations
 - **Aura✨** — AI Research Co-Architect (Gemini), Mathematical Theory, Red-Team Verification & Paper Drafting
+- **Kestrel** — AI Systems & Inference Architect, Native `llama.cpp` / GGUF / CUDA Implementation & Red-Team Validation
 
 ---
 
