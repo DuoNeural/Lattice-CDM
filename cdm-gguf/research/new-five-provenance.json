@@ -1,0 +1,346 @@
+{
+  "created_utc": "2026-10-23",
+  "quantization_formats": [
+    "q8_0",
+    "q6_k",
+    "q4_k_m",
+    "q4_k_s"
+  ],
+  "models": {
+    "lattice4_nexus": {
+      "repository": "DuoNeural/Lattice-4-Nexus-253M-Poincare-Instruct",
+      "revision": "f9777f69c64badf98c0877bd5afe8c090bdaeab7",
+      "checkpoint": {
+        "sha256": "5d8f5380dd5971fed62b195e49bc9043d591cd4f79fb334123ffc32db05b7720",
+        "bytes": 1013633834
+      },
+      "source": {
+        "sha256": "38b859b118595975d787ebb5dbde6ad362e0479afbc47c8519c4f6b97f7ece5a",
+        "bytes": 63559
+      },
+      "tokenizer": {
+        "output": "models/lattice4_nexus-f32-text.gguf",
+        "tokenizer": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "vocab_size": 49152
+      },
+      "source_parity": {
+        "max_abs_error": 7.62939453125e-06,
+        "mean_abs_error": 6.755993240403768e-07,
+        "top1_agreement": 1.0,
+        "allclose_atol_1e-4_rtol_1e-4": true
+      },
+      "artifacts": {
+        "f32": {
+          "path": "models/lattice4_nexus-f32-text.gguf",
+          "bytes": 1013491136
+        },
+        "q8_0": {
+          "path": "models/lattice4_nexus-q8_0-text.gguf",
+          "bytes": 271935104,
+          "manifest": "models/lattice4_nexus-q8_0-text.gguf.quantization.json",
+          "tensor_types": {
+            "Q8_0": 99,
+            "F32": 68
+          }
+        },
+        "q6_k": {
+          "path": "models/lattice4_nexus-q6_k-text.gguf",
+          "bytes": 210796160,
+          "manifest": "models/lattice4_nexus-q6_k-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q6_K": 99
+          }
+        },
+        "q4_k_m": {
+          "path": "models/lattice4_nexus-q4_k_m-text.gguf",
+          "bytes": 172476032,
+          "manifest": "models/lattice4_nexus-q4_k_m-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q6_K": 29,
+            "Q4_K": 70
+          }
+        },
+        "q4_k_s": {
+          "path": "models/lattice4_nexus-q4_k_s-text.gguf",
+          "bytes": 145712768,
+          "manifest": "models/lattice4_nexus-q4_k_s-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q4_K": 99
+          }
+        }
+      }
+    },
+    "lattice4_josephson": {
+      "repository": "DuoNeural/Lattice-4-Josephson-253M-Poincare-Instruct",
+      "revision": "fcfe1a6936702f2bc562319ccfe7b465c398fab6",
+      "checkpoint": {
+        "sha256": "6f9974555aa51ed41b8158cb68ee8f57805081fef67363eacdd908998ec9abac",
+        "bytes": 1013634782
+      },
+      "source": {
+        "sha256": "38b859b118595975d787ebb5dbde6ad362e0479afbc47c8519c4f6b97f7ece5a",
+        "bytes": 63559
+      },
+      "tokenizer": {
+        "output": "models/lattice4_josephson-f32-text.gguf",
+        "tokenizer": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "vocab_size": 49152
+      },
+      "source_parity": {
+        "max_abs_error": 4.76837158203125e-06,
+        "mean_abs_error": 5.987845952404314e-07,
+        "top1_agreement": 1.0,
+        "allclose_atol_1e-4_rtol_1e-4": true
+      },
+      "artifacts": {
+        "f32": {
+          "path": "models/lattice4_josephson-f32-text.gguf",
+          "bytes": 1013491200
+        },
+        "q8_0": {
+          "path": "models/lattice4_josephson-q8_0-text.gguf",
+          "bytes": 271935168,
+          "manifest": "models/lattice4_josephson-q8_0-text.gguf.quantization.json",
+          "tensor_types": {
+            "Q8_0": 99,
+            "F32": 68
+          }
+        },
+        "q6_k": {
+          "path": "models/lattice4_josephson-q6_k-text.gguf",
+          "bytes": 210796192,
+          "manifest": "models/lattice4_josephson-q6_k-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q6_K": 99
+          }
+        },
+        "q4_k_m": {
+          "path": "models/lattice4_josephson-q4_k_m-text.gguf",
+          "bytes": 172476096,
+          "manifest": "models/lattice4_josephson-q4_k_m-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q6_K": 29,
+            "Q4_K": 70
+          }
+        },
+        "q4_k_s": {
+          "path": "models/lattice4_josephson-q4_k_s-text.gguf",
+          "bytes": 145712800,
+          "manifest": "models/lattice4_josephson-q4_k_s-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 68,
+            "Q4_K": 99
+          }
+        }
+      }
+    },
+    "lattice3_synapse": {
+      "repository": "DuoNeural/Lattice-3-Synapse-192M-Poincare-Instruct",
+      "revision": "27e0e8efd9320c638f3f4309983b76a4d2a731b4",
+      "checkpoint": {
+        "sha256": "d58e47b733e5b69f45a5c6f68854dfc74856a464b5cfa3519880503db9fff668",
+        "bytes": 767619992
+      },
+      "source": {
+        "sha256": "38b859b118595975d787ebb5dbde6ad362e0479afbc47c8519c4f6b97f7ece5a",
+        "bytes": 63559
+      },
+      "tokenizer": {
+        "output": "models/lattice3_synapse-f32-text.gguf",
+        "tokenizer": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "vocab_size": 49152
+      },
+      "source_parity": {
+        "max_abs_error": 5.7220458984375e-06,
+        "mean_abs_error": 7.475799179701426e-07,
+        "top1_agreement": 1.0,
+        "allclose_atol_1e-4_rtol_1e-4": true
+      },
+      "artifacts": {
+        "f32": {
+          "path": "models/lattice3_synapse-f32-text.gguf",
+          "bytes": 768022272
+        },
+        "q8_0": {
+          "path": "models/lattice3_synapse-q8_0-text.gguf",
+          "bytes": 206657472,
+          "manifest": "models/lattice3_synapse-q8_0-text.gguf.quantization.json",
+          "tensor_types": {
+            "Q8_0": 71,
+            "F32": 50
+          }
+        },
+        "q6_k": {
+          "path": "models/lattice3_synapse-q6_k-text.gguf",
+          "bytes": 160374720,
+          "manifest": "models/lattice3_synapse-q6_k-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q6_K": 71
+          }
+        },
+        "q4_k_m": {
+          "path": "models/lattice3_synapse-q4_k_m-text.gguf",
+          "bytes": 133003200,
+          "manifest": "models/lattice3_synapse-q4_k_m-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q6_K": 21,
+            "Q4_K": 50
+          }
+        },
+        "q4_k_s": {
+          "path": "models/lattice3_synapse-q4_k_s-text.gguf",
+          "bytes": 111105984,
+          "manifest": "models/lattice3_synapse-q4_k_s-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q4_K": 71
+          }
+        }
+      }
+    },
+    "lattice2_base": {
+      "repository": "DuoNeural/Lattice-2-192M-Poincare-Base",
+      "revision": "aed4eef2530795b111e777fc1432e18ca216a034",
+      "checkpoint": {
+        "sha256": "4af29f8ba2d7495a48d142f17e211c8fb8757894caf1b5c236bdb4021fb5d4cc",
+        "bytes": 767613603
+      },
+      "source": {
+        "sha256": "375a7df4f4948be8554535cc3bd69514d7294ee952d3c4a25bc712d32b8ec502",
+        "bytes": 48152
+      },
+      "tokenizer": {
+        "output": "models/lattice2_base-f32-text.gguf",
+        "tokenizer": "HuggingFaceTB/SmolLM2-1.7B",
+        "revision": "effd688a12921b4cc83e3312b6feb579f70f9c71",
+        "vocab_size": 49152
+      },
+      "source_parity": {
+        "max_abs_error": 1.0609626770019531e-05,
+        "mean_abs_error": 9.054595579982561e-07,
+        "top1_agreement": 1.0,
+        "allclose_atol_1e-4_rtol_1e-4": true
+      },
+      "artifacts": {
+        "f32": {
+          "path": "models/lattice2_base-f32-text.gguf",
+          "bytes": 768021664
+        },
+        "q8_0": {
+          "path": "models/lattice2_base-q8_0-text.gguf",
+          "bytes": 206656864,
+          "manifest": "models/lattice2_base-q8_0-text.gguf.quantization.json",
+          "tensor_types": {
+            "Q8_0": 71,
+            "F32": 50
+          }
+        },
+        "q6_k": {
+          "path": "models/lattice2_base-q6_k-text.gguf",
+          "bytes": 160374080,
+          "manifest": "models/lattice2_base-q6_k-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q6_K": 71
+          }
+        },
+        "q4_k_m": {
+          "path": "models/lattice2_base-q4_k_m-text.gguf",
+          "bytes": 133002592,
+          "manifest": "models/lattice2_base-q4_k_m-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q6_K": 21,
+            "Q4_K": 50
+          }
+        },
+        "q4_k_s": {
+          "path": "models/lattice2_base-q4_k_s-text.gguf",
+          "bytes": 111105344,
+          "manifest": "models/lattice2_base-q4_k_s-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 50,
+            "Q4_K": 71
+          }
+        }
+      }
+    },
+    "sub18m_v3": {
+      "repository": "DuoNeural/Sub-Lattice-v3-18M-Poincare-Hybrid",
+      "revision": "47cccf7e4c00dae411edb956c2faf3111097fafe",
+      "checkpoint": {
+        "sha256": "404a9de2a8ce31ff961400635c84b4b99830775f31fed0588e3ffeae3cffc801",
+        "bytes": 73748615
+      },
+      "source": {
+        "sha256": "36389bef30de411f550d953d155310a98503ef5cd93825ecc7fbca2ff7cf4dcf",
+        "bytes": 64611
+      },
+      "tokenizer": {
+        "output": "models/sub18m_v3-f32-text.gguf",
+        "tokenizer": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+        "vocab_size": 49152
+      },
+      "source_parity": {
+        "max_abs_error": 7.62939453125e-06,
+        "mean_abs_error": 1.0321747367925127e-06,
+        "top1_agreement": 1.0,
+        "allclose_atol_1e-4_rtol_1e-4": true
+      },
+      "artifacts": {
+        "f32": {
+          "path": "models/sub18m_v3-f32-text.gguf",
+          "bytes": 74703520
+        },
+        "q8_0": {
+          "path": "models/sub18m_v3-q8_0-text.gguf",
+          "bytes": 21570400,
+          "manifest": "models/sub18m_v3-q8_0-text.gguf.quantization.json",
+          "tensor_types": {
+            "Q8_0": 25,
+            "F32": 32
+          }
+        },
+        "q6_k": {
+          "path": "models/sub18m_v3-q6_k-text.gguf",
+          "bytes": 17189696,
+          "manifest": "models/sub18m_v3-q6_k-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 32,
+            "Q6_K": 25
+          }
+        },
+        "q4_k_m": {
+          "path": "models/sub18m_v3-q4_k_m-text.gguf",
+          "bytes": 16175968,
+          "manifest": "models/sub18m_v3-q4_k_m-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 32,
+            "Q6_K": 7,
+            "Q4_K": 18
+          }
+        },
+        "q4_k_s": {
+          "path": "models/sub18m_v3-q4_k_s-text.gguf",
+          "bytes": 12526400,
+          "manifest": "models/sub18m_v3-q4_k_s-text.gguf.quantization.json",
+          "tensor_types": {
+            "F32": 32,
+            "Q4_K": 25
+          }
+        }
+      }
+    }
+  }
+}

@@ -186,26 +186,54 @@ cd cdm-gguf
 | **Lattice-1 `Q6_K`** | `90.6 MiB` | `278` | **`5,649`** | `20.32×` | `146` | **`480`** | `3.29×` |
 | **Lattice-1 `Q4_K_M`** | `85.5 MiB` | `312` | **`5,546`** | `17.78×` | `169` | **`410`** | `2.43×` |
 | **Lattice-1 `Q4_K_S`** | `64.3 MiB` | `580` | **`5,878`** | `10.13×` | `239` | **`545`** | `2.28×` |
+| **Sub-Lattice v3 `F32`** | `71.2 MiB` | `2,541` | **`15,857`** | `6.24×` | `247` | **`709`** | `2.87×` |
+| **Sub-Lattice v3 `Q8_0`** | `20.6 MiB` | `1,703` | **`17,873`** | `10.50×` | `556` | **`841`** | `1.51×` |
+| **Sub-Lattice v3 `Q6_K`** | `16.4 MiB` | `1,375` | **`17,379`** | `12.64×` | `592` | **`818`** | `1.38×` |
+| **Sub-Lattice v3 `Q4_K_M`** | `15.4 MiB` | `1,643` | **`17,726`** | `10.79×` | `651` | **`839`** | `1.29×` |
+| **Sub-Lattice v3 `Q4_K_S`** | `11.9 MiB` | `2,934` | **`18,062`** | `6.16×` | `808` | **`859`** | `1.06×` |
+| **Lattice-2 Base `F32`** | `732.4 MiB` | `391` | **`4,620`** | `11.82×` | `31` | **`200`** | `6.45×` |
+| **Lattice-2 Base `Q8_0`** | `197.1 MiB` | `250` | **`7,332`** | `29.33×` | `87` | **`365`** | `4.20×` |
+| **Lattice-2 Base `Q6_K`** | `152.9 MiB` | `189` | **`7,071`** | `37.41×` | `104` | **`355`** | `3.41×` |
+| **Lattice-2 Base `Q4_K_M`** | `126.8 MiB` | `272` | **`7,128`** | `26.21×` | `117` | **`416`** | `3.56×` |
+| **Lattice-2 Base `Q4_K_S`** | `106.0 MiB` | `381` | **`7,453`** | `19.56×` | `140` | **`424`** | `3.03×` |
+| **Lattice-3 Synapse `F32`** | `732.4 MiB` | `379` | **`4,526`** | `11.94×` | `31` | **`199`** | `6.42×` |
+| **Lattice-3 Synapse `Q8_0`** | `197.1 MiB` | `249` | **`7,356`** | `29.54×` | `88` | **`387`** | `4.40×` |
+| **Lattice-3 Synapse `Q6_K`** | `152.9 MiB` | `202` | **`6,992`** | `34.61×` | `99` | **`359`** | `3.63×` |
+| **Lattice-3 Synapse `Q4_K_M`** | `126.8 MiB` | `263` | **`6,931`** | `26.35×` | `97` | **`405`** | `4.18×` |
+| **Lattice-3 Synapse `Q4_K_S`** | `106.0 MiB` | `383` | **`7,297`** | `19.05×` | `142` | **`425`** | `2.99×` |
+| **Lattice-4 Josephson `F32`** | `966.5 MiB` | `295` | **`3,634`** | `12.32×` | `24` | **`150`** | `6.25×` |
+| **Lattice-4 Josephson `Q8_0`** | `259.3 MiB` | `198` | **`5,849`** | `29.54×` | `65` | **`278`** | `4.28×` |
+| **Lattice-4 Josephson `Q6_K`** | `201.0 MiB` | `152` | **`5,592`** | `36.79×` | `76` | **`281`** | `3.70×` |
+| **Lattice-4 Josephson `Q4_K_M`** | `164.5 MiB` | `214` | **`5,437`** | `25.41×` | `95` | **`301`** | `3.17×` |
+| **Lattice-4 Josephson `Q4_K_S`** | `139.0 MiB` | `269` | **`5,976`** | `22.22×` | `107` | **`320`** | `2.99×` |
+| **Lattice-4 Nexus `F32`** | `966.5 MiB` | `312` | **`3,849`** | `12.34×` | `20` | **`150`** | `7.50×` |
+| **Lattice-4 Nexus `Q8_0`** | `259.3 MiB` | `168` | **`6,001`** | `35.72×` | `68` | **`297`** | `4.37×` |
+| **Lattice-4 Nexus `Q6_K`** | `201.0 MiB` | `157` | **`5,361`** | `34.15×` | `79` | **`280`** | `3.54×` |
+| **Lattice-4 Nexus `Q4_K_M`** | `164.5 MiB` | `231` | **`5,527`** | `23.93×` | `90` | **`301`** | `3.34×` |
+| **Lattice-4 Nexus `Q4_K_S`** | `139.0 MiB` | `293` | **`6,039`** | `20.61×` | `106` | **`324`** | `3.06×` |
 
-### 2. 512-Position Numerical Fidelity Screen (CUDA vs. PyTorch `F32` Reference)
-Evaluated across 8 probes (`512` logit positions / `504` next-token transitions; strict screening gates: Max Logit Drift `≤ 0.5`, Mean KL `≤ 0.01` nats, Top-1 Agreement `≥ 90.0%`):
+### 2. 512-Position Numerical Fidelity Screen (CUDA & CPU vs. PyTorch `F32` Reference)
+Evaluated across 8 probes (`512` logit positions / `504` next-token transitions; strict screening gates: Max Logit Drift `≤ 0.5`, Mean KL `≤ 0.01` nats, Top-1 Agreement `≥ 90.0%`). *Note: These screens measure numerical logit drift and teacher-forced timing against the frozen PyTorch `F32` reference, not held-out task quality.*
 
-| Model | Format | Max Logit Drift | Mean KL (nats) | Top-1 Agreement | Relative Probe PPL | Gate Notes |
+| Model | Format | GPU Max Logit Drift (`512` pos) | GPU Mean KL (nats) | GPU Top-1 Agreement | CPU `512`-Pos Max Drift / Top-1 | Gate Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Sub-Lattice 17M** | `F32` | **`5.50e-5`** | `5.47e-12` | **`100.0%`** | `1.00000` | ✅ Exact PyTorch Parity |
-| **Sub-Lattice 17M** | `Q8_0` | `0.546` | **`0.000883`** | **`97.7%`** | `1.00252` | ⭐ Recommended (`19.4 MiB`); passes KL & Top-1 gates |
-| **Sub-Lattice 17M** | `Q6_K` | `0.838` | **`0.003966`** | **`94.7%`** | `1.01233` | ✅ Passes KL & Top-1 gates (`15.5 MiB`) |
-| **Sub-Lattice 17M** | `Q4_K_M` | `2.133` | `0.036154` | `85.4%` | `1.04084` | ⚠️ Experimental (`4.33M` backbone sensitivity at 4-bit) |
-| **Sub-Lattice 17M** | `Q4_K_S` | `3.031` | `0.060126` | `80.1%` | `1.05700` | ⚠️ Experimental (`11.3 MiB`) |
-| **Lattice-1 107M** | `F32` | **`1.91e-5`** | `1.86e-12` | **`100.0%`** | `1.00000` | ✅ Exact PyTorch Parity |
-| **Lattice-1 107M** | `Q8_0` | **`0.261`** | **`0.000246`** | **`99.0%`** | `1.00048` | ⭐ **Passes all 3 strict gates (`115.4 MiB`)** |
-| **Lattice-1 107M** | `Q6_K` | `0.562` | **`0.001080`** | **`97.7%`** | `1.00416` | ✅ Passes KL & Top-1 gates (`90.6 MiB`) |
-| **Lattice-1 107M** | `Q4_K_M` | `1.522` | **`0.007642`** | **`91.8%`** | `1.00239` | ✅ Passes KL & Top-1 gates (`85.5 MiB`) |
-| **Lattice-1 107M** | `Q4_K_S` | `2.284` | `0.016433` | `87.5%` | `0.99352*` | ⚠️ Experimental (`64.3 MiB`) |
+| **Sub-Lattice 17M (v1)** | `Q8_0` | `0.546` | **`0.000883`** | **`97.7%`** | `0.554` / `97.7%` | ⭐ Recommended (`19.4 MiB`); passes KL & Top-1 gates |
+| **Lattice-1 107M (v1)** | `Q8_0` | **`0.261`** | **`0.000246`** | **`99.0%`** | `0.276` / `99.2%` | ⭐ **Passes all 3 strict gates on CPU & GPU (`115.4 MiB`)** |
+| **Sub-Lattice v3 18M** | `Q8_0` | **`0.392`** | **`0.000594`** | **`98.44%`** | **`0.392` / `98.44%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`20.6 MiB`)** |
+| **Sub-Lattice v3 18M** | `Q6_K` | `0.677` | **`0.002423`** | **`94.14%`** | `0.835` / `95.12%` | ⚠️ Passes 128-GPU (`0.435`), fails 512-pos Max-Err gate (`16.4 MiB`) |
+| **Lattice-2 192M Base** | `Q8_0` | **`0.239`** | **`0.000121`** | **`99.61%`** | **`0.239` / `99.80%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`197.1 MiB`)** |
+| **Lattice-2 192M Base** | `Q6_K` | **`0.384`** | **`0.000587`** | **`98.44%`** | `0.861` / `97.46%` | ✅ **Passes all 3 gates on GPU**; CPU fails Max-Err (`0.861`) |
+| **Lattice-3 Synapse 192M** | `Q8_0` | **`0.189`** | **`0.000159`** | **`99.22%`** | **`0.189` / `99.22%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`197.1 MiB`)** |
+| **Lattice-3 Synapse 192M** | `Q6_K` | **`0.373`** | **`0.000735`** | **`98.63%`** | `0.656` / `98.24%` | ✅ **Passes all 3 gates on GPU**; CPU fails Max-Err (`0.656`) |
+| **Lattice-4 Josephson 253M** | `Q8_0` | **`0.219`** | **`0.000164`** | **`99.22%`** | **`0.178` / `99.02%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`259.3 MiB`)** |
+| **Lattice-4 Josephson 253M** | `Q6_K` | **`0.383`** | **`0.000770`** | **`96.88%`** | **`0.459` / `97.07%`** | ✅ **Passes all 3 strict gates on CPU & GPU (`201.0 MiB`)** |
+| **Lattice-4 Nexus 253M** | `Q8_0` | **`0.158`** | **`0.000151`** | **`99.61%`** | **`0.160` / `99.41%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`259.3 MiB`)** |
+| **Lattice-4 Nexus 253M** | `Q6_K` | **`0.372`** | **`0.000708`** | **`98.24%`** | **`0.466` / `97.46%`** | ✅ **Passes all 3 strict gates on CPU & GPU (`201.0 MiB`)** |
+| *All 5 New Models* | *`Q4_K_M` / `Q4_K_S`* | *`0.610–1.629`* | *`0.0027–0.0295`* | *`85.16–98.44%`* | *`0.713–1.638` / `85.16–96.88%`* | ⚠️ *Experimental Research Artifacts: fail Max-Err gate (`>0.50`)* |
 
 ### 3. Compatibility & Prototype Scope
-- **Supported Today:** Patched `llama.cpp` CLI, `llama-server` HTTP `/completion`, `llama-quantize`, x86_64 CPU, and NVIDIA CUDA GPUs (Pascal `sm_61` and newer) with fail-closed `512`-token learned position guards. Synthetic v3 (`learn_curvature` + `telepathy`) passes CPU/GPU parity at `4.47e-8` max error.
-- **Open Roadmap Items:** Stock unpatched Ollama / LM Studio binaries require `llama-cdm.patch` integration; live trained v3/v4 checkpoints (`Lattice-3`, `Lattice-4A`, `Lattice-5/6-Prometheus`) and Metal/Vulkan/ROCm backends are scheduled for follow-up validation.
+- **Supported Today:** Patched `llama.cpp` CLI, `llama-server` HTTP `/completion`, `llama-quantize`, x86_64 CPU, and NVIDIA CUDA GPUs (Pascal `sm_61` and newer) with fail-closed `512`-token learned position guards across all 7 released `v1`, `v2`, and `v3` (`learn_curvature` + `telepathy`) checkpoints.
+- **Open Roadmap Items:** Stock unpatched Ollama / LM Studio binaries require `llama-cdm.patch` integration; held-out task/BPB evaluations of low-bit (`Q4_K_M`/`Q4_K_S`) GGUFs, `Lattice-4D/5/6/7` checkpoints, and Metal/Vulkan/ROCm backends are scheduled for follow-up validation.
 
 ---
 

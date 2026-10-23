@@ -15,6 +15,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+import time
 
 import numpy as np
 import torch
@@ -23,7 +24,13 @@ from cdm_tools import ROOT, PRESETS, forward, load
 MODELS = {
     'sub17m': 'cdm_sublattice_v1_poincare_final_step0100000.pt',
     'lattice107m': 'pytorch_model.pt',
+    'lattice4_nexus': 'lattice4_nexus-pytorch_model.pt',
+    'lattice4_josephson': 'lattice4_josephson-pytorch_model.pt',
+    'lattice3_synapse': 'lattice3_synapse-pytorch_model.pt',
+    'lattice2_base': 'lattice2_base-pytorch_model.pt',
+    'sub18m_v3': 'sub18m_v3-pytorch_model.pt',
 }
+INSTRUCT_MODELS = {'sub17m', 'lattice4_nexus', 'lattice4_josephson', 'lattice3_synapse', 'sub18m_v3'}
 THRESHOLDS = {
     'f32': {'atol': 1e-3, 'rtol': 1e-4, 'require_allclose': True},
     'quantized': {'max_abs_error': .5, 'mean_kl_nats': .01, 'top1_agreement': .9},
@@ -52,7 +59,7 @@ def pinned_cases(model, positions):
     cases = []
     for name, text in PROBES.items():
         rendered = text * 8
-        chat = model == 'sub17m' and name == 'conversation'
+        chat = model in INSTRUCT_MODELS and name == 'conversation'
         if chat:
             rendered = tokenizer.apply_chat_template([
                 {'role':'system','content':'You are a careful research assistant.'},
@@ -115,6 +122,25 @@ def aggregate(records, kind):
     return result
 
 
+def gpu_temperature_c():
+    proc=subprocess.run(['nvidia-smi','--query-gpu=temperature.gpu',
+                         '--format=csv,noheader,nounits'],capture_output=True,
+                        text=True,check=True,timeout=10)
+    return float(proc.stdout.splitlines()[0].strip())
+
+
+def cool_gpu_if_needed(limit_c, target_c):
+    if limit_c is None:
+        return None,0
+    started=time.monotonic()
+    temperature=gpu_temperature_c()
+    while temperature>=limit_c:
+        print(f'GPU at {temperature:.0f} C; pausing until it reaches {target_c:.0f} C',flush=True)
+        time.sleep(15)
+        temperature=gpu_temperature_c()
+    return temperature,round(time.monotonic()-started)
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--runner',type=Path,default=ROOT/'cdm-logits')
@@ -124,11 +150,16 @@ def main():
     p.add_argument('--modes',nargs='+',choices=['prefill','incremental'],default=['prefill','incremental'])
     p.add_argument('--threads',type=int,default=4)
     p.add_argument('--positions-per-case',type=int,default=64)
+    p.add_argument('--gpu-temp-limit',type=float,help='Pause a requested CUDA run at/above this temperature, in Celsius')
+    p.add_argument('--gpu-cooldown-target',type=float,default=75.0,help='Resume CUDA cases at/below this temperature')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--artifact',action='append',default=[],metavar='MODEL:FORMAT:PATH',help='Override an artifact path')
     a=p.parse_args()
     if not 8<=a.positions_per_case<=512: p.error('positions-per-case must be 8..512')
     if a.gpu_layers<0: p.error('gpu-layers must be nonnegative; 99 requests full offload')
+    if a.gpu_temp_limit is not None:
+        if a.gpu_layers==0:p.error('gpu-temp-limit requires --gpu-layers > 0')
+        if not 1<=a.gpu_cooldown_target<a.gpu_temp_limit<=100:p.error('Require cooldown target < temperature limit <= 100 C')
     overrides={}
     for override in a.artifact:
         model,fmt,path=override.split(':',2);overrides[(model,fmt)]=Path(path)
@@ -168,6 +199,10 @@ def main():
                     env.pop('CDM_PROMPT',None)
                     record={'name':case['name']}
                     try:
+                        temperature,waited=cool_gpu_if_needed(a.gpu_temp_limit,a.gpu_cooldown_target)
+                        if temperature is not None:
+                            record['gpu_temperature_before_c']=temperature
+                            record['thermal_cooldown_seconds']=waited
                         with tempfile.TemporaryDirectory() as folder:
                             out=Path(folder)/'logits.f32'
                             proc=subprocess.run([str(a.runner.resolve()),str(artifact.resolve()),str(out),*map(str,case['ids'])],
@@ -180,6 +215,10 @@ def main():
                             offload=re.findall(r'offloaded\s+(\d+)/(\d+)\s+layers',proc.stderr)
                             record['offloaded_layers']=[list(map(int,pair)) for pair in offload]
                             record['full_gpu_offload_verified']=any(int(n)==int(total) and int(total)>0 for n,total in offload)
+                            if a.gpu_temp_limit is not None:
+                                record['gpu_temperature_after_c']=gpu_temperature_c()
+                                if record['gpu_temperature_after_c']>=90:
+                                    raise RuntimeError('Reached the 90 C GPU hard stop; ending CUDA evaluation')
                             if a.gpu_layers>0 and not record['full_gpu_offload_verified']:
                                 record['finite']=False;record['error']='Requested GPU run lacks native full-offload evidence'
                     except Exception as exc:

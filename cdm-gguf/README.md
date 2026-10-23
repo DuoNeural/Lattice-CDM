@@ -2,11 +2,12 @@
 
 Built for Jesse, Archon and Aura, 2026-10-21.
 
-**Working:** both released trained CDM models export to GGUF, load as native
+**Working:** the original two released models and five additional October 2026
+checkpoints export to GGUF, load as native
 `general.architecture = "cdm"` models in patched llama.cpp, and execute on CPU
 and CUDA with prefill and incremental KV-cached inference. Standard
 `llama-server` serves completions on either backend. Native F32 parity was
-validated against the released PyTorch implementations on CPU and a GTX 1070;
+validated against the published PyTorch implementations on CPU and a GTX 1070;
 Q8_0, Q6_K, Q4_K_M and Q4_K_S were measured on both. No custom GGML operators
 or hyperbolic approximations were required.
 
@@ -280,9 +281,64 @@ provide `--config` JSON containing actual `heads`, `geometry="poincare"`,
 Do not infer head count or curvature bounds from tensor shapes. Validate each
 new checkpoint against its original source before distributing it.
 
+## Five newly published checkpoints (2026-10-23)
+
+Added the released `pytorch_model.pt` checkpoint for each model below, pinned
+to its exact Hugging Face commit. Every checkpoint passes the source-class vs
+frozen-reference check at 4 initial IDs (max logit error `1.1e-5` or lower;
+100% top-1 agreement). F32 native prefill and cached decoding pass on CPU and
+CUDA across the eight-probe corpus. The GGUFs carry the matching immutable
+SmolLM2 tokenizer revision and chat template where the card defines one.
+
+| Model | Layers / width | Source | Tokenizer |
+|---|---:|---|---|
+| Lattice-4-Nexus 253M | 7 / 768 | v3, learned curvature + telepathy | SmolLM2-1.7B-Instruct |
+| Lattice-4-Josephson 253M | 7 / 768 | v3, learned curvature + telepathy | SmolLM2-1.7B-Instruct |
+| Lattice-3-Synapse 192M | 5 / 768 | v3, learned curvature + telepathy | SmolLM2-1.7B-Instruct |
+| Lattice-2 192M Base | 5 / 768 | v2, fixed curvature | SmolLM2-1.7B |
+| Sub-Lattice v3 18M | 3 / 256 | v3, learned curvature + telepathy | SmolLM2-360M-Instruct |
+
+Each release has tokenizer-equipped F32, Q8_0, Q6_K, Q4_K_M and Q4_K_S GGUFs
+under `models/`. Quantization preserves routing geometry, positions, norms,
+telepathy and slot mapping in F32. Provenance, checkpoint hashes, tensor-type
+manifests and source parity are indexed in `research/new-five-provenance.json`.
+
+The short drift screen used eight prompts × 16 positions, separately for
+prefill and cached decoding. The unchanged gates are max absolute logit error
+`<=0.5`, mean KL `<=0.01` nats and top-1 agreement `>=90%`:
+
+| Format | CPU passes | GTX 1070 passes | Result |
+|---|---:|---:|---|
+| F32 | 5/5 | 5/5 | strict F32 parity |
+| Q8_0 | 5/5 | 5/5 | all three gates pass |
+| Q6_K | 2/5 | 5/5 | CPU gate fails on Synapse, Lattice-2 and Sub v3 |
+| Q4_K_M | 0/5 | 0/5 | max-error gate fails on all five |
+| Q4_K_S | 0/5 | 0/5 | max-error gate fails on all five; top-1 also drops on several |
+
+The 512-position follow-up confirms CPU and GTX 1070 Q8_0 pass all five models.
+CPU Q6_K fails the max-error gate on Synapse (`0.656`), Lattice-2 (`0.861`) and
+Sub v3 (`0.883`); it passes on the two Lattice-4 siblings, close to the `0.5`
+cutoff (`0.442–0.466`). GTX 1070 Q6_K passes Nexus, Josephson, Synapse and
+Lattice-2, but fails Sub v3 (`0.718` prefill / `0.677` cached). The resumed
+CUDA cases used an `82°C` pause threshold, a `75°C` resume target and a `90°C`
+hard stop. No pause was needed; the card finished at `65°C`. The complete 128-position CUDA screen had
+already exercised all formats on all five models with finite logits and full
+offload evidence for every offloadable layer. These are numerical drift
+screens, not held-out task-quality results.
+
+Matched throughput (four threads; 160-token all-position prefill; 32 cached
+tokens after a 128-token prefix; median of five) is in
+`research/new-five-<model>-<device>.json`. Run `./run-new-model-benchmarks.sh` to reproduce; it waits for
+the GTX 1070 to cool below 79°C before each CUDA timing set. The complete
+probe-level quality files are `research/new-five-cpu-quant-eval.json`,
+`research/new-five-gpu-quant-eval.json`, `research/new-five-cpu-q8-q6-64.json`
+and `research/new-five-gpu-q8-q6-64.json`. Resumed GPU runs and per-case
+cooldown timing are preserved in `research/new-five-gpu-q8-q6-64-resume-*.json`.
+
 ## Remaining work
 
-* Validate trained v3/v4 checkpoints and any new architecture revisions.
+* Validate any future checkpoint or architecture revisions against their
+  published source before distributing them.
 * Held-out task/BPB and generation evaluation after quantization; current
   authored-token probes only measure numerical drift.
 * Vulkan, ROCm and other backends remain untested. CUDA validation is specific

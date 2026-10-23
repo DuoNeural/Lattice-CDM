@@ -9,6 +9,11 @@ sys.path.insert(0, str(ROOT / 'llama.cpp/gguf-py'))
 PRESETS = {
  'sub17m': dict(heads=4, geometry='poincare', curvature=1.4427, source='DuoNeural/Sub-Lattice-17M-Poincare-Instruct README, published v1'),
  'lattice107m': dict(heads=8, geometry='poincare', curvature=1.4427, source='DuoNeural/Lattice-1-107M-Poincare-Preview README, published v1'),
+ 'lattice2_base': dict(heads=12, geometry='poincare', curvature=1.4427, source='DuoNeural/Lattice-2-192M-Poincare-Base README, pinned 2026-10-23'),
+ 'lattice3_synapse': dict(heads=12, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Lattice-3-Synapse-192M-Poincare-Instruct README/source; telepathy_scale=1.0'),
+ 'lattice4_nexus': dict(heads=12, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Lattice-4-Nexus-253M-Poincare-Instruct README/source; telepathy_scale=1.0'),
+ 'lattice4_josephson': dict(heads=12, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Lattice-4-Josephson-253M-Poincare-Instruct README/source; telepathy_scale=1.0'),
+ 'sub18m_v3': dict(heads=4, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Sub-Lattice-v3-18M-Poincare-Hybrid README/source; telepathy_scale=1.0'),
 }
 
 def expmap(v,c):
