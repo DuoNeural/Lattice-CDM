@@ -44,21 +44,39 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 
 ---
 
-## 📊 Model Series
+## 📊 Model Series & 100,000-Step Benchmark Leaderboard
 
 | Model | Total Params (Backbone) | Layers / Dim / Experts | Teacher | Best `val_bpb` | Best `val_ppl` | Status | HuggingFace |
 | :--- | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
-| **Lattice-1** | `107.4M` (`29.4M`) | `4L`, `d=512`, `E=2` | `Qwen/Qwen3-0.6B-Base` | `1.1676` | `48.45` | **Released** | [Lattice-1-107M-Poincare-Preview](https://huggingface.co/DuoNeural/Lattice-1-107M-Poincare-Preview) |
-| **Sub-Lattice v1** | `17.05M` (`4.33M`) | `3L`, `d=256`, `E=2` | `SmolLM2-360M-Instruct` | **`0.2697`** (`0.2235`‡) | **`2.12`** (`1.79`‡) | **Released** | [Sub-Lattice-17M-Poincare-Instruct](https://huggingface.co/DuoNeural/Sub-Lattice-17M-Poincare-Instruct) |
-| **Lattice-2** | `191.5M` (`153.4M`) | `5L`, `d=512`, `E=4` | `SmolLM2-1.7B` | `1.1052` | `31.03` | Complete (100k) | Coming soon |
-| **Lattice-3-Synapse** | `191.5M` (`153.4M`) | `5L`, `d=512`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6371`** | **`6.93`** | Training (~85%) | Coming soon |
-| **Lattice-4A** | `252.8M` (`215.1M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.8270`** | **`11.87`** | Training (~26%) | Coming soon |
-| **Sub-Lattice v3** | `17.05M` (`4.33M`) | `3L`, `d=256`, `E=2` (`v3`) | `SmolLM2-1.7B-Instruct` | `0.9570` | `17.68` | Training (~46%) | Coming soon |
-| **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | — | — | Launching | Coming soon |
-| **Lattice-6-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | — | — | Launching | Coming soon |
+| **Lattice-1** | `107.43M` (`29.38M`) | `4L`, `d=512`, `E=2` (`v1`) | `Qwen/Qwen3-0.6B-Base` | `1.1676` | `48.45` | **Released (100k + GGUF)** | [Lattice-1-107M-Poincare-Preview](https://huggingface.co/DuoNeural/Lattice-1-107M-Poincare-Preview) |
+| **Sub-Lattice v1** | `17.05M` (`4.33M`) | `3L`, `d=256`, `E=2` (`v1`) | `SmolLM2-360M-Instruct` | **`0.2697`** (`0.2235`‡) | **`2.12`** (`1.79`‡) | **Released (100k + GGUF)** | [Sub-Lattice-17M-Poincare-Instruct](https://huggingface.co/DuoNeural/Sub-Lattice-17M-Poincare-Instruct) |
+| **Lattice-2-Base** | `191.56M` (`153.42M`) | `5L`, `d=768`, `E=4` (`v2`) | `SmolLM2-1.7B` | **`1.1052`** | **`31.03`** | **Complete (100k)** | `DuoNeural/Lattice-2-192M-Poincare-Base` |
+| **Lattice-3-Synapse** | `191.56M` (`153.42M`) | `5L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6369`** ⭐ | **`6.92`** ⭐ | **Complete (100k)** | `DuoNeural/Lattice-3-Synapse-192M-Poincare-Instruct` |
+| **Lattice-4-Josephson (`L4A`)** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6746`** | **`7.52`** | **Complete (100k)** | `DuoNeural/Lattice-4-Josephson-253M-Poincare-Instruct` |
+| **Lattice-4-Nexus (`L4B`)** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6854`** | **`8.45`** | **Complete (100k)** | `DuoNeural/Lattice-4-Nexus-253M-Poincare-Instruct` |
+| **Sub-Lattice v3 (`18M`)** | `18.23M` (`5.52M`) | `3L`, `d=256`, `E=2` (`v3`) | `SmolLM2-360M-Instruct` | **`0.9186`** (`0.2282`‡) | **`15.76`** (`1.81`‡) | **Complete (100k)** | `DuoNeural/Sub-Lattice-v3-18M-Poincare-Hybrid` |
+| **Lattice-4C (3rd Seed)** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | `0.7780` | `8.32` | Training (~83%) | In progress (All 4 UV layers `> 1B τ*`) |
+| **Lattice-6-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | `0.8280` | `14.95` | Training (~21k) | Sub-0.83 BPB / Josephson `2¹⁵` crossed |
+| **Lattice-7-Hermes** | `283.6M` (`245.5M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | `0.8956` | `15.59` | Training (~17k) | Sub-0.90 BPB / 4-layer Josephson active |
+| **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `1.1561` | `36.66` | Training (~12k) | `2⁹` DHP storm across all 7 layers |
 
 †`405.8M` total params (`215.1M` non-embedding 7-layer CDM backbone + `190.7M` tied `tok_embed`/`lm_head` for Qwen's `248,320` vocabulary).  
-‡Held-out `apigen-80k` function-calling full-sequence BPB (`0.2235`) and PPL (`1.79`) vs. `SmolLM2-360M-Instruct` teacher (`0.6945` BPB / `6.08` PPL).
+‡Held-out `apigen-80k` function-calling full-sequence BPB (`0.2235` v1 / `0.2282` v3) and PPL (`1.79` v1 / `1.81` v3) vs. `SmolLM2-360M-Instruct` teacher (`0.6932` BPB / `6.11` PPL).
+
+### Held-Out Multi-Domain & Function-Calling Benchmark Summary ([`scripts/eval_lattice_v3_suite.py`](scripts/eval_lattice_v3_suite.py))
+
+| Held-Out Benchmark Metric | **Lattice-3-Synapse (`192M`, `5L`)** | **Lattice-4-Josephson (`253M`, `L4A`)** | **Lattice-4-Nexus (`253M`, `L4B`)** | **Teacher (`SmolLM2-1.7B-Instruct`, `1.71B`)** | **Sub-Lattice v3 (`18.2M` / `5.5M` Backbone)** | **Teacher (`SmolLM2-360M-Instruct`, `362M`)** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`apigen-80k` Asst Top-1 / Top-5 Teacher Agree** | `96.88%` / `98.69%` | **`97.27%` / `98.80%`** ⭐ | `97.13%` / `98.75%` | `100.0%` (Ref) | **`83.62%` / `95.50%`** | `100.0%` (Ref) |
+| **`apigen-80k` `<\|im_end\|>` Stop-Token Discipline** | **`100.0%`** ⭐ | **`100.0%`** ⭐ | `96.7%` | `100.0%` | **`83.3%` (`1.78×` Tea)** | `46.7%` |
+| **`apigen-80k` Valid JSON Tool Syntax (`json.loads`)** | `96.7%` | **`100.0%`** ⭐ | `96.7%` | `100.0%` | **`80.0%` (`3.00×` Tea)** ⭐ | `26.7%` |
+| **`apigen-80k` Exact Tool Name Accuracy (vs. GT)** | `96.7%` | **`100.0%`** ⭐ | `96.7%` | `100.0%` | **`56.7%` (`3.40×` Tea)** ⭐ | `16.7%` |
+| **`apigen-80k` Schema Argument Keys F1 Score** | **`96.7%`** ⭐ | **`96.7%`** ⭐ | `94.4%` | `100.0%` | **`61.6%` (`3.69×` Tea)** ⭐ | `16.7%` |
+| **`everyday-conversations` Full-Seq `val_bpb` (`PPL`)** | **`0.1051` (`1.41`)** ⭐ | **`0.1060` (`1.42`)** | **`0.1088` (`1.43`)** | `0.3899` (`3.59`) | `0.4416` (`4.26`) | `0.3695` (`3.36`) |
+| **`everyday-conversations` Asst-Only `val_bpb` (`PPL`)** | **`0.0927` (`1.36`)** ⭐ | **`0.0940` (`1.37`)** | **`0.0981` (`1.39`)** | `0.1847` (`1.85`) | `0.6057` (`7.59`) | `0.2315` (`2.17`) |
+| **`everyday-conversations` Teacher-Scored Gen PPL** | **`1.15`** | **`1.15`** | **`1.15`** | `1.05` | **`1.41` (Beats Tea!)** ⭐ | `1.56` |
+| **`smol-constraints` Full-Sequence `val_bpb` (`PPL`)** | **`0.3410` (`3.07`)** ⭐ | `0.3615` (`3.28`) | `0.3656` (`3.33`) | `0.3489` (`3.15`) | `0.5799` (`6.73`) | `0.3403` (`3.06`) |
+| **Total DHP/CHP 3-Smooth Rung Crossings (100k)** | `4,200+` | **`7,824` (`1,318` PURE)** | **`7,939` (`1,324` PURE)** | — | **`2,566` (`606` PURE)** | — |
 
 ---
 
