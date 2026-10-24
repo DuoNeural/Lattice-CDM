@@ -1,0 +1,6550 @@
+{
+  "Teacher-SmolLM2-360M-Instruct": {
+    "total_params": 361821120,
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 42.0,
+        "acc_norm_pct": 51.0
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 51.5,
+        "acc_norm_pct": 50.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 27.5,
+        "acc_norm_pct": 35.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 68.0,
+        "acc_norm_pct": 73.0
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.0029,
+      "ppl": 16.7
+    }
+  },
+  "Sub-Lattice-v3-Lorentz-18M": {
+    "geometry": "lorentz",
+    "best_step": 75500,
+    "checkpoint_val_bpb": 0.8914453971440521,
+    "checkpoint_val_ppl": 14.46307748187059,
+    "total_params": 18226310,
+    "backbone_params": 5512326,
+    "d_ff": 1024,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 31.5,
+        "acc_norm_pct": 30.5
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 35.5,
+        "acc_norm_pct": 35.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 21.0,
+        "acc_norm_pct": 21.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 59.0,
+        "acc_norm_pct": 55.5
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.8983,
+      "ppl": 206.15
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1411,
+      "pure_dhp_fires": 332,
+      "mixed_dhp_fires": 1079,
+      "total_evals_logged": 200,
+      "first_dhp": "[2026-10-23T07:20:04Z] !!! DHP L01 slot=7 rung=24 (2^3x3^1,MIXED) tau*=24 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-24T02:34:09Z] !!! DHP L01 slot=7 rung=2.2395e+06 (2^10x3^7,MIXED) tau*=2.2507e+06 next=2.3593e+06 !!!",
+        "[2026-10-24T02:34:09Z] !!! DHP L02 slot=0 rung=209952 (2^5x3^8,MIXED) tau*=211327 next=221184 !!!",
+        "[2026-10-24T02:34:09Z] !!! DHP L02 slot=3 rung=73728 (2^13x3^2,MIXED) tau*=75585 next=78732 !!!",
+        "[2026-10-24T02:34:09Z] !!! DHP L02 slot=4 rung=104976 (2^4x3^8,MIXED) tau*=108038 next=110592 !!!",
+        "[2026-10-24T02:34:09Z] !!! DHP L02 slot=7 rung=73728 (2^13x3^2,MIXED) tau*=74164 next=78732 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-23T06:08:48Z] EVAL step     500 | val_bpb=2.6123 val_ppl~=2512.02 teacher_kld=0.8787 | best=2.6123@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-23T07:01:08Z] EVAL step    5000 | val_bpb=1.2650 val_ppl~=44.30 teacher_kld=0.3291 | best=1.2650@5000 | L00:20(c=1.51) L01:20(c=1.51) L02:20(c=1.51) | DHP=NO",
+        "[2026-10-23T08:03:58Z] EVAL step   10000 | val_bpb=1.1329 val_ppl~=29.82 teacher_kld=0.2707 | best=1.1329@10000 | L00:35(c=0.75) L01:36(c=0.84) L02:32(c=0.93) | DHP=YES",
+        "[2026-10-23T10:09:02Z] EVAL step   20000 | val_bpb=1.0257 val_ppl~=21.63 teacher_kld=0.2354 | best=1.0257@20000 | L00:116(c=0.37) L01:125(c=0.60) L02:85(c=0.60) | DHP=YES",
+        "[2026-10-23T11:11:47Z] EVAL step   25000 | val_bpb=0.9935 val_ppl~=19.64 teacher_kld=0.2258 | best=0.9935@25000 | L00:214(c=0.32) L01:231(c=0.56) L02:138(c=0.55) | DHP=YES",
+        "[2026-10-23T12:14:33Z] EVAL step   30000 | val_bpb=0.9785 val_ppl~=18.78 teacher_kld=0.2216 | best=0.9785@30000 | L00:394(c=0.29) L01:427(c=0.56) L02:225(c=0.53) | DHP=YES",
+        "[2026-10-23T14:20:23Z] EVAL step   40000 | val_bpb=0.9478 val_ppl~=17.12 teacher_kld=0.2139 | best=0.9406@39000 | L00:1334(c=0.27) L01:1452(c=0.58) L02:598(c=0.54) | DHP=YES",
+        "[2026-10-23T16:13:08Z] EVAL step   49000 | val_bpb=0.9210 val_ppl~=15.80 teacher_kld=0.2058 | best=0.9207@48500 | L00:3995(c=0.26) L01:4372(c=0.61) L02:1446(c=0.56) | DHP=YES",
+        "[2026-10-23T16:25:41Z] EVAL step   50000 | val_bpb=0.9216 val_ppl~=15.83 teacher_kld=0.2051 | best=0.9199@49500 | L00:4512(c=0.26) L01:4942(c=0.61) L02:1594(c=0.56) | DHP=YES",
+        "[2026-10-23T21:45:41Z] EVAL step   75500 | val_bpb=0.8914 val_ppl~=14.46 teacher_kld=0.1960 | best=0.8914@75500 | L00:100877(c=0.26) L01:112162(c=0.62) L02:19354(c=0.57) | DHP=YES",
+        "[2026-10-23T23:26:37Z] EVAL step   83500 | val_bpb=0.8916 val_ppl~=14.47 teacher_kld=0.1960 | best=0.8914@75500 | L00:267422(c=0.26) L01:298693(c=0.62) L02:42143(c=0.57) | DHP=YES",
+        "[2026-10-24T00:35:53Z] EVAL step   89000 | val_bpb=0.8917 val_ppl~=14.47 teacher_kld=0.1961 | best=0.8914@75500 | L00:521920(c=0.26) L01:585649(c=0.62) L02:72118(c=0.57) | DHP=YES",
+        "[2026-10-24T01:01:06Z] EVAL step   91000 | val_bpb=0.8917 val_ppl~=14.48 teacher_kld=0.1961 | best=0.8914@75500 | L00:665834(c=0.26) L01:747986(c=0.62) L02:87568(c=0.57) | DHP=YES",
+        "[2026-10-24T02:34:09Z] EVAL step  100000 | val_bpb=0.8917 val_ppl~=14.47 teacher_kld=0.1961 | best=0.8914@75500 | L00:1.9914e+06(c=0.26) L01:2.2507e+06(c=0.62) L02:211327(c=0.57) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "lorentz",
+        "curvature_best": 0.2578,
+        "curvature_100k": 0.2578,
+        "router_temp": 0.5,
+        "tau_max_best": 100877.9722098006,
+        "tau_max_100k": 1991413.2265605477,
+        "taus_best": [
+          54860.32606272679,
+          3784.588959594383,
+          60.896798494902114,
+          3037.2137203172283,
+          345.3508468559956,
+          100877.9722098006,
+          23.569429168608348,
+          422.19128111592465
+        ],
+        "taus_100k": [
+          906843.5280842857,
+          21195.699493424898,
+          88.27365241424215,
+          17288.553888033395,
+          929.8794878040558,
+          1991413.2265605477,
+          24.907340186253897,
+          1211.6515140698616
+        ],
+        "purity_best": 0.6173,
+        "slot_entropy_best": 0.4127,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 54860.32606272679,
+            "tau_100k": 906843.5280842857,
+            "top_tokens": [
+              " be",
+              " have",
+              " of",
+              " is",
+              " a",
+              " other",
+              " the",
+              " are"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 3784.588959594383,
+            "tau_100k": 21195.699493424898,
+            "top_tokens": [
+              ".",
+              " and",
+              " to",
+              ",",
+              " in",
+              " for",
+              " with",
+              " or"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 60.896798494902114,
+            "tau_100k": 88.27365241424215,
+            "top_tokens": [
+              "\n",
+              "\n\n",
+              "\n ",
+              " \n",
+              "\n   ",
+              "\n\n\n",
+              "\n\n\n\n",
+              "\n  "
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 3037.2137203172283,
+            "tau_100k": 17288.553888033395,
+            "top_tokens": [
+              " ",
+              "-",
+              " \"",
+              "1",
+              "\n",
+              ",",
+              "2",
+              " of"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 345.3508468559956,
+            "tau_100k": 929.8794878040558,
+            "top_tokens": [
+              ",",
+              ".",
+              ":",
+              " and",
+              "-",
+              " of",
+              "\":",
+              "\","
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 100877.9722098006,
+            "tau_100k": 1991413.2265605477,
+            "top_tokens": [
+              "CreateModel",
+              " antidepress",
+              "arnation",
+              "teness",
+              "dprinting",
+              "mentation",
+              " Ayurved",
+              "vation"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 23.569429168608348,
+            "tau_100k": 24.907340186253897,
+            "top_tokens": [
+              " of",
+              "of",
+              " for",
+              " and",
+              " in",
+              ",",
+              " from",
+              " or"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 422.19128111592465,
+            "tau_100k": 1211.6515140698616,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " your",
+              " its",
+              " their",
+              " our",
+              " this"
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "lorentz",
+        "curvature_best": 0.6199,
+        "curvature_100k": 0.62,
+        "router_temp": 0.5,
+        "tau_max_best": 112162.46201763536,
+        "tau_max_100k": 2250726.744038482,
+        "taus_best": [
+          1163.7336575738257,
+          104.12313014071681,
+          285.28944824497984,
+          456.368770225919,
+          676.0465499784109,
+          181.46296786872972,
+          20352.36435556788,
+          112162.46201763536
+        ],
+        "taus_100k": [
+          5527.62390090073,
+          182.69753407528913,
+          684.8352908429066,
+          1325.1179019129977,
+          2264.273209996545,
+          383.1982056632573,
+          232560.4420100167,
+          2250726.744038482
+        ],
+        "purity_best": 0.8285,
+        "slot_entropy_best": 0.2667,
+        "tele_frobenius_norm": 28.1122,
+        "tele_max_abs": 6.5263,
+        "W_tele": [
+          [
+            -2.9065,
+            2.7781,
+            1.7073,
+            -1.4498,
+            -0.5665,
+            0.7661,
+            -5.8146,
+            -6.5016
+          ],
+          [
+            -2.9191,
+            2.7923,
+            1.6984,
+            -1.4493,
+            -0.5804,
+            0.7707,
+            -5.8197,
+            -6.5074
+          ],
+          [
+            -3.1238,
+            2.8466,
+            1.6536,
+            -1.441,
+            -0.5847,
+            0.8522,
+            -5.8404,
+            -6.521
+          ],
+          [
+            -2.9499,
+            2.7764,
+            1.6698,
+            -1.4418,
+            -0.55,
+            0.7768,
+            -5.8152,
+            -6.5045
+          ],
+          [
+            -2.9833,
+            2.8189,
+            1.6806,
+            -1.4286,
+            -0.5851,
+            0.7977,
+            -5.8359,
+            -6.5215
+          ],
+          [
+            -2.9558,
+            2.7802,
+            1.675,
+            -1.4351,
+            -0.5676,
+            0.7856,
+            -5.8139,
+            -6.5
+          ],
+          [
+            -2.8262,
+            2.7878,
+            1.721,
+            -1.4289,
+            -0.5755,
+            0.7602,
+            -5.8382,
+            -6.5263
+          ],
+          [
+            -2.9281,
+            2.8039,
+            1.7185,
+            -1.4467,
+            -0.5886,
+            0.7827,
+            -5.8365,
+            -6.5222
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 1163.7336575738257,
+            "tau_100k": 5527.62390090073,
+            "top_tokens": [
+              " \"",
+              "{\"",
+              "\n",
+              "[\"",
+              " {\"",
+              "[",
+              " [",
+              " "
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 104.12313014071681,
+            "tau_100k": 182.69753407528913,
+            "top_tokens": [
+              " the",
+              "The",
+              "the",
+              " The",
+              " its",
+              " your",
+              " a",
+              " this"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 285.28944824497984,
+            "tau_100k": 684.8352908429066,
+            "top_tokens": [
+              "1",
+              " ",
+              "2",
+              "5",
+              "0",
+              "4",
+              "3",
+              "6"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 456.368770225919,
+            "tau_100k": 1325.1179019129977,
+            "top_tokens": [
+              "\n",
+              ".",
+              "\n\n",
+              " \n",
+              "\n ",
+              "!",
+              "The",
+              " The"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 676.0465499784109,
+            "tau_100k": 2264.273209996545,
+            "top_tokens": [
+              " a",
+              " to",
+              " the",
+              " an",
+              " in",
+              " for",
+              " of",
+              " by"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 181.46296786872972,
+            "tau_100k": 383.1982056632573,
+            "top_tokens": [
+              ",",
+              " and",
+              " or",
+              " but",
+              " ,",
+              ";",
+              " &",
+              "."
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 20352.36435556788,
+            "tau_100k": 232560.4420100167,
+            "top_tokens": [
+              " the",
+              " be",
+              " a",
+              " not",
+              " more",
+              " also",
+              " your",
+              " an"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 112162.46201763536,
+            "tau_100k": 2250726.744038482,
+            "top_tokens": [
+              "-",
+              " function",
+              " and",
+              ",",
+              " data",
+              " information",
+              ".",
+              " functions"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "lorentz",
+        "curvature_best": 0.571,
+        "curvature_100k": 0.5711,
+        "router_temp": 0.5,
+        "tau_max_best": 19354.26114185284,
+        "tau_max_100k": 211327.3341036895,
+        "taus_best": [
+          19354.26114185284,
+          936.3854246525441,
+          818.5525737892026,
+          8740.280710457284,
+          12527.031873836166,
+          202.20940431884728,
+          109.13909946964141,
+          8785.270275621197
+        ],
+        "taus_100k": [
+          211327.3341036895,
+          5574.209017289318,
+          2682.005568259961,
+          75585.72976239407,
+          108038.7597413187,
+          470.1039659546682,
+          198.18039126109113,
+          74164.01201685965
+        ],
+        "purity_best": 0.376,
+        "slot_entropy_best": 0.7156,
+        "tele_frobenius_norm": 25.5956,
+        "tele_max_abs": 5.0036,
+        "W_tele": [
+          [
+            -4.7728,
+            -1.3729,
+            -0.8426,
+            -3.4481,
+            -4.6528,
+            1.6429,
+            2.0408,
+            -3.834
+          ],
+          [
+            -5.0036,
+            -1.3432,
+            -0.8258,
+            -3.6397,
+            -4.8681,
+            1.6641,
+            2.1379,
+            -4.0055
+          ],
+          [
+            -4.97,
+            -1.3436,
+            -0.854,
+            -3.5968,
+            -4.8439,
+            1.6802,
+            2.1305,
+            -3.983
+          ],
+          [
+            -4.8315,
+            -1.3519,
+            -0.8268,
+            -3.5121,
+            -4.7042,
+            1.6505,
+            2.0974,
+            -3.8886
+          ],
+          [
+            -4.8486,
+            -1.3134,
+            -0.8061,
+            -3.5365,
+            -4.7239,
+            1.6266,
+            2.0972,
+            -3.8893
+          ],
+          [
+            -4.9026,
+            -1.3187,
+            -0.8191,
+            -3.5615,
+            -4.7729,
+            1.6416,
+            2.1111,
+            -3.9263
+          ],
+          [
+            -4.6315,
+            -1.2953,
+            -0.799,
+            -3.3896,
+            -4.5289,
+            1.5509,
+            1.9925,
+            -3.7238
+          ],
+          [
+            -4.5674,
+            -1.2811,
+            -0.7935,
+            -3.3391,
+            -4.4755,
+            1.5264,
+            1.9625,
+            -3.678
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 19354.26114185284,
+            "tau_100k": 211327.3341036895,
+            "top_tokens": [
+              ",",
+              ".",
+              " and",
+              "-",
+              " in",
+              " to",
+              " for",
+              " or"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 936.3854246525441,
+            "tau_100k": 5574.209017289318,
+            "top_tokens": [
+              ",",
+              " \"",
+              " ",
+              "\n",
+              " and",
+              "\",",
+              ".",
+              " ("
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 818.5525737892026,
+            "tau_100k": 2682.005568259961,
+            "top_tokens": [
+              "\n",
+              ".",
+              " The",
+              " \n",
+              "The",
+              "\n\n",
+              " If",
+              " "
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 8740.280710457284,
+            "tau_100k": 75585.72976239407,
+            "top_tokens": [
+              " the",
+              " a",
+              " to",
+              " be",
+              ",",
+              " ",
+              " is",
+              " not"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 12527.031873836166,
+            "tau_100k": 108038.7597413187,
+            "top_tokens": [
+              " the",
+              " a",
+              " and",
+              " in",
+              " an",
+              " ",
+              ",",
+              " at"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 202.20940431884728,
+            "tau_100k": 470.1039659546682,
+            "top_tokens": [
+              " ",
+              "1",
+              "2",
+              "0",
+              "5",
+              "3",
+              "4",
+              "9"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 109.13909946964141,
+            "tau_100k": 198.18039126109113,
+            "top_tokens": [
+              " the",
+              " The",
+              "the",
+              "The",
+              " same",
+              " current",
+              " first",
+              " a"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 8785.270275621197,
+            "tau_100k": 74164.01201685965,
+            "top_tokens": [
+              "-",
+              "_",
+              ",",
+              ".",
+              " and",
+              " ",
+              "in",
+              "/"
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.5133,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 88.95,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 39.88,
+      "top5_agree_pct": 62.68,
+      "kld_T1": 1.9707
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 0.2323,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 1.83,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 0.2878,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 1.72,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 83.05,
+        "asst_top5_agree_pct": 95.5,
+        "asst_kld_T1": 0.6805
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 0.4791,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 4.82,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 0.6672,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 9.53,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 56.28,
+        "asst_top5_agree_pct": 78.46,
+        "asst_kld_T1": 1.5361
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 0.5817,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 6.77,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 0.7996,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 15.9,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 47.92,
+        "asst_top5_agree_pct": 73.74,
+        "asst_kld_T1": 1.8837
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 86.7,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 80.0,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 43.3,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 13.3,
+      "stu_arg_key_f1_pct": 62.7,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Llngngngngngngngngngngngngngngngngngngngngngngngngngngngngngngngn"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"get_block_hash\", \"arguments\": {\"i\": 20000, \"n\": 30000}}]</tool_call>"
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"duplicate_list\", \"arguments\": {\"lst\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}}]</tool_call>"
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 100.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 100.0,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 1.33,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            13.22,
+            12.51,
+            12.1,
+            12.87,
+            12.21,
+            13.57,
+            11.53,
+            11.99
+          ],
+          "INDENT_NEWLINE": [
+            12.41,
+            12.35,
+            15.94,
+            12.61,
+            11.78,
+            12.14,
+            11.1,
+            11.67
+          ],
+          "JSON_SYNTAX": [
+            13.04,
+            12.51,
+            11.69,
+            12.94,
+            12.98,
+            13.29,
+            11.61,
+            11.94
+          ],
+          "SCHEMA_KEYWORD": [
+            13.42,
+            12.56,
+            11.65,
+            12.93,
+            12.21,
+            13.52,
+            11.68,
+            12.04
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            13.55,
+            12.56,
+            11.97,
+            12.87,
+            12.19,
+            13.35,
+            11.5,
+            12.01
+          ],
+          "GENERAL_PROSE": [
+            13.22,
+            12.79,
+            11.71,
+            13.0,
+            12.31,
+            12.99,
+            11.68,
+            12.3
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            2.56,
+            42.1,
+            25.46,
+            5.23,
+            8.1,
+            15.52,
+            0.6,
+            0.44
+          ],
+          "INDENT_NEWLINE": [
+            2.57,
+            41.67,
+            25.06,
+            5.92,
+            7.97,
+            15.8,
+            0.59,
+            0.42
+          ],
+          "JSON_SYNTAX": [
+            2.7,
+            41.48,
+            25.5,
+            5.18,
+            8.15,
+            15.95,
+            0.6,
+            0.43
+          ],
+          "SCHEMA_KEYWORD": [
+            2.55,
+            41.79,
+            25.87,
+            4.97,
+            8.23,
+            15.52,
+            0.61,
+            0.45
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            2.54,
+            42.48,
+            25.04,
+            5.12,
+            8.22,
+            15.57,
+            0.62,
+            0.42
+          ],
+          "GENERAL_PROSE": [
+            2.53,
+            42.12,
+            25.49,
+            5.01,
+            8.22,
+            15.6,
+            0.61,
+            0.43
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            1.26,
+            7.66,
+            9.75,
+            2.46,
+            1.33,
+            34.04,
+            41.35,
+            2.14
+          ],
+          "INDENT_NEWLINE": [
+            1.22,
+            7.83,
+            10.65,
+            2.44,
+            1.31,
+            33.53,
+            40.99,
+            2.04
+          ],
+          "JSON_SYNTAX": [
+            1.23,
+            8.03,
+            9.65,
+            2.44,
+            1.33,
+            34.01,
+            41.24,
+            2.07
+          ],
+          "SCHEMA_KEYWORD": [
+            1.31,
+            7.65,
+            9.24,
+            2.5,
+            1.34,
+            34.33,
+            41.46,
+            2.17
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            1.23,
+            7.6,
+            9.54,
+            2.6,
+            1.34,
+            33.62,
+            42.0,
+            2.07
+          ],
+          "GENERAL_PROSE": [
+            1.26,
+            7.6,
+            9.36,
+            2.5,
+            1.34,
+            33.82,
+            42.04,
+            2.07
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 0.00451,
+        "everyday-conversations": 0.004808,
+        "fineweb-edu": 0.005545
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 0.2384,
+          "everyday-conversations": 0.4764,
+          "fineweb-edu": 1.3936
+        },
+        "lesions": {
+          "L00_S5": {
+            "tau_star": 100877.9722098006,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000318,
+            "delta_bpb_chat": 0.004724,
+            "delta_bpb_fineweb": 0.00125
+          },
+          "L00_S0": {
+            "tau_star": 54860.32606272679,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000127,
+            "delta_bpb_chat": 0.005716,
+            "delta_bpb_fineweb": 0.000751
+          },
+          "L00_S6": {
+            "tau_star": 23.569429168608348,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000177,
+            "delta_bpb_chat": 0.004296,
+            "delta_bpb_fineweb": 0.000695
+          },
+          "L01_S7": {
+            "tau_star": 112162.46201763536,
+            "expert": 1,
+            "delta_bpb_apigen": -5.7e-05,
+            "delta_bpb_chat": 1.5e-05,
+            "delta_bpb_fineweb": -1.9e-05
+          },
+          "L01_S6": {
+            "tau_star": 20352.36435556788,
+            "expert": 0,
+            "delta_bpb_apigen": -4.2e-05,
+            "delta_bpb_chat": -1.5e-05,
+            "delta_bpb_fineweb": -9.5e-05
+          },
+          "L01_S1": {
+            "tau_star": 104.12313014071681,
+            "expert": 1,
+            "delta_bpb_apigen": 0.014727,
+            "delta_bpb_chat": 0.018882,
+            "delta_bpb_fineweb": 0.01135
+          },
+          "L02_S0": {
+            "tau_star": 19354.26114185284,
+            "expert": 0,
+            "delta_bpb_apigen": -2e-06,
+            "delta_bpb_chat": 0.000592,
+            "delta_bpb_fineweb": 0.000376
+          },
+          "L02_S4": {
+            "tau_star": 12527.031873836166,
+            "expert": 0,
+            "delta_bpb_apigen": 2.5e-05,
+            "delta_bpb_chat": 0.000751,
+            "delta_bpb_fineweb": 0.000403
+          },
+          "L02_S6": {
+            "tau_star": 109.13909946964141,
+            "expert": 0,
+            "delta_bpb_apigen": 0.017883,
+            "delta_bpb_chat": 0.055136,
+            "delta_bpb_fineweb": 0.067273
+          }
+        }
+      }
+    },
+    "eval_seconds": 66.0
+  },
+  "Sub-Lattice-v3-Poincare-18M": {
+    "geometry": "poincare",
+    "best_step": 91000,
+    "checkpoint_val_bpb": 0.9185944780046887,
+    "checkpoint_val_ppl": 15.75654289509029,
+    "total_params": 18226310,
+    "backbone_params": 5512326,
+    "d_ff": 1024,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 30.5,
+        "acc_norm_pct": 29.0
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 36.5,
+        "acc_norm_pct": 35.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 20.0,
+        "acc_norm_pct": 22.5
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 56.5,
+        "acc_norm_pct": 54.5
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.8911,
+      "ppl": 202.02
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1283,
+      "pure_dhp_fires": 303,
+      "mixed_dhp_fires": 980,
+      "total_evals_logged": 200,
+      "first_dhp": "[2026-10-20T21:44:26Z] !!! DHP L01 slot=4 rung=24 (2^3x3^1,MIXED) tau*=24 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-21T17:28:01Z] !!! DHP L01 slot=4 rung=2.2395e+06 (2^10x3^7,MIXED) tau*=2.2518e+06 next=2.3593e+06 !!!",
+        "[2026-10-21T17:28:01Z] !!! DHP L02 slot=0 rung=1728 (2^6x3^3,MIXED) tau*=1744 next=1944 !!!",
+        "[2026-10-21T17:28:01Z] !!! DHP L02 slot=1 rung=98304 (2^15x3^1,MIXED) tau*=99755 next=104976 !!!",
+        "[2026-10-21T17:28:01Z] !!! DHP L02 slot=3 rung=93312 (2^7x3^6,MIXED) tau*=96629 next=98304 !!!",
+        "[2026-10-21T17:28:01Z] !!! DHP L02 slot=5 rung=209952 (2^5x3^8,MIXED) tau*=212075 next=221184 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-20T20:31:22Z] EVAL step     500 | val_bpb=2.5588 val_ppl~=2165.81 teacher_kld=0.8421 | best=2.5588@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-20T21:25:34Z] EVAL step    5000 | val_bpb=1.2666 val_ppl~=44.79 teacher_kld=0.3094 | best=1.2666@5000 | L00:20(c=1.51) L01:20(c=1.51) L02:20(c=1.51) | DHP=NO",
+        "[2026-10-20T22:28:39Z] EVAL step   10000 | val_bpb=1.1435 val_ppl~=30.95 teacher_kld=0.2567 | best=1.1435@10000 | L00:36(c=0.75) L01:36(c=0.79) L02:33(c=0.92) | DHP=YES",
+        "[2026-10-21T00:34:59Z] EVAL step   20000 | val_bpb=1.0434 val_ppl~=22.92 teacher_kld=0.2235 | best=1.0434@20000 | L00:124(c=0.37) L01:125(c=0.41) L02:89(c=0.65) | DHP=YES",
+        "[2026-10-21T01:38:11Z] EVAL step   25000 | val_bpb=1.0258 val_ppl~=21.74 teacher_kld=0.2174 | best=1.0258@25000 | L00:229(c=0.32) L01:230(c=0.35) L02:146(c=0.59) | DHP=YES",
+        "[2026-10-21T02:41:17Z] EVAL step   30000 | val_bpb=1.0032 val_ppl~=20.31 teacher_kld=0.2120 | best=1.0005@29500 | L00:422(c=0.29) L01:425(c=0.31) L02:237(c=0.56) | DHP=YES",
+        "[2026-10-21T04:48:11Z] EVAL step   40000 | val_bpb=0.9740 val_ppl~=18.61 teacher_kld=0.2042 | best=0.9705@39500 | L00:1439(c=0.27) L01:1448(c=0.28) L02:627(c=0.54) | DHP=YES",
+        "[2026-10-21T06:41:48Z] EVAL step   49000 | val_bpb=0.9555 val_ppl~=17.60 teacher_kld=0.1986 | best=0.9555@49000 | L00:4335(c=0.26) L01:4361(c=0.27) L02:1508(c=0.55) | DHP=YES",
+        "[2026-10-21T06:54:29Z] EVAL step   50000 | val_bpb=0.9531 val_ppl~=17.48 teacher_kld=0.1975 | best=0.9531@50000 | L00:4900(c=0.26) L01:4929(c=0.27) L02:1662(c=0.55) | DHP=YES",
+        "[2026-10-21T12:17:25Z] EVAL step   75500 | val_bpb=0.9202 val_ppl~=15.84 teacher_kld=0.1872 | best=0.9202@75500 | L00:111351(c=0.26) L01:112016(c=0.27) L02:19773(c=0.57) | DHP=YES",
+        "[2026-10-21T13:58:50Z] EVAL step   83500 | val_bpb=0.9192 val_ppl~=15.78 teacher_kld=0.1867 | best=0.9187@82500 | L00:296677(c=0.26) L01:298434(c=0.27) L02:42886(c=0.57) | DHP=YES",
+        "[2026-10-21T15:08:25Z] EVAL step   89000 | val_bpb=0.9188 val_ppl~=15.77 teacher_kld=0.1866 | best=0.9187@82500 | L00:581962(c=0.26) L01:585350(c=0.27) L02:73117(c=0.57) | DHP=YES",
+        "[2026-10-21T15:33:54Z] EVAL step   91000 | val_bpb=0.9186 val_ppl~=15.76 teacher_kld=0.1866 | best=0.9186@91000 | L00:743531(c=0.26) L01:747828(c=0.27) L02:88673(c=0.57) | DHP=YES",
+        "[2026-10-21T17:28:01Z] EVAL step  100000 | val_bpb=0.9187 val_ppl~=15.76 teacher_kld=0.1866 | best=0.9186@91000 | L00:2.2392e+06(c=0.26) L01:2.2518e+06(c=0.27) L02:212075(c=0.57) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "poincare",
+        "curvature_best": 0.2564,
+        "curvature_100k": 0.2564,
+        "router_temp": 0.5,
+        "tau_max_best": 743531.5,
+        "tau_max_100k": 2239194.5,
+        "taus_best": [
+          767.0116577148438,
+          1748.782470703125,
+          63.520877838134766,
+          1202.8880615234375,
+          743531.5,
+          74.31060028076172,
+          24.5551815032959,
+          130758.484375
+        ],
+        "taus_100k": [
+          1116.0147705078125,
+          3519.16796875,
+          71.67731475830078,
+          1733.3883056640625,
+          2239194.5,
+          85.41630554199219,
+          25.07526397705078,
+          318050.1875
+        ],
+        "purity_best": 0.8467,
+        "slot_entropy_best": 0.2182,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 767.0116577148438,
+            "tau_100k": 1116.0147705078125,
+            "top_tokens": [
+              ",",
+              "\n",
+              ".",
+              " and",
+              " (",
+              " or",
+              ":",
+              "-"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 1748.782470703125,
+            "tau_100k": 3519.16796875,
+            "top_tokens": [
+              " \"",
+              ".",
+              ",",
+              "-",
+              " (",
+              " of",
+              " and",
+              ":"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 63.520877838134766,
+            "tau_100k": 71.67731475830078,
+            "top_tokens": [
+              ".",
+              ",",
+              "!",
+              "-",
+              ":",
+              " and",
+              " to",
+              " in"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 1202.8880615234375,
+            "tau_100k": 1733.3883056640625,
+            "top_tokens": [
+              "1",
+              " ",
+              "2",
+              "-",
+              "0",
+              "5",
+              "_",
+              "3"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 743531.5,
+            "tau_100k": 2239194.5,
+            "top_tokens": [
+              " of",
+              " unit",
+              " units",
+              " field",
+              " type",
+              " sense",
+              " base",
+              " key"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 74.31060028076172,
+            "tau_100k": 85.41630554199219,
+            "top_tokens": [
+              " to",
+              " a",
+              " an",
+              " the",
+              " in",
+              " for",
+              ",",
+              " and"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 24.5551815032959,
+            "tau_100k": 25.07526397705078,
+            "top_tokens": [
+              " of",
+              "of",
+              " Of",
+              " to",
+              " in",
+              " and",
+              ",",
+              " or"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 130758.484375,
+            "tau_100k": 318050.1875,
+            "top_tokens": [
+              " the",
+              " and",
+              " a",
+              " to",
+              " in",
+              " of",
+              ",",
+              " or"
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "poincare",
+        "curvature_best": 0.2663,
+        "curvature_100k": 0.2663,
+        "router_temp": 0.5,
+        "tau_max_best": 747828.25,
+        "tau_max_100k": 2251799.5,
+        "taus_best": [
+          96.67089080810547,
+          140212.3125,
+          3229.293701171875,
+          149.56158447265625,
+          747828.25,
+          412.07806396484375,
+          110.67042541503906,
+          1436.1380615234375
+        ],
+        "taus_100k": [
+          112.45380401611328,
+          358001.9375,
+          5998.79638671875,
+          184.01641845703125,
+          2251799.5,
+          479.1134338378906,
+          133.67111206054688,
+          2250.975830078125
+        ],
+        "purity_best": 0.837,
+        "slot_entropy_best": 0.2295,
+        "tele_frobenius_norm": 30.6287,
+        "tele_max_abs": 6.6755,
+        "W_tele": [
+          [
+            1.6539,
+            -6.0958,
+            -4.0148,
+            2.1958,
+            -6.6677,
+            -1.8401,
+            1.6242,
+            -2.4765
+          ],
+          [
+            1.6687,
+            -6.1076,
+            -4.0862,
+            2.2243,
+            -6.6653,
+            -1.8417,
+            1.6755,
+            -2.4657
+          ],
+          [
+            1.665,
+            -6.086,
+            -3.9756,
+            2.1479,
+            -6.6755,
+            -1.861,
+            1.5842,
+            -2.5078
+          ],
+          [
+            1.657,
+            -6.0909,
+            -4.0154,
+            2.2098,
+            -6.6512,
+            -1.8237,
+            1.6341,
+            -2.46
+          ],
+          [
+            1.6634,
+            -6.0933,
+            -4.0131,
+            2.2189,
+            -6.6523,
+            -1.8112,
+            1.6452,
+            -2.4612
+          ],
+          [
+            1.6047,
+            -6.0957,
+            -4.0278,
+            2.2575,
+            -6.6718,
+            -1.7685,
+            1.5802,
+            -2.4291
+          ],
+          [
+            1.6276,
+            -6.0968,
+            -3.9915,
+            2.2368,
+            -6.6714,
+            -1.7825,
+            1.5876,
+            -2.4466
+          ],
+          [
+            1.6037,
+            -6.0821,
+            -4.0381,
+            2.237,
+            -6.6564,
+            -1.7762,
+            1.5827,
+            -2.437
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 96.67089080810547,
+            "tau_100k": 112.45380401611328,
+            "top_tokens": [
+              "\n",
+              "\n\n",
+              " \n",
+              "\n ",
+              "\n\n\n",
+              "\n\n\n\n",
+              "\n\n ",
+              "\n  "
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 140212.3125,
+            "tau_100k": 358001.9375,
+            "top_tokens": [
+              " the",
+              " a",
+              " your",
+              " an",
+              " this",
+              " you",
+              " any",
+              " some"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 3229.293701171875,
+            "tau_100k": 5998.79638671875,
+            "top_tokens": [
+              " ",
+              " \"",
+              "\n",
+              "...",
+              "-",
+              " (",
+              " **",
+              "{\""
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 149.56158447265625,
+            "tau_100k": 184.01641845703125,
+            "top_tokens": [
+              " the",
+              "The",
+              " The",
+              "the",
+              " its",
+              " your",
+              " THE",
+              " their"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 747828.25,
+            "tau_100k": 2251799.5,
+            "top_tokens": [
+              "-",
+              ".",
+              "_",
+              ",",
+              " and",
+              "/",
+              " information",
+              ":"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 412.07806396484375,
+            "tau_100k": 479.1134338378906,
+            "top_tokens": [
+              ",",
+              " and",
+              ";",
+              " ,",
+              ".",
+              "\n",
+              ".,",
+              ",,"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 110.67042541503906,
+            "tau_100k": 133.67111206054688,
+            "top_tokens": [
+              ".",
+              "\n",
+              "!",
+              ".*",
+              "*.",
+              "..",
+              ".\"",
+              "'."
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 1436.1380615234375,
+            "tau_100k": 2250.975830078125,
+            "top_tokens": [
+              " to",
+              " the",
+              " and",
+              " in",
+              " by",
+              " on",
+              " a",
+              " for"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "poincare",
+        "curvature_best": 0.5659,
+        "curvature_100k": 0.5659,
+        "router_temp": 0.5,
+        "tau_max_best": 88673.796875,
+        "tau_max_100k": 212075.375,
+        "taus_best": [
+          1216.9244384765625,
+          44375.4296875,
+          152.323486328125,
+          43632.58984375,
+          21665.416015625,
+          88673.796875,
+          3884.374267578125,
+          248.22283935546875
+        ],
+        "taus_100k": [
+          1744.7071533203125,
+          99755.4765625,
+          188.28945922851562,
+          96629.5703125,
+          45838.59765625,
+          212075.375,
+          7590.5556640625,
+          334.61651611328125
+        ],
+        "purity_best": 0.435,
+        "slot_entropy_best": 0.6645,
+        "tele_frobenius_norm": 29.3458,
+        "tele_max_abs": 5.3501,
+        "W_tele": [
+          [
+            -1.2646,
+            -4.5013,
+            2.0721,
+            -4.852,
+            -4.7161,
+            -5.2814,
+            -3.2568,
+            2.0615
+          ],
+          [
+            -1.1883,
+            -4.2047,
+            1.9221,
+            -4.613,
+            -4.4024,
+            -4.9549,
+            -3.0042,
+            1.9534
+          ],
+          [
+            -1.1104,
+            -4.2761,
+            2.0,
+            -4.6116,
+            -4.4069,
+            -5.0067,
+            -3.0502,
+            1.9174
+          ],
+          [
+            -1.2665,
+            -4.5358,
+            2.0941,
+            -4.9376,
+            -4.7492,
+            -5.3501,
+            -3.1559,
+            2.1285
+          ],
+          [
+            -1.2184,
+            -4.1314,
+            1.8395,
+            -4.5289,
+            -4.3615,
+            -4.8705,
+            -3.0125,
+            1.9592
+          ],
+          [
+            -1.2115,
+            -4.3588,
+            1.9735,
+            -4.7528,
+            -4.5521,
+            -5.1312,
+            -3.0992,
+            1.9942
+          ],
+          [
+            -1.2238,
+            -4.5223,
+            2.1059,
+            -4.8929,
+            -4.6863,
+            -5.3063,
+            -3.1211,
+            2.0568
+          ],
+          [
+            -1.2192,
+            -4.3191,
+            1.9892,
+            -4.7284,
+            -4.5427,
+            -5.1109,
+            -3.0479,
+            2.0438
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 1216.9244384765625,
+            "tau_100k": 1744.7071533203125,
+            "top_tokens": [
+              "\n",
+              ".",
+              " The",
+              "The",
+              " \n",
+              " In",
+              "\n\n",
+              " If"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 44375.4296875,
+            "tau_100k": 99755.4765625,
+            "top_tokens": [
+              "-",
+              " ",
+              "_",
+              "1",
+              "2",
+              ",",
+              ".",
+              " the"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 152.323486328125,
+            "tau_100k": 188.28945922851562,
+            "top_tokens": [
+              " the",
+              " The",
+              "The",
+              " same",
+              "the",
+              " most",
+              " main",
+              " following"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 43632.58984375,
+            "tau_100k": 96629.5703125,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " in",
+              " ",
+              " all",
+              " and",
+              " their"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 21665.416015625,
+            "tau_100k": 45838.59765625,
+            "top_tokens": [
+              " the",
+              " a",
+              " be",
+              " to",
+              " not",
+              " it",
+              " only",
+              " as"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 88673.796875,
+            "tau_100k": 212075.375,
+            "top_tokens": [
+              ",",
+              " and",
+              "-",
+              ".",
+              " in",
+              " or",
+              " to",
+              " for"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 3884.374267578125,
+            "tau_100k": 7590.5556640625,
+            "top_tokens": [
+              " \"",
+              ",",
+              "\n",
+              " ",
+              " the",
+              " and",
+              " (",
+              " The"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 248.22283935546875,
+            "tau_100k": 334.61651611328125,
+            "top_tokens": [
+              "\n",
+              "ass",
+              " AI",
+              "_",
+              ",",
+              " the",
+              " ",
+              "-"
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.4973,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 84.85,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 40.39,
+      "top5_agree_pct": 63.19,
+      "kld_T1": 1.931
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 0.2282,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 1.81,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 0.2667,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 1.66,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 83.62,
+        "asst_top5_agree_pct": 95.5,
+        "asst_kld_T1": 0.6568
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 0.4716,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 4.71,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 0.6562,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 9.18,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 56.26,
+        "asst_top5_agree_pct": 79.1,
+        "asst_kld_T1": 1.5028
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 0.5799,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 6.73,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 0.8004,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 15.94,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 48.29,
+        "asst_top5_agree_pct": 73.6,
+        "asst_kld_T1": 1.8776
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 83.3,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 80.0,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 56.7,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 16.7,
+      "stu_arg_key_f1_pct": 61.6,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"theorem\"}}]</tool_call>"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"get_bitcoin_hash\", \"arguments\": {\"i\": 200000}}]</tool_call>"
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"duplicate_elements\", \"arguments\": {\"n\": 1}}, {\"name\": \"duplicate_elements\", \"arguments\": {\"n\": 5}}]</tool_call>"
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 100.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 100.0,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 1.33,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            12.23,
+            13.07,
+            11.59,
+            12.67,
+            13.52,
+            12.04,
+            12.01,
+            12.88
+          ],
+          "INDENT_NEWLINE": [
+            14.09,
+            12.75,
+            11.79,
+            12.51,
+            12.49,
+            11.91,
+            11.7,
+            12.76
+          ],
+          "JSON_SYNTAX": [
+            12.11,
+            13.63,
+            11.58,
+            12.65,
+            13.16,
+            12.02,
+            12.03,
+            12.83
+          ],
+          "SCHEMA_KEYWORD": [
+            12.01,
+            13.15,
+            11.44,
+            12.75,
+            13.55,
+            12.12,
+            12.07,
+            12.91
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            12.21,
+            13.13,
+            11.41,
+            12.64,
+            13.51,
+            12.13,
+            11.97,
+            13.0
+          ],
+          "GENERAL_PROSE": [
+            12.23,
+            12.98,
+            11.65,
+            12.77,
+            13.06,
+            12.27,
+            12.0,
+            13.04
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            28.04,
+            0.59,
+            1.67,
+            34.99,
+            0.46,
+            4.81,
+            25.91,
+            3.53
+          ],
+          "INDENT_NEWLINE": [
+            30.85,
+            0.54,
+            1.59,
+            32.6,
+            0.41,
+            4.63,
+            26.1,
+            3.28
+          ],
+          "JSON_SYNTAX": [
+            27.27,
+            0.59,
+            1.77,
+            34.97,
+            0.45,
+            4.97,
+            26.41,
+            3.58
+          ],
+          "SCHEMA_KEYWORD": [
+            26.92,
+            0.61,
+            1.71,
+            35.94,
+            0.47,
+            4.91,
+            25.78,
+            3.66
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            27.38,
+            0.62,
+            1.66,
+            35.83,
+            0.44,
+            4.81,
+            25.67,
+            3.58
+          ],
+          "GENERAL_PROSE": [
+            26.97,
+            0.6,
+            1.69,
+            35.96,
+            0.45,
+            4.88,
+            25.79,
+            3.65
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            7.57,
+            1.57,
+            39.46,
+            1.26,
+            1.39,
+            1.04,
+            2.96,
+            44.75
+          ],
+          "INDENT_NEWLINE": [
+            8.5,
+            1.55,
+            39.9,
+            1.25,
+            1.39,
+            1.02,
+            3.11,
+            43.28
+          ],
+          "JSON_SYNTAX": [
+            7.86,
+            1.61,
+            40.97,
+            1.3,
+            1.43,
+            1.04,
+            3.28,
+            42.52
+          ],
+          "SCHEMA_KEYWORD": [
+            7.47,
+            1.67,
+            40.84,
+            1.31,
+            1.45,
+            1.1,
+            3.09,
+            43.07
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            7.61,
+            1.55,
+            40.5,
+            1.28,
+            1.48,
+            1.02,
+            3.0,
+            43.56
+          ],
+          "GENERAL_PROSE": [
+            7.62,
+            1.6,
+            41.42,
+            1.31,
+            1.45,
+            1.06,
+            3.07,
+            42.46
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 7.9e-05,
+        "everyday-conversations": 0.000896,
+        "fineweb-edu": 0.00099
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 0.2363,
+          "everyday-conversations": 0.4712,
+          "fineweb-edu": 1.3831
+        },
+        "lesions": {
+          "L00_S4": {
+            "tau_star": 743531.5,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000182,
+            "delta_bpb_chat": 0.006341,
+            "delta_bpb_fineweb": 0.001246
+          },
+          "L00_S7": {
+            "tau_star": 130758.484375,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000489,
+            "delta_bpb_chat": 0.00565,
+            "delta_bpb_fineweb": 0.000775
+          },
+          "L00_S6": {
+            "tau_star": 24.5551815032959,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000169,
+            "delta_bpb_chat": 0.005469,
+            "delta_bpb_fineweb": 0.000549
+          },
+          "L01_S4": {
+            "tau_star": 747828.25,
+            "expert": 0,
+            "delta_bpb_apigen": 3.7e-05,
+            "delta_bpb_chat": -0.000236,
+            "delta_bpb_fineweb": 4e-05
+          },
+          "L01_S1": {
+            "tau_star": 140212.3125,
+            "expert": 1,
+            "delta_bpb_apigen": 7.7e-05,
+            "delta_bpb_chat": -0.00012,
+            "delta_bpb_fineweb": -5.8e-05
+          },
+          "L01_S0": {
+            "tau_star": 96.67089080810547,
+            "expert": 0,
+            "delta_bpb_apigen": 0.00651,
+            "delta_bpb_chat": 0.008869,
+            "delta_bpb_fineweb": 0.007025
+          },
+          "L02_S5": {
+            "tau_star": 88673.796875,
+            "expert": 1,
+            "delta_bpb_apigen": 8.7e-05,
+            "delta_bpb_chat": 0.000431,
+            "delta_bpb_fineweb": 0.000242
+          },
+          "L02_S1": {
+            "tau_star": 44375.4296875,
+            "expert": 1,
+            "delta_bpb_apigen": 0.000127,
+            "delta_bpb_chat": 0.000596,
+            "delta_bpb_fineweb": 0.000306
+          },
+          "L02_S2": {
+            "tau_star": 152.323486328125,
+            "expert": 0,
+            "delta_bpb_apigen": 0.021633,
+            "delta_bpb_chat": 0.041187,
+            "delta_bpb_fineweb": 0.046637
+          }
+        }
+      }
+    },
+    "eval_seconds": 74.4
+  },
+  "Sub-Lattice-v3-BK-Exact-18M": {
+    "geometry": "klein",
+    "best_step": 83500,
+    "checkpoint_val_bpb": 0.9476127527127838,
+    "checkpoint_val_ppl": 15.87537340121631,
+    "total_params": 18226310,
+    "backbone_params": 5512326,
+    "d_ff": 1024,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 32.5,
+        "acc_norm_pct": 31.0
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 35.0,
+        "acc_norm_pct": 37.5
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 22.0,
+        "acc_norm_pct": 20.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 55.5,
+        "acc_norm_pct": 55.5
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.9061,
+      "ppl": 210.71
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1408,
+      "pure_dhp_fires": 334,
+      "mixed_dhp_fires": 1074,
+      "total_evals_logged": 200,
+      "first_dhp": "[2026-10-23T07:23:45Z] !!! DHP L00 slot=1 rung=24 (2^3x3^1,MIXED) tau*=24 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-24T02:04:30Z] !!! DHP L02 slot=0 rung=93312 (2^7x3^6,MIXED) tau*=93404 next=98304 !!!",
+        "[2026-10-24T02:04:30Z] !!! DHP L02 slot=2 rung=2187 (3^7,PURE) tau*=2233 next=2304 !!!",
+        "[2026-10-24T02:04:30Z] !!! DHP L02 slot=3 rung=69984 (2^5x3^7,MIXED) tau*=71989 next=73728 !!!",
+        "[2026-10-24T02:04:30Z] !!! DHP L02 slot=4 rung=6144 (2^11x3^1,MIXED) tau*=6303 next=6561 !!!",
+        "[2026-10-24T02:04:30Z] !!! DHP L02 slot=5 rung=248832 (2^10x3^5,MIXED) tau*=253280 next=262144 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-23T06:08:37Z] EVAL step     500 | val_bpb=2.6893 val_ppl~=2556.50 teacher_kld=0.8690 | best=2.6893@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-23T06:59:31Z] EVAL step    5000 | val_bpb=1.2975 val_ppl~=44.06 teacher_kld=0.3279 | best=1.2975@5000 | L00:20(c=1.51) L01:20(c=1.51) L02:20(c=1.51) | DHP=NO",
+        "[2026-10-23T07:59:56Z] EVAL step   10000 | val_bpb=1.1772 val_ppl~=31.02 teacher_kld=0.2727 | best=1.1772@10000 | L00:34(c=0.72) L01:35(c=0.78) L02:36(c=0.75) | DHP=YES",
+        "[2026-10-23T10:00:06Z] EVAL step   20000 | val_bpb=1.0887 val_ppl~=23.96 teacher_kld=0.2414 | best=1.0887@19500 | L00:112(c=0.37) L01:108(c=0.48) L02:99(c=0.45) | DHP=YES",
+        "[2026-10-23T11:00:06Z] EVAL step   25000 | val_bpb=1.0584 val_ppl~=21.93 teacher_kld=0.2319 | best=1.0584@25000 | L00:206(c=0.31) L01:189(c=0.43) L02:162(c=0.38) | DHP=YES",
+        "[2026-10-23T12:00:04Z] EVAL step   30000 | val_bpb=1.0435 val_ppl~=21.00 teacher_kld=0.2267 | best=1.0412@28000 | L00:380(c=0.29) L01:332(c=0.41) L02:265(c=0.36) | DHP=YES",
+        "[2026-10-23T14:00:12Z] EVAL step   40000 | val_bpb=1.0035 val_ppl~=18.69 teacher_kld=0.2171 | best=1.0033@39000 | L00:1292(c=0.27) L01:1024(c=0.41) L02:706(c=0.31) | DHP=YES",
+        "[2026-10-23T15:48:24Z] EVAL step   49000 | val_bpb=0.9841 val_ppl~=17.66 teacher_kld=0.2119 | best=0.9822@48500 | L00:3885(c=0.26) L01:2821(c=0.42) L02:1709(c=0.29) | DHP=YES",
+        "[2026-10-23T16:00:29Z] EVAL step   50000 | val_bpb=0.9797 val_ppl~=17.43 teacher_kld=0.2109 | best=0.9797@50000 | L00:4390(c=0.26) L01:3156(c=0.42) L02:1886(c=0.29) | DHP=YES",
+        "[2026-10-23T21:08:10Z] EVAL step   75500 | val_bpb=0.9482 val_ppl~=15.90 teacher_kld=0.2011 | best=0.9478@74000 | L00:99303(c=0.26) L01:55710(c=0.42) L02:22930(c=0.28) | DHP=YES",
+        "[2026-10-23T22:44:45Z] EVAL step   83500 | val_bpb=0.9476 val_ppl~=15.88 teacher_kld=0.2010 | best=0.9476@83500 | L00:264044(c=0.26) L01:137728(c=0.42) L02:50221(c=0.28) | DHP=YES",
+        "[2026-10-23T23:51:22Z] EVAL step   89000 | val_bpb=0.9477 val_ppl~=15.88 teacher_kld=0.2010 | best=0.9476@83500 | L00:517005(c=0.26) L01:256650(c=0.42) L02:86055(c=0.28) | DHP=YES",
+        "[2026-10-24T00:15:29Z] EVAL step   91000 | val_bpb=0.9479 val_ppl~=15.89 teacher_kld=0.2010 | best=0.9476@83500 | L00:660035(c=0.26) L01:321769(c=0.42) L02:104739(c=0.28) | DHP=YES",
+        "[2026-10-24T02:04:30Z] EVAL step  100000 | val_bpb=0.9478 val_ppl~=15.88 teacher_kld=0.2010 | best=0.9476@83500 | L00:1.9836e+06(c=0.26) L01:886587(c=0.42) L02:253280(c=0.28) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "klein",
+        "curvature_best": 0.2569,
+        "curvature_100k": 0.2569,
+        "router_temp": 0.5,
+        "tau_max_best": 264044.4638881976,
+        "tau_max_100k": 1983633.6739877854,
+        "taus_best": [
+          1315.1385682790321,
+          264044.4638881976,
+          102360.58257507002,
+          289.44660777412844,
+          557.0646082843841,
+          56.497669104167535,
+          70.42422692129449,
+          18222.383422553055
+        ],
+        "taus_100k": [
+          2985.158293807879,
+          1983633.6739877854,
+          645527.5902054855,
+          505.3382702812885,
+          1110.3785140658492,
+          70.1479893082466,
+          89.82567039720776,
+          76640.2752553099
+        ],
+        "purity_best": 0.6824,
+        "slot_entropy_best": 0.3816,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 1315.1385682790321,
+            "tau_100k": 2985.158293807879,
+            "top_tokens": [
+              " to",
+              " of",
+              " in",
+              " for",
+              " with",
+              " on",
+              " and",
+              " from"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 264044.4638881976,
+            "tau_100k": 1983633.6739877854,
+            "top_tokens": [
+              "ive",
+              "able",
+              "ible",
+              " ecosystems",
+              " personalities",
+              "ing",
+              " biology",
+              "berry"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 102360.58257507002,
+            "tau_100k": 645527.5902054855,
+            "top_tokens": [
+              " can",
+              " is",
+              " are",
+              ",",
+              " the",
+              " have",
+              " also",
+              "."
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 289.44660777412844,
+            "tau_100k": 505.3382702812885,
+            "top_tokens": [
+              ",",
+              " and",
+              " or",
+              ".",
+              "-",
+              " to",
+              " in",
+              " for"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 557.0646082843841,
+            "tau_100k": 1110.3785140658492,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " your",
+              " their",
+              " its",
+              " this",
+              " our"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 56.497669104167535,
+            "tau_100k": 70.1479893082466,
+            "top_tokens": [
+              ".",
+              ",",
+              "!",
+              ":",
+              " and",
+              "-",
+              ".*",
+              "\n"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 70.42422692129449,
+            "tau_100k": 89.82567039720776,
+            "top_tokens": [
+              "\n",
+              "\n\n",
+              "\n ",
+              ".",
+              " \n",
+              "\n   ",
+              ",",
+              "\n\n\n"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 18222.383422553055,
+            "tau_100k": 76640.2752553099,
+            "top_tokens": [
+              "-",
+              " ",
+              ",",
+              ".",
+              " and",
+              " \"",
+              "/",
+              ":"
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "klein",
+        "curvature_best": 0.4245,
+        "curvature_100k": 0.4245,
+        "router_temp": 0.5,
+        "tau_max_best": 137728.8122327876,
+        "tau_max_100k": 886587.3971319672,
+        "taus_best": [
+          59.346789073641574,
+          1852.0753820461764,
+          339.3178639214042,
+          719.7254866969906,
+          137728.8122327876,
+          195.22726534375388,
+          29225.401351396322,
+          21499.449845017745
+        ],
+        "taus_100k": [
+          74.25988485415617,
+          5356.102288013171,
+          603.3235200881257,
+          1482.4758667577178,
+          886587.3971319672,
+          317.5794562428473,
+          134012.83162519484,
+          91456.72032075144
+        ],
+        "purity_best": 0.7188,
+        "slot_entropy_best": 0.4117,
+        "tele_frobenius_norm": 32.8067,
+        "tele_max_abs": 6.3726,
+        "W_tele": [
+          [
+            2.8574,
+            -3.5571,
+            -0.6849,
+            -0.347,
+            -6.3426,
+            1.508,
+            -6.1125,
+            -5.7355
+          ],
+          [
+            2.8327,
+            -3.5555,
+            -0.6729,
+            -0.2873,
+            -6.3576,
+            1.5365,
+            -6.1173,
+            -5.7306
+          ],
+          [
+            2.8524,
+            -3.5574,
+            -0.6753,
+            -0.3271,
+            -6.3486,
+            1.5192,
+            -6.1117,
+            -5.7333
+          ],
+          [
+            2.8404,
+            -3.5055,
+            -0.711,
+            -0.3076,
+            -6.3641,
+            1.5459,
+            -6.1386,
+            -5.7459
+          ],
+          [
+            2.8809,
+            -3.5802,
+            -0.6646,
+            -0.3543,
+            -6.3604,
+            1.505,
+            -6.1286,
+            -5.7545
+          ],
+          [
+            2.8071,
+            -3.4662,
+            -0.731,
+            -0.2978,
+            -6.3726,
+            1.557,
+            -6.1447,
+            -5.7396
+          ],
+          [
+            2.8128,
+            -3.6593,
+            -0.68,
+            -0.3064,
+            -6.3673,
+            1.5485,
+            -6.135,
+            -5.7617
+          ],
+          [
+            2.8186,
+            -3.5428,
+            -0.7007,
+            -0.2723,
+            -6.3532,
+            1.5431,
+            -6.1239,
+            -5.7323
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 59.346789073641574,
+            "tau_100k": 74.25988485415617,
+            "top_tokens": [
+              "\n",
+              "\n\n",
+              "\n ",
+              " \n",
+              "\t",
+              "\n   ",
+              "\n\n\n",
+              "\n\n "
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 1852.0753820461764,
+            "tau_100k": 5356.102288013171,
+            "top_tokens": [
+              " \"",
+              "\n",
+              " [",
+              ",",
+              "-",
+              "[",
+              " ",
+              "\""
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 339.3178639214042,
+            "tau_100k": 603.3235200881257,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " The",
+              " your",
+              "the",
+              " its",
+              "The"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 719.7254866969906,
+            "tau_100k": 1482.4758667577178,
+            "top_tokens": [
+              ".",
+              ",",
+              "\n",
+              ";",
+              "?",
+              " and",
+              "!",
+              ":"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 137728.8122327876,
+            "tau_100k": 886587.3971319672,
+            "top_tokens": [
+              " the",
+              " your",
+              " a",
+              " to",
+              " in",
+              " it",
+              " you",
+              " is"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 195.22726534375388,
+            "tau_100k": 317.5794562428473,
+            "top_tokens": [
+              "2",
+              "1",
+              "0",
+              " ",
+              "5",
+              "3",
+              "4",
+              "6"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 29225.401351396322,
+            "tau_100k": 134012.83162519484,
+            "top_tokens": [
+              "-",
+              ".",
+              ",",
+              " environment",
+              " data",
+              " information",
+              " language",
+              " system"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 21499.449845017745,
+            "tau_100k": 91456.72032075144,
+            "top_tokens": [
+              "_",
+              "-",
+              ",",
+              "user",
+              "ass",
+              ".",
+              "ing",
+              "\n"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "klein",
+        "curvature_best": 0.2833,
+        "curvature_100k": 0.2833,
+        "router_temp": 0.5,
+        "tau_max_best": 50221.39117764446,
+        "tau_max_100k": 253280.9361600344,
+        "taus_best": [
+          22156.354936897722,
+          266.51261383580373,
+          1039.6855962876043,
+          17456.4115197456,
+          1859.2031636574588,
+          50221.39117764446,
+          10112.356323433094,
+          204.10487529299846
+        ],
+        "taus_100k": [
+          93404.16470213924,
+          467.6080701782084,
+          2233.604378347988,
+          71989.63009219887,
+          6303.695857215633,
+          253280.9361600344,
+          36556.56848664835,
+          381.13965696050644
+        ],
+        "purity_best": 0.4861,
+        "slot_entropy_best": 0.6516,
+        "tele_frobenius_norm": 25.7788,
+        "tele_max_abs": 5.7293,
+        "W_tele": [
+          [
+            -4.0938,
+            0.6581,
+            1.3494,
+            -5.1908,
+            -0.6638,
+            -5.7293,
+            -2.7477,
+            2.2683
+          ],
+          [
+            -3.895,
+            0.6372,
+            1.2345,
+            -4.8466,
+            -0.6949,
+            -5.3569,
+            -2.6056,
+            2.1524
+          ],
+          [
+            -4.0348,
+            0.7006,
+            1.2276,
+            -4.9404,
+            -0.6235,
+            -5.506,
+            -2.7089,
+            2.2233
+          ],
+          [
+            -4.0352,
+            0.6436,
+            1.2603,
+            -4.9979,
+            -0.6287,
+            -5.5408,
+            -2.697,
+            2.2113
+          ],
+          [
+            -3.8745,
+            0.6257,
+            1.1657,
+            -4.6888,
+            -0.62,
+            -5.1846,
+            -2.5842,
+            2.1119
+          ],
+          [
+            -4.1,
+            0.6891,
+            1.216,
+            -5.0336,
+            -0.6714,
+            -5.6042,
+            -2.7391,
+            2.2651
+          ],
+          [
+            -3.8727,
+            0.6426,
+            1.1201,
+            -4.6566,
+            -0.6406,
+            -5.1653,
+            -2.5785,
+            2.1168
+          ],
+          [
+            -3.8627,
+            0.628,
+            1.1269,
+            -4.6835,
+            -0.6674,
+            -5.1876,
+            -2.5693,
+            2.1106
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 22156.354936897722,
+            "tau_100k": 93404.16470213924,
+            "top_tokens": [
+              " the",
+              " a",
+              " in",
+              " and",
+              " to",
+              " for",
+              " on",
+              " all"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 266.51261383580373,
+            "tau_100k": 467.6080701782084,
+            "top_tokens": [
+              " ",
+              "1",
+              "2",
+              "0",
+              "3",
+              "5",
+              "4",
+              "8"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 1039.6855962876043,
+            "tau_100k": 2233.604378347988,
+            "top_tokens": [
+              "\n",
+              ".",
+              " \n",
+              "\n\n",
+              " The",
+              "\n ",
+              ",",
+              "The"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 17456.4115197456,
+            "tau_100k": 71989.63009219887,
+            "top_tokens": [
+              "-",
+              "_",
+              ",",
+              ".",
+              " and",
+              "/",
+              "in",
+              " in"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 1859.2031636574588,
+            "tau_100k": 6303.695857215633,
+            "top_tokens": [
+              ",",
+              " \"",
+              "\n",
+              " and",
+              " ",
+              ".",
+              " the",
+              "..."
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 50221.39117764446,
+            "tau_100k": 253280.9361600344,
+            "top_tokens": [
+              ",",
+              " and",
+              ".",
+              " in",
+              "-",
+              " or",
+              " for",
+              " to"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 10112.356323433094,
+            "tau_100k": 36556.56848664835,
+            "top_tokens": [
+              " the",
+              " a",
+              " be",
+              " is",
+              " to",
+              " not",
+              " in",
+              " have"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 204.10487529299846,
+            "tau_100k": 381.13965696050644,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " new",
+              " most",
+              " The",
+              " main",
+              " "
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.5197,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 90.67,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 39.08,
+      "top5_agree_pct": 62.48,
+      "kld_T1": 2.0005
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 0.2346,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 1.85,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 0.3006,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 1.77,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 81.94,
+        "asst_top5_agree_pct": 95.31,
+        "asst_kld_T1": 0.7008
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 0.4788,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 4.82,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 0.669,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 9.59,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 55.66,
+        "asst_top5_agree_pct": 78.0,
+        "asst_kld_T1": 1.5347
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 0.5878,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 6.9,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 0.8122,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 16.61,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 47.77,
+        "asst_top5_agree_pct": 73.3,
+        "asst_kld_T1": 1.9154
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 73.3,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 70.0,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 26.7,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 3.3,
+      "stu_arg_key_f1_pct": 58.2,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"search_restaurants_by_location\", \"arguments\": {\"location\": \"London\", \"country\": \"London\"}}]</tool_call>"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"get_coin_hash\", \"arguments\": {\"i\": 200000, \"i\": 300000}}]</tool_call>"
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"duplicate_elements\", \"arguments\": {\"l\": 1, \"l\": 5}}]</tool_call>"
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 100.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 100.0,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 1.33,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            12.49,
+            13.55,
+            13.24,
+            12.0,
+            11.96,
+            11.6,
+            12.21,
+            12.95
+          ],
+          "INDENT_NEWLINE": [
+            12.06,
+            12.19,
+            12.47,
+            11.87,
+            11.82,
+            11.62,
+            15.46,
+            12.5
+          ],
+          "JSON_SYNTAX": [
+            12.57,
+            13.29,
+            13.13,
+            12.12,
+            12.02,
+            11.74,
+            11.76,
+            13.37
+          ],
+          "SCHEMA_KEYWORD": [
+            12.59,
+            13.5,
+            13.4,
+            12.03,
+            12.05,
+            11.57,
+            11.75,
+            13.1
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            12.44,
+            13.37,
+            13.49,
+            12.05,
+            12.05,
+            11.57,
+            12.05,
+            13.0
+          ],
+          "GENERAL_PROSE": [
+            12.71,
+            12.98,
+            13.21,
+            12.25,
+            12.3,
+            11.71,
+            11.81,
+            13.04
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            50.53,
+            2.14,
+            8.51,
+            10.36,
+            0.52,
+            26.58,
+            0.6,
+            0.75
+          ],
+          "INDENT_NEWLINE": [
+            55.15,
+            1.96,
+            7.62,
+            9.97,
+            0.47,
+            23.68,
+            0.52,
+            0.64
+          ],
+          "JSON_SYNTAX": [
+            49.77,
+            2.28,
+            8.52,
+            10.64,
+            0.53,
+            26.96,
+            0.58,
+            0.72
+          ],
+          "SCHEMA_KEYWORD": [
+            48.87,
+            2.21,
+            8.81,
+            10.42,
+            0.55,
+            27.75,
+            0.62,
+            0.77
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            50.31,
+            2.15,
+            8.81,
+            10.44,
+            0.55,
+            26.44,
+            0.58,
+            0.72
+          ],
+          "GENERAL_PROSE": [
+            49.29,
+            2.19,
+            8.83,
+            10.52,
+            0.54,
+            27.29,
+            0.6,
+            0.73
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            1.73,
+            18.53,
+            25.12,
+            1.1,
+            9.54,
+            0.8,
+            3.4,
+            39.78
+          ],
+          "INDENT_NEWLINE": [
+            1.65,
+            17.93,
+            27.19,
+            1.02,
+            9.68,
+            0.75,
+            3.28,
+            38.5
+          ],
+          "JSON_SYNTAX": [
+            1.72,
+            18.48,
+            24.83,
+            1.05,
+            10.08,
+            0.78,
+            3.36,
+            39.72
+          ],
+          "SCHEMA_KEYWORD": [
+            1.75,
+            18.81,
+            24.07,
+            1.12,
+            9.71,
+            0.84,
+            3.47,
+            40.24
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            1.72,
+            18.24,
+            24.57,
+            1.05,
+            9.48,
+            0.78,
+            3.59,
+            40.58
+          ],
+          "GENERAL_PROSE": [
+            1.74,
+            18.5,
+            24.21,
+            1.06,
+            9.58,
+            0.8,
+            3.45,
+            40.66
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 0.006074,
+        "everyday-conversations": 0.004153,
+        "fineweb-edu": 0.005295
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 0.2415,
+          "everyday-conversations": 0.4755,
+          "fineweb-edu": 1.3995
+        },
+        "lesions": {
+          "L00_S1": {
+            "tau_star": 264044.4638881976,
+            "expert": 1,
+            "delta_bpb_apigen": -0.001334,
+            "delta_bpb_chat": 0.004107,
+            "delta_bpb_fineweb": 0.000701
+          },
+          "L00_S2": {
+            "tau_star": 102360.58257507002,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000858,
+            "delta_bpb_chat": 0.004589,
+            "delta_bpb_fineweb": 0.002212
+          },
+          "L00_S5": {
+            "tau_star": 56.497669104167535,
+            "expert": 1,
+            "delta_bpb_apigen": -0.001852,
+            "delta_bpb_chat": 0.003093,
+            "delta_bpb_fineweb": 0.000586
+          },
+          "L01_S4": {
+            "tau_star": 137728.8122327876,
+            "expert": 0,
+            "delta_bpb_apigen": 4.5e-05,
+            "delta_bpb_chat": -1.7e-05,
+            "delta_bpb_fineweb": -2.8e-05
+          },
+          "L01_S6": {
+            "tau_star": 29225.401351396322,
+            "expert": 0,
+            "delta_bpb_apigen": 6.1e-05,
+            "delta_bpb_chat": -7.6e-05,
+            "delta_bpb_fineweb": -0.000125
+          },
+          "L01_S0": {
+            "tau_star": 59.346789073641574,
+            "expert": 0,
+            "delta_bpb_apigen": 0.027325,
+            "delta_bpb_chat": 0.036847,
+            "delta_bpb_fineweb": 0.028535
+          },
+          "L02_S5": {
+            "tau_star": 50221.39117764446,
+            "expert": 1,
+            "delta_bpb_apigen": 8.4e-05,
+            "delta_bpb_chat": 9.5e-05,
+            "delta_bpb_fineweb": 0.000165
+          },
+          "L02_S0": {
+            "tau_star": 22156.354936897722,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000188,
+            "delta_bpb_chat": 0.000484,
+            "delta_bpb_fineweb": 0.000294
+          },
+          "L02_S7": {
+            "tau_star": 204.10487529299846,
+            "expert": 1,
+            "delta_bpb_apigen": 0.016477,
+            "delta_bpb_chat": 0.032275,
+            "delta_bpb_fineweb": 0.037917
+          }
+        }
+      }
+    },
+    "eval_seconds": 77.2
+  },
+  "CDM-Sub-Lattice-v3-18M-Kilonova": {
+    "geometry": "poincare",
+    "best_step": 89000,
+    "checkpoint_val_bpb": 0.9688,
+    "checkpoint_val_ppl": 19.41,
+    "total_params": 17046662,
+    "backbone_params": 4332678,
+    "d_ff": 768,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 32.5,
+        "acc_norm_pct": 32.0
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 35.0,
+        "acc_norm_pct": 34.5
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 21.5,
+        "acc_norm_pct": 22.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 55.0,
+        "acc_norm_pct": 54.5
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.9671,
+      "ppl": 250.04
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1375,
+      "pure_dhp_fires": 328,
+      "mixed_dhp_fires": 1047,
+      "total_evals_logged": 200,
+      "first_dhp": "[2026-10-21T05:02:55Z] !!! DHP L01 slot=2 rung=24 (2^3x3^1,MIXED) tau*=24 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-23T13:54:36Z] !!! DHP L01 slot=2 rung=2.1258e+06 (2^2x3^12,MIXED) tau*=2.2452e+06 next=2.2395e+06 !!!",
+        "[2026-10-23T13:54:36Z] !!! DHP L01 slot=2 rung=2.2395e+06 (2^10x3^7,MIXED) tau*=2.2452e+06 next=2.3593e+06 !!!",
+        "[2026-10-23T13:54:36Z] !!! DHP L01 slot=3 rung=324 (2^2x3^4,MIXED) tau*=328 next=384 !!!",
+        "[2026-10-23T13:54:36Z] !!! DHP L02 slot=2 rung=6561 (3^8,PURE) tau*=6614 next=6912 !!!",
+        "[2026-10-23T13:54:36Z] !!! DHP L02 slot=7 rung=8192 (2^13,PURE) tau*=8445 next=8748 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-21T01:23:49Z] EVAL step     500 | val_bpb=2.6175 val_ppl~=3020.07 teacher_kld=0.8537 | best=2.6175@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-21T04:06:25Z] EVAL step    5000 | val_bpb=1.3234 val_ppl~=57.47 teacher_kld=0.3328 | best=1.3234@5000 | L00:20(c=1.51) L01:20(c=1.51) L02:20(c=1.51) | DHP=NO",
+        "[2026-10-21T07:15:00Z] EVAL step   10000 | val_bpb=1.2032 val_ppl~=39.78 teacher_kld=0.2787 | best=1.2032@10000 | L00:35(c=0.77) L01:36(c=0.82) L02:35(c=0.76) | DHP=YES",
+        "[2026-10-21T13:06:02Z] EVAL step   20000 | val_bpb=1.0994 val_ppl~=28.95 teacher_kld=0.2436 | best=1.0994@20000 | L00:112(c=0.39) L01:125(c=0.45) L02:114(c=0.42) | DHP=YES",
+        "[2026-10-21T15:59:38Z] EVAL step   25000 | val_bpb=1.0762 val_ppl~=26.97 teacher_kld=0.2353 | best=1.0749@24500 | L00:206(c=0.33) L01:231(c=0.36) L02:203(c=0.35) | DHP=YES",
+        "[2026-10-21T18:49:14Z] EVAL step   30000 | val_bpb=1.0573 val_ppl~=25.45 teacher_kld=0.2298 | best=1.0573@30000 | L00:379(c=0.29) L01:426(c=0.32) L02:310(c=0.31) | DHP=YES",
+        "[2026-10-22T00:34:46Z] EVAL step   40000 | val_bpb=1.0335 val_ppl~=23.66 teacher_kld=0.2200 | best=1.0296@37000 | L00:1280(c=0.27) L01:1451(c=0.28) L02:580(c=0.31) | DHP=YES",
+        "[2026-10-22T06:45:51Z] EVAL step   49000 | val_bpb=1.0137 val_ppl~=22.27 teacher_kld=0.2145 | best=1.0060@46000 | L00:3825(c=0.26) L01:4368(c=0.27) L02:1355(c=0.31) | DHP=YES",
+        "[2026-10-22T07:21:54Z] EVAL step   50000 | val_bpb=1.0048 val_ppl~=21.67 teacher_kld=0.2132 | best=1.0048@50000 | L00:4321(c=0.26) L01:4936(c=0.27) L02:1489(c=0.31) | DHP=YES",
+        "[2026-10-22T22:36:12Z] EVAL step   75500 | val_bpb=0.9695 val_ppl~=19.45 teacher_kld=0.2029 | best=0.9695@75500 | L00:96083(c=0.26) L01:111967(c=0.27) L02:16786(c=0.32) | DHP=YES",
+        "[2026-10-23T03:33:57Z] EVAL step   83500 | val_bpb=0.9689 val_ppl~=19.42 teacher_kld=0.2027 | best=0.9689@82500 | L00:254150(c=0.26) L01:298023(c=0.27) L02:36098(c=0.32) | DHP=YES",
+        "[2026-10-23T07:15:23Z] EVAL step   89000 | val_bpb=0.9688 val_ppl~=19.41 teacher_kld=0.2027 | best=0.9688@89000 | L00:495591(c=0.26) L01:584077(c=0.27) L02:60968(c=0.32) | DHP=YES",
+        "[2026-10-23T08:27:45Z] EVAL step   91000 | val_bpb=0.9688 val_ppl~=19.41 teacher_kld=0.2027 | best=0.9688@89000 | L00:632110(c=0.26) L01:746136(c=0.27) L02:73950(c=0.32) | DHP=YES",
+        "[2026-10-23T13:54:36Z] EVAL step  100000 | val_bpb=0.9688 val_ppl~=19.41 teacher_kld=0.2027 | best=0.9688@89000 | L00:1.8867e+06(c=0.26) L01:2.2452e+06(c=0.27) L02:176165(c=0.32) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "poincare",
+        "curvature_best": 0.2588,
+        "curvature_100k": 0.2588,
+        "router_temp": 0.5,
+        "tau_max_best": 495591.53125,
+        "tau_max_100k": 495591.53125,
+        "taus_best": [
+          24916.546875,
+          823.9055786132812,
+          495591.53125,
+          74.39823913574219,
+          4769.21728515625,
+          224879.78125,
+          72.46755981445312,
+          67.09022521972656
+        ],
+        "taus_100k": [
+          24916.546875,
+          823.9055786132812,
+          495591.53125,
+          74.39823913574219,
+          4769.21728515625,
+          224879.78125,
+          72.46755981445312,
+          67.09022521972656
+        ],
+        "purity_best": 0.6597,
+        "slot_entropy_best": 0.3802,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 24916.546875,
+            "tau_100k": 24916.546875,
+            "top_tokens": [
+              " ",
+              ".",
+              ",",
+              "-",
+              "1",
+              "2",
+              " \"",
+              "_"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 823.9055786132812,
+            "tau_100k": 823.9055786132812,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " your",
+              " its",
+              " this",
+              " their",
+              " any"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 495591.53125,
+            "tau_100k": 495591.53125,
+            "top_tokens": [
+              "cards",
+              " cardiomyopathy",
+              " bioinformatics",
+              "uminum",
+              "actions",
+              " inverte",
+              "ability",
+              "ender"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 74.39823913574219,
+            "tau_100k": 74.39823913574219,
+            "top_tokens": [
+              ",",
+              ".",
+              " and",
+              ";",
+              ":",
+              " or",
+              " in",
+              " to"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 4769.21728515625,
+            "tau_100k": 4769.21728515625,
+            "top_tokens": [
+              " to",
+              " and",
+              " in",
+              " of",
+              " for",
+              " with",
+              " by",
+              ","
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 224879.78125,
+            "tau_100k": 224879.78125,
+            "top_tokens": [
+              " do",
+              " have",
+              " be",
+              " more",
+              " can",
+              " is",
+              " are",
+              " only"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 72.46755981445312,
+            "tau_100k": 72.46755981445312,
+            "top_tokens": [
+              "\n",
+              "\n\n",
+              " \n",
+              "\n ",
+              ".",
+              "\n   ",
+              "\n  ",
+              "\n\n\n"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 67.09022521972656,
+            "tau_100k": 67.09022521972656,
+            "top_tokens": [
+              ".",
+              ",",
+              "!",
+              ":",
+              ".*",
+              "-",
+              " to",
+              ";"
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "poincare",
+        "curvature_best": 0.2672,
+        "curvature_100k": 0.2672,
+        "router_temp": 0.5,
+        "tau_max_best": 584077.25,
+        "tau_max_100k": 584077.25,
+        "taus_best": [
+          107312.546875,
+          597.7300415039062,
+          584077.25,
+          236.53302001953125,
+          272.66558837890625,
+          2540.86083984375,
+          860.6326293945312,
+          143.80174255371094
+        ],
+        "taus_100k": [
+          107312.546875,
+          597.7300415039062,
+          584077.25,
+          236.53302001953125,
+          272.66558837890625,
+          2540.86083984375,
+          860.6326293945312,
+          143.80174255371094
+        ],
+        "purity_best": 0.8391,
+        "slot_entropy_best": 0.2298,
+        "tele_frobenius_norm": 29.1316,
+        "tele_max_abs": 6.4168,
+        "W_tele": [
+          [
+            -5.845,
+            -1.36,
+            -6.3841,
+            0.4815,
+            1.9133,
+            -4.437,
+            0.393,
+            2.2834
+          ],
+          [
+            -5.8623,
+            -1.3986,
+            -6.4063,
+            0.5287,
+            1.926,
+            -4.4317,
+            0.4042,
+            2.3027
+          ],
+          [
+            -5.8281,
+            -1.378,
+            -6.3725,
+            0.4893,
+            1.9063,
+            -4.4266,
+            0.3973,
+            2.2501
+          ],
+          [
+            -5.8705,
+            -1.4058,
+            -6.4168,
+            0.49,
+            1.9226,
+            -4.3997,
+            0.4398,
+            2.2791
+          ],
+          [
+            -5.8529,
+            -1.3994,
+            -6.393,
+            0.5108,
+            1.9317,
+            -4.4224,
+            0.4208,
+            2.2852
+          ],
+          [
+            -5.8303,
+            -1.4074,
+            -6.3769,
+            0.494,
+            1.9183,
+            -4.4153,
+            0.4094,
+            2.2558
+          ],
+          [
+            -5.8656,
+            -1.3902,
+            -6.4151,
+            0.4668,
+            1.9619,
+            -4.5254,
+            0.3789,
+            2.2509
+          ],
+          [
+            -5.8675,
+            -1.4012,
+            -6.4162,
+            0.4746,
+            1.9415,
+            -4.4259,
+            0.3986,
+            2.2617
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 107312.546875,
+            "tau_100k": 107312.546875,
+            "top_tokens": [
+              " a",
+              " the",
+              " an",
+              " more",
+              " your",
+              " only",
+              " be",
+              " no"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 597.7300415039062,
+            "tau_100k": 597.7300415039062,
+            "top_tokens": [
+              " to",
+              " in",
+              " by",
+              " of",
+              " for",
+              " at",
+              " with",
+              " on"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 584077.25,
+            "tau_100k": 584077.25,
+            "top_tokens": [
+              "-",
+              "_",
+              " function",
+              " and",
+              " language",
+              ",",
+              " response",
+              " data"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 236.53302001953125,
+            "tau_100k": 236.53302001953125,
+            "top_tokens": [
+              "1",
+              "0",
+              " ",
+              "2",
+              "5",
+              "3",
+              "4",
+              "6"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 272.66558837890625,
+            "tau_100k": 272.66558837890625,
+            "top_tokens": [
+              ",",
+              " and",
+              " or",
+              " but",
+              "and",
+              ";",
+              " ,",
+              " &"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 2540.86083984375,
+            "tau_100k": 2540.86083984375,
+            "top_tokens": [
+              " \"",
+              ",\"",
+              " ",
+              " [",
+              "{\"",
+              " {\"",
+              "\n",
+              "-"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 860.6326293945312,
+            "tau_100k": 860.6326293945312,
+            "top_tokens": [
+              "\n",
+              ".",
+              " \n",
+              "\n\n",
+              " The",
+              "\n ",
+              "!",
+              "?"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 143.80174255371094,
+            "tau_100k": 143.80174255371094,
+            "top_tokens": [
+              " the",
+              "The",
+              " The",
+              "the",
+              " same",
+              " its",
+              " your",
+              " most"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "poincare",
+        "curvature_best": 0.3157,
+        "curvature_100k": 0.3157,
+        "router_temp": 0.5,
+        "tau_max_best": 60968.58984375,
+        "tau_max_100k": 60968.58984375,
+        "taus_best": [
+          3966.631591796875,
+          306.3506164550781,
+          4160.08251953125,
+          9840.52734375,
+          60968.58984375,
+          34243.5703125,
+          1005.0227661132812,
+          3540.14453125
+        ],
+        "taus_100k": [
+          3966.631591796875,
+          306.3506164550781,
+          4160.08251953125,
+          9840.52734375,
+          60968.58984375,
+          34243.5703125,
+          1005.0227661132812,
+          3540.14453125
+        ],
+        "purity_best": 0.5165,
+        "slot_entropy_best": 0.6254,
+        "tele_frobenius_norm": 15.1756,
+        "tele_max_abs": 3.2242,
+        "W_tele": [
+          [
+            -0.2992,
+            1.8434,
+            -1.1705,
+            -1.022,
+            -2.7257,
+            -2.9449,
+            1.4626,
+            -1.3516
+          ],
+          [
+            -0.2579,
+            1.9057,
+            -1.3322,
+            -0.9845,
+            -2.8496,
+            -3.0788,
+            1.519,
+            -1.396
+          ],
+          [
+            -0.2957,
+            1.8636,
+            -1.1771,
+            -0.9996,
+            -2.7378,
+            -2.9522,
+            1.4633,
+            -1.3522
+          ],
+          [
+            -0.2569,
+            1.9664,
+            -1.4325,
+            -0.9286,
+            -2.9592,
+            -3.1754,
+            1.5307,
+            -1.4376
+          ],
+          [
+            -0.2578,
+            1.9509,
+            -1.4468,
+            -0.9722,
+            -2.9648,
+            -3.1928,
+            1.5553,
+            -1.4427
+          ],
+          [
+            -0.2991,
+            1.9308,
+            -1.2776,
+            -0.9471,
+            -2.8247,
+            -3.0225,
+            1.4446,
+            -1.434
+          ],
+          [
+            -0.2458,
+            1.9923,
+            -1.454,
+            -0.9251,
+            -2.9806,
+            -3.193,
+            1.5287,
+            -1.4682
+          ],
+          [
+            -0.2701,
+            2.006,
+            -1.4773,
+            -0.9617,
+            -3.0181,
+            -3.2242,
+            1.5559,
+            -1.4528
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 3966.631591796875,
+            "tau_100k": 3966.631591796875,
+            "top_tokens": [
+              " the",
+              " be",
+              " have",
+              " can",
+              " a",
+              " also",
+              " to",
+              ","
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 306.3506164550781,
+            "tau_100k": 306.3506164550781,
+            "top_tokens": [
+              " ",
+              "1",
+              "0",
+              "2",
+              "5",
+              "3",
+              "4",
+              "6"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 4160.08251953125,
+            "tau_100k": 4160.08251953125,
+            "top_tokens": [
+              " the",
+              " a",
+              " The",
+              "The",
+              " ",
+              " an",
+              " same",
+              " specific"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 9840.52734375,
+            "tau_100k": 9840.52734375,
+            "top_tokens": [
+              " the",
+              " in",
+              " a",
+              " to",
+              " on",
+              " with",
+              ",",
+              " and"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 60968.58984375,
+            "tau_100k": 60968.58984375,
+            "top_tokens": [
+              ",",
+              " and",
+              ".",
+              "-",
+              " in",
+              " or",
+              " of",
+              " for"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 34243.5703125,
+            "tau_100k": 34243.5703125,
+            "top_tokens": [
+              "-",
+              "_",
+              ",",
+              " and",
+              ".",
+              " ",
+              "in",
+              "m"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 1005.0227661132812,
+            "tau_100k": 1005.0227661132812,
+            "top_tokens": [
+              "\n",
+              ".",
+              " The",
+              "The",
+              " \n",
+              "\n\n",
+              " In",
+              " "
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 3540.14453125,
+            "tau_100k": 3540.14453125,
+            "top_tokens": [
+              " \"",
+              ",",
+              " and",
+              "\n",
+              " ",
+              " (",
+              " the",
+              " The"
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.5773,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 107.57,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 36.75,
+      "top5_agree_pct": 59.37,
+      "kld_T1": 2.1725
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 0.2535,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 1.94,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 0.3812,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 2.06,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 79.41,
+        "asst_top5_agree_pct": 93.68,
+        "asst_kld_T1": 0.8452
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 0.5408,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 5.91,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 0.762,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 13.13,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 51.15,
+        "asst_top5_agree_pct": 74.52,
+        "asst_kld_T1": 1.8193
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 0.6415,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 8.24,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 0.8891,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 21.67,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 43.75,
+        "asst_top5_agree_pct": 69.9,
+        "asst_kld_T1": 2.1766
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 73.3,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 73.3,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 23.3,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 10.0,
+      "stu_arg_key_f1_pct": 50.4,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"search_by_city\", \"arguments\": {\"location\": \"New York City\"}}, {\"name\": \"search_by_city\", \"arguments\": {\"location\": \"New York City\"}}]</too"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"get_bit_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_hash_"
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "<tool_call>[{\"name\": \"find_duplicate_elements\", \"arguments\": {\"n\": 15}}]</tool_call>"
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 100.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 100.0,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 1.33,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            13.1,
+            12.02,
+            13.72,
+            11.38,
+            12.59,
+            13.34,
+            12.25,
+            11.62
+          ],
+          "INDENT_NEWLINE": [
+            12.68,
+            11.7,
+            12.23,
+            11.28,
+            12.12,
+            12.48,
+            15.92,
+            11.59
+          ],
+          "JSON_SYNTAX": [
+            13.52,
+            11.99,
+            13.43,
+            11.69,
+            12.62,
+            13.22,
+            11.8,
+            11.74
+          ],
+          "SCHEMA_KEYWORD": [
+            13.21,
+            12.1,
+            13.64,
+            11.52,
+            12.65,
+            13.55,
+            11.75,
+            11.58
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            13.09,
+            12.11,
+            13.57,
+            11.42,
+            12.55,
+            13.65,
+            12.06,
+            11.54
+          ],
+          "GENERAL_PROSE": [
+            13.17,
+            12.36,
+            13.09,
+            11.68,
+            12.83,
+            13.33,
+            11.8,
+            11.74
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            0.63,
+            5.65,
+            0.5,
+            14.75,
+            29.14,
+            1.29,
+            13.93,
+            34.1
+          ],
+          "INDENT_NEWLINE": [
+            0.61,
+            5.47,
+            0.46,
+            14.23,
+            29.31,
+            1.27,
+            15.48,
+            33.18
+          ],
+          "JSON_SYNTAX": [
+            0.63,
+            5.67,
+            0.48,
+            14.73,
+            29.85,
+            1.35,
+            13.7,
+            33.6
+          ],
+          "SCHEMA_KEYWORD": [
+            0.64,
+            5.81,
+            0.51,
+            15.04,
+            29.24,
+            1.3,
+            13.3,
+            34.17
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            0.65,
+            5.67,
+            0.48,
+            14.53,
+            29.4,
+            1.28,
+            13.77,
+            34.22
+          ],
+          "GENERAL_PROSE": [
+            0.64,
+            5.77,
+            0.48,
+            14.77,
+            29.36,
+            1.28,
+            13.42,
+            34.28
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            11.28,
+            34.8,
+            6.15,
+            8.04,
+            2.96,
+            2.76,
+            27.7,
+            6.3
+          ],
+          "INDENT_NEWLINE": [
+            10.96,
+            33.67,
+            5.95,
+            7.69,
+            2.78,
+            2.57,
+            30.07,
+            6.32
+          ],
+          "JSON_SYNTAX": [
+            11.26,
+            34.79,
+            6.15,
+            7.97,
+            2.88,
+            2.67,
+            27.63,
+            6.65
+          ],
+          "SCHEMA_KEYWORD": [
+            11.52,
+            35.18,
+            6.22,
+            8.25,
+            3.08,
+            2.81,
+            26.57,
+            6.37
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            12.1,
+            34.32,
+            6.33,
+            8.11,
+            2.9,
+            2.66,
+            27.3,
+            6.3
+          ],
+          "GENERAL_PROSE": [
+            11.56,
+            34.86,
+            6.32,
+            8.22,
+            2.97,
+            2.68,
+            27.04,
+            6.34
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 0.000498,
+        "everyday-conversations": 0.001217,
+        "fineweb-edu": 0.001023
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 0.2613,
+          "everyday-conversations": 0.5383,
+          "fineweb-edu": 1.443
+        },
+        "lesions": {
+          "L00_S2": {
+            "tau_star": 495591.53125,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000215,
+            "delta_bpb_chat": 0.005125,
+            "delta_bpb_fineweb": -0.000759
+          },
+          "L00_S5": {
+            "tau_star": 224879.78125,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000715,
+            "delta_bpb_chat": 0.006768,
+            "delta_bpb_fineweb": 0.001589
+          },
+          "L00_S7": {
+            "tau_star": 67.09022521972656,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000839,
+            "delta_bpb_chat": 0.006249,
+            "delta_bpb_fineweb": 0.001221
+          },
+          "L01_S2": {
+            "tau_star": 584077.25,
+            "expert": 0,
+            "delta_bpb_apigen": 6.9e-05,
+            "delta_bpb_chat": 6.7e-05,
+            "delta_bpb_fineweb": -0.000102
+          },
+          "L01_S0": {
+            "tau_star": 107312.546875,
+            "expert": 0,
+            "delta_bpb_apigen": 1e-05,
+            "delta_bpb_chat": 0.000189,
+            "delta_bpb_fineweb": -0.000137
+          },
+          "L01_S7": {
+            "tau_star": 143.80174255371094,
+            "expert": 1,
+            "delta_bpb_apigen": 0.011561,
+            "delta_bpb_chat": 0.017718,
+            "delta_bpb_fineweb": 0.009327
+          },
+          "L02_S4": {
+            "tau_star": 60968.58984375,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000245,
+            "delta_bpb_chat": 0.001375,
+            "delta_bpb_fineweb": 0.000871
+          },
+          "L02_S5": {
+            "tau_star": 34243.5703125,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000409,
+            "delta_bpb_chat": 0.000524,
+            "delta_bpb_fineweb": 0.000381
+          },
+          "L02_S1": {
+            "tau_star": 306.3506164550781,
+            "expert": 1,
+            "delta_bpb_apigen": 0.017904,
+            "delta_bpb_chat": 0.026261,
+            "delta_bpb_fineweb": 0.027035
+          }
+        }
+      }
+    },
+    "eval_seconds": 76.2
+  },
+  "Sub-Lattice-v3-Euclidean-17M": {
+    "geometry": "euclidean",
+    "best_step": 49000,
+    "checkpoint_val_bpb": 1.2633459423100821,
+    "checkpoint_val_ppl": 67.23299742138977,
+    "total_params": 17046659,
+    "backbone_params": 4332675,
+    "d_ff": 768,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 32.5,
+        "acc_norm_pct": 32.5
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 35.5,
+        "acc_norm_pct": 36.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 17.0,
+        "acc_norm_pct": 21.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 54.0,
+        "acc_norm_pct": 54.5
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.7805,
+      "ppl": 148.09
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1390,
+      "pure_dhp_fires": 349,
+      "mixed_dhp_fires": 1041,
+      "total_evals_logged": 100,
+      "first_dhp": "[2026-10-22T23:41:56Z] !!! DHP L00 slot=5 rung=24 (2^3x3^1,MIXED) tau*=24 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-23T14:20:33Z] !!! DHP L02 slot=3 rung=746496 (2^10x3^6,MIXED) tau*=767690 next=786432 !!!",
+        "[2026-10-23T14:20:33Z] !!! DHP L02 slot=5 rung=34992 (2^4x3^7,MIXED) tau*=36457 next=36864 !!!",
+        "[2026-10-23T14:20:33Z] !!! DHP L02 slot=6 rung=65536 (2^16,PURE) tau*=68528 next=69984 !!!",
+        "[2026-10-23T14:20:33Z] !!! DHP L02 slot=7 rung=5832 (2^3x3^6,MIXED) tau*=6169 next=6144 !!!",
+        "[2026-10-23T14:20:33Z] !!! DHP L02 slot=7 rung=6144 (2^11x3^1,MIXED) tau*=6169 next=6561 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-22T21:54:38Z] EVAL step     500 | val_bpb=2.3709 val_ppl~=2690.37 teacher_kld=0.6548 | best=2.3709@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-22T23:21:58Z] EVAL step    5000 | val_bpb=1.5773 val_ppl~=191.29 teacher_kld=0.3084 | best=1.5773@5000 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-23T01:01:49Z] EVAL step   10000 | val_bpb=1.4376 val_ppl~=120.14 teacher_kld=0.2665 | best=1.4376@10000 | L00:56(c=1.44) L01:48(c=1.44) L02:61(c=1.44) | DHP=YES",
+        "[2026-10-23T04:21:31Z] EVAL step   20000 | val_bpb=1.3309 val_ppl~=84.20 teacher_kld=0.2396 | best=1.3309@20000 | L00:465(c=1.44) L01:265(c=1.44) L02:620(c=1.44) | DHP=YES",
+        "[2026-10-23T06:01:20Z] EVAL step   25000 | val_bpb=1.3067 val_ppl~=77.67 teacher_kld=0.2329 | best=1.3041@24500 | L00:1317(c=1.44) L01:615(c=1.44) L02:2015(c=1.44) | DHP=YES",
+        "[2026-10-23T07:41:14Z] EVAL step   30000 | val_bpb=1.2865 val_ppl~=72.63 teacher_kld=0.2270 | best=1.2865@30000 | L00:3446(c=1.44) L01:1413(c=1.44) L02:6578(c=1.44) | DHP=YES",
+        "[2026-10-23T11:00:54Z] EVAL step   40000 | val_bpb=1.2680 val_ppl~=68.29 teacher_kld=0.2209 | best=1.2680@40000 | L00:21862(c=1.44) L01:7387(c=1.44) L02:70789(c=1.44) | DHP=YES",
+        "[2026-10-23T14:00:36Z] EVAL step   49000 | val_bpb=1.2633 val_ppl~=67.23 teacher_kld=0.2197 | best=1.2633@49000 | L00:113938(c=1.44) L01:34739(c=1.44) L02:605396(c=1.44) | DHP=YES",
+        "[2026-10-23T14:20:33Z] EVAL step   50000 | val_bpb=1.2636 val_ppl~=67.29 teacher_kld=0.2196 | best=1.2633@49000 | L00:135972(c=1.44) L01:41366(c=1.44) L02:767690(c=1.44) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "euclidean",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.2525,
+        "tau_max_best": 113938.875,
+        "tau_max_100k": 135972.5625,
+        "taus_best": [
+          5191.4931640625,
+          30522.423828125,
+          211.8584442138672,
+          1875.7115478515625,
+          7590.39501953125,
+          113938.875,
+          36716.05078125,
+          9846.013671875
+        ],
+        "taus_100k": [
+          5902.2392578125,
+          37023.79296875,
+          225.33120727539062,
+          2085.9150390625,
+          8621.2119140625,
+          135972.5625,
+          43245.78125,
+          11303.7158203125
+        ],
+        "purity_best": 0.5534,
+        "slot_entropy_best": 0.6385,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 5191.4931640625,
+            "tau_100k": 5902.2392578125,
+            "top_tokens": [
+              " are",
+              " have",
+              " is",
+              " can",
+              " has",
+              " was",
+              " also",
+              " may"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 30522.423828125,
+            "tau_100k": 37023.79296875,
+            "top_tokens": [
+              "icides",
+              "erers",
+              "esters",
+              "ermint",
+              "arial",
+              "itives",
+              "ppers",
+              "iculture"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 211.8584442138672,
+            "tau_100k": 225.33120727539062,
+            "top_tokens": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "9"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 1875.7115478515625,
+            "tau_100k": 2085.9150390625,
+            "top_tokens": [
+              "\n",
+              " ",
+              " The",
+              "\u00a0",
+              " A",
+              " (",
+              "1",
+              " \u201c"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 7590.39501953125,
+            "tau_100k": 8621.2119140625,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " their",
+              " its",
+              " this",
+              " it",
+              " some"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 113938.875,
+            "tau_100k": 135972.5625,
+            "top_tokens": [
+              " control",
+              "0",
+              " ",
+              " part",
+              " research",
+              "1",
+              " point",
+              " state"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 36716.05078125,
+            "tau_100k": 43245.78125,
+            "top_tokens": [
+              ",",
+              ".",
+              " and",
+              "-",
+              " (",
+              " or",
+              ":",
+              ";"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 9846.013671875,
+            "tau_100k": 11303.7158203125,
+            "top_tokens": [
+              " to",
+              " of",
+              " in",
+              " for",
+              " with",
+              " from",
+              " on",
+              " as"
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "euclidean",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.952,
+        "tau_max_best": 34739.38671875,
+        "tau_max_100k": 41366.8125,
+        "taus_best": [
+          32948.58984375,
+          1489.1248779296875,
+          18368.134765625,
+          1263.2423095703125,
+          34739.38671875,
+          2427.9052734375,
+          19805.822265625,
+          1336.15673828125
+        ],
+        "taus_100k": [
+          38898.78515625,
+          1646.10107421875,
+          21407.845703125,
+          1402.1026611328125,
+          41366.8125,
+          2690.1708984375,
+          23027.322265625,
+          1471.113037109375
+        ],
+        "purity_best": 0.3091,
+        "slot_entropy_best": 0.754,
+        "tele_frobenius_norm": 8.8792,
+        "tele_max_abs": 1.8421,
+        "W_tele": [
+          [
+            -1.3612,
+            1.6985,
+            -0.6586,
+            -0.0622,
+            -1.0464,
+            0.7259,
+            -0.9704,
+            1.5045
+          ],
+          [
+            -1.0578,
+            1.2455,
+            -0.4678,
+            -0.2093,
+            -0.6615,
+            0.4802,
+            -0.5868,
+            1.1665
+          ],
+          [
+            -1.3828,
+            1.7433,
+            -0.7576,
+            -0.2762,
+            -1.0912,
+            0.8024,
+            -0.9315,
+            1.6103
+          ],
+          [
+            -1.3769,
+            1.7223,
+            -0.7501,
+            -0.1599,
+            -1.1024,
+            0.7388,
+            -0.9894,
+            1.5698
+          ],
+          [
+            -1.4312,
+            1.7535,
+            -0.7526,
+            -0.0515,
+            -1.1538,
+            0.7733,
+            -1.025,
+            1.5525
+          ],
+          [
+            -1.2154,
+            1.4077,
+            -0.5351,
+            -0.1075,
+            -0.7705,
+            0.5639,
+            -0.6711,
+            1.2827
+          ],
+          [
+            -1.511,
+            1.8421,
+            -0.8797,
+            -0.1074,
+            -1.2729,
+            0.8498,
+            -1.1241,
+            1.6738
+          ],
+          [
+            -1.4545,
+            1.767,
+            -0.7674,
+            -0.0732,
+            -1.144,
+            0.7821,
+            -1.0165,
+            1.5742
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 32948.58984375,
+            "tau_100k": 38898.78515625,
+            "top_tokens": [
+              "-",
+              ",",
+              " and",
+              ".",
+              " of",
+              "\n",
+              "\ufffd",
+              " or"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 1489.1248779296875,
+            "tau_100k": 1646.10107421875,
+            "top_tokens": [
+              " and",
+              ",",
+              " or",
+              "\n",
+              ";",
+              " And",
+              " (",
+              " &"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 18368.134765625,
+            "tau_100k": 21407.845703125,
+            "top_tokens": [
+              "-",
+              ",",
+              " and",
+              ".",
+              " of",
+              "\n",
+              "\ufffd",
+              "\u00a0"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 1263.2423095703125,
+            "tau_100k": 1402.1026611328125,
+            "top_tokens": [
+              "1",
+              " ",
+              "2",
+              "0",
+              "3",
+              "5",
+              "9",
+              "4"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 34739.38671875,
+            "tau_100k": 41366.8125,
+            "top_tokens": [
+              " the",
+              " to",
+              " of",
+              " a",
+              " in",
+              " for",
+              " with",
+              ","
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 2427.9052734375,
+            "tau_100k": 2690.1708984375,
+            "top_tokens": [
+              "\n",
+              ".",
+              "<|im_end|>",
+              "The",
+              " The",
+              ".\u201d",
+              "\n\n",
+              " \n"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 19805.822265625,
+            "tau_100k": 23027.322265625,
+            "top_tokens": [
+              " the",
+              " a",
+              " not",
+              " be",
+              " is",
+              " are",
+              " also",
+              " some"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 1336.15673828125,
+            "tau_100k": 1471.113037109375,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " The",
+              " its",
+              "the",
+              " their",
+              " your"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "euclidean",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.0099,
+        "tau_max_best": 605396.6875,
+        "tau_max_100k": 767690.5,
+        "taus_best": [
+          7613.060546875,
+          2608.80126953125,
+          579.2571411132812,
+          605396.6875,
+          989.57861328125,
+          31104.82421875,
+          57101.97265625,
+          5428.91650390625
+        ],
+        "taus_100k": [
+          8779.3798828125,
+          2901.387939453125,
+          630.350830078125,
+          767690.5,
+          1083.7147216796875,
+          36457.875,
+          68528.7109375,
+          6169.771484375
+        ],
+        "purity_best": 0.8517,
+        "slot_entropy_best": 0.2874,
+        "tele_frobenius_norm": 16.5163,
+        "tele_max_abs": 3.8425,
+        "W_tele": [
+          [
+            -1.1375,
+            1.9428,
+            0.8326,
+            -3.0824,
+            1.0205,
+            -1.2996,
+            -2.9458,
+            -0.0144
+          ],
+          [
+            -1.1572,
+            1.5617,
+            1.2755,
+            -3.7806,
+            1.5505,
+            -2.0268,
+            -3.3355,
+            -0.4801
+          ],
+          [
+            -1.1827,
+            1.9912,
+            0.7861,
+            -3.105,
+            0.9842,
+            -1.2893,
+            -2.9984,
+            0.0008
+          ],
+          [
+            -0.8936,
+            1.4553,
+            1.1053,
+            -3.6235,
+            1.684,
+            -1.8922,
+            -3.1232,
+            -0.5872
+          ],
+          [
+            -1.1006,
+            1.7181,
+            1.4883,
+            -3.6038,
+            1.6442,
+            -1.9291,
+            -3.1586,
+            -0.2926
+          ],
+          [
+            -1.2264,
+            1.4871,
+            1.0361,
+            -3.6974,
+            1.3107,
+            -1.9839,
+            -3.2741,
+            -0.4425
+          ],
+          [
+            -1.1785,
+            1.7218,
+            1.4686,
+            -3.6394,
+            1.5953,
+            -1.9502,
+            -3.2286,
+            -0.3009
+          ],
+          [
+            -1.0841,
+            1.6212,
+            1.5147,
+            -3.8425,
+            1.8089,
+            -2.101,
+            -3.351,
+            -0.495
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 7613.060546875,
+            "tau_100k": 8779.3798828125,
+            "top_tokens": [
+              " the",
+              " a",
+              " ",
+              " new",
+              " most",
+              " many",
+              " an",
+              " other"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 2608.80126953125,
+            "tau_100k": 2901.387939453125,
+            "top_tokens": [
+              "\n",
+              ".",
+              "<|im_end|>",
+              " The",
+              "The",
+              " This",
+              " In",
+              " If"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 579.2571411132812,
+            "tau_100k": 630.350830078125,
+            "top_tokens": [
+              " ",
+              "1",
+              "2",
+              "0",
+              "3",
+              "5",
+              "4",
+              "9"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 605396.6875,
+            "tau_100k": 767690.5,
+            "top_tokens": [
+              " and",
+              ",",
+              ".",
+              "-",
+              " in",
+              " or",
+              " of",
+              " ("
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 989.57861328125,
+            "tau_100k": 1083.7147216796875,
+            "top_tokens": [
+              " and",
+              ",",
+              " or",
+              "\n",
+              " the",
+              " but",
+              " which",
+              " ("
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 31104.82421875,
+            "tau_100k": 36457.875,
+            "top_tokens": [
+              " the",
+              ",",
+              " a",
+              " ",
+              " and",
+              " is",
+              " to",
+              " not"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 57101.97265625,
+            "tau_100k": 68528.7109375,
+            "top_tokens": [
+              " the",
+              " a",
+              " ",
+              " in",
+              " and",
+              " to",
+              ",",
+              " for"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 5428.91650390625,
+            "tau_100k": 6169.771484375,
+            "top_tokens": [
+              "-",
+              " and",
+              ",",
+              ".",
+              "\u2019",
+              "\ufffd",
+              " ",
+              "/"
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.4354,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 70.62,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 42.32,
+      "top5_agree_pct": 66.16,
+      "kld_T1": 1.7593
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 1.9109,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 146.89,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 2.6028,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 138.29,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 28.93,
+        "asst_top5_agree_pct": 44.35,
+        "asst_kld_T1": 4.4073
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 1.3489,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 83.95,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 1.2095,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 59.56,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 28.11,
+        "asst_top5_agree_pct": 51.85,
+        "asst_kld_T1": 3.1276
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 1.3451,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 83.19,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 1.1445,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 52.44,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 29.86,
+        "asst_top5_agree_pct": 54.48,
+        "asst_kld_T1": 3.062
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 0.0,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 0.0,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 0.0,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 0.0,
+      "stu_arg_key_f1_pct": 0.0,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "The first time of the 19th century, the first time of the 19th century was the first of the 19th century. The first time of the 19th century was the first of th"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "The first step in the 2000s was to use the \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000\" \"2000"
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "The first step in the 19th century was to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the"
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 0.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 25.1,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 2.25,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            12.14,
+            15.38,
+            12.1,
+            13.53,
+            11.09,
+            12.66,
+            11.38,
+            11.72
+          ],
+          "INDENT_NEWLINE": [
+            11.32,
+            8.28,
+            12.32,
+            19.64,
+            12.02,
+            10.42,
+            13.99,
+            12.0
+          ],
+          "JSON_SYNTAX": [
+            12.25,
+            15.51,
+            12.03,
+            12.43,
+            11.23,
+            12.69,
+            12.08,
+            11.78
+          ],
+          "SCHEMA_KEYWORD": [
+            12.13,
+            15.17,
+            12.38,
+            12.12,
+            11.48,
+            14.13,
+            10.89,
+            11.71
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            12.59,
+            11.71,
+            12.75,
+            16.48,
+            11.99,
+            11.42,
+            11.63,
+            11.43
+          ],
+          "GENERAL_PROSE": [
+            12.55,
+            11.72,
+            12.64,
+            12.83,
+            12.66,
+            12.45,
+            12.44,
+            12.7
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            6.85,
+            22.69,
+            9.16,
+            10.08,
+            6.01,
+            17.99,
+            5.98,
+            21.24
+          ],
+          "INDENT_NEWLINE": [
+            3.41,
+            25.74,
+            4.86,
+            9.58,
+            4.02,
+            29.44,
+            5.16,
+            17.79
+          ],
+          "JSON_SYNTAX": [
+            4.47,
+            29.67,
+            6.14,
+            9.57,
+            5.48,
+            19.56,
+            6.09,
+            19.02
+          ],
+          "SCHEMA_KEYWORD": [
+            6.82,
+            23.06,
+            9.96,
+            10.79,
+            7.08,
+            14.14,
+            6.84,
+            21.31
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            3.0,
+            23.58,
+            5.14,
+            10.32,
+            5.09,
+            17.73,
+            10.22,
+            24.91
+          ],
+          "GENERAL_PROSE": [
+            5.12,
+            25.25,
+            7.21,
+            10.35,
+            6.76,
+            15.07,
+            7.2,
+            23.04
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            6.27,
+            29.24,
+            21.56,
+            2.01,
+            23.5,
+            4.26,
+            2.19,
+            10.97
+          ],
+          "INDENT_NEWLINE": [
+            5.31,
+            35.42,
+            19.39,
+            1.47,
+            24.01,
+            3.89,
+            1.86,
+            8.65
+          ],
+          "JSON_SYNTAX": [
+            6.17,
+            29.24,
+            20.93,
+            1.77,
+            25.52,
+            4.33,
+            2.19,
+            9.84
+          ],
+          "SCHEMA_KEYWORD": [
+            6.6,
+            27.14,
+            22.33,
+            2.28,
+            23.91,
+            4.74,
+            2.36,
+            10.65
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            6.61,
+            26.94,
+            21.36,
+            1.67,
+            27.09,
+            5.46,
+            2.23,
+            8.64
+          ],
+          "GENERAL_PROSE": [
+            6.89,
+            26.46,
+            22.42,
+            1.91,
+            25.5,
+            4.75,
+            2.4,
+            9.66
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 0.036631,
+        "everyday-conversations": 0.040348,
+        "fineweb-edu": 0.023356
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 1.9348,
+          "everyday-conversations": 1.3494,
+          "fineweb-edu": 1.3197
+        },
+        "lesions": {
+          "L00_S5": {
+            "tau_star": 113938.875,
+            "expert": 1,
+            "delta_bpb_apigen": 0.011014,
+            "delta_bpb_chat": 0.019834,
+            "delta_bpb_fineweb": 0.000793
+          },
+          "L00_S6": {
+            "tau_star": 36716.05078125,
+            "expert": 0,
+            "delta_bpb_apigen": 0.003094,
+            "delta_bpb_chat": 0.005641,
+            "delta_bpb_fineweb": 0.000931
+          },
+          "L00_S2": {
+            "tau_star": 211.8584442138672,
+            "expert": 0,
+            "delta_bpb_apigen": 0.002862,
+            "delta_bpb_chat": 0.005205,
+            "delta_bpb_fineweb": 0.00097
+          },
+          "L01_S4": {
+            "tau_star": 34739.38671875,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000347,
+            "delta_bpb_chat": -0.00754,
+            "delta_bpb_fineweb": 0.00104
+          },
+          "L01_S0": {
+            "tau_star": 32948.58984375,
+            "expert": 0,
+            "delta_bpb_apigen": -0.000296,
+            "delta_bpb_chat": -0.007667,
+            "delta_bpb_fineweb": 0.00058
+          },
+          "L01_S3": {
+            "tau_star": 1263.2423095703125,
+            "expert": 1,
+            "delta_bpb_apigen": -0.001278,
+            "delta_bpb_chat": -0.008471,
+            "delta_bpb_fineweb": 0.000844
+          },
+          "L02_S3": {
+            "tau_star": 605396.6875,
+            "expert": 1,
+            "delta_bpb_apigen": 0.000555,
+            "delta_bpb_chat": -0.000982,
+            "delta_bpb_fineweb": -1.7e-05
+          },
+          "L02_S6": {
+            "tau_star": 57101.97265625,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000783,
+            "delta_bpb_chat": -0.00091,
+            "delta_bpb_fineweb": 0.00038
+          },
+          "L02_S2": {
+            "tau_star": 579.2571411132812,
+            "expert": 0,
+            "delta_bpb_apigen": 0.01344,
+            "delta_bpb_chat": -0.003692,
+            "delta_bpb_fineweb": 0.009946
+          }
+        }
+      }
+    },
+    "eval_seconds": 78.4
+  },
+  "Sub-Lattice-v3-Spherical-17M": {
+    "geometry": "spherical",
+    "best_step": 50000,
+    "checkpoint_val_bpb": 1.3604893085355505,
+    "checkpoint_val_ppl": 69.54878872413984,
+    "total_params": 17046659,
+    "backbone_params": 4332675,
+    "d_ff": 768,
+    "teacher": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "mc_zeroshot": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 29.0,
+        "acc_norm_pct": 29.5
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 37.5,
+        "acc_norm_pct": 36.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 21.0,
+        "acc_norm_pct": 22.0
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 55.5,
+        "acc_norm_pct": 51.0
+      }
+    },
+    "wikitext2_eval": {
+      "chunks": 60,
+      "bpb": 1.7782,
+      "ppl": 147.14
+    },
+    "dhp_log_summary": {
+      "total_dhp_fires": 1397,
+      "pure_dhp_fires": 345,
+      "mixed_dhp_fires": 1052,
+      "total_evals_logged": 100,
+      "first_dhp": "[2026-10-22T23:43:42Z] !!! DHP L00 slot=2 rung=24 (2^3x3^1,MIXED) tau*=25 next=27 !!!",
+      "last_5_dhp": [
+        "[2026-10-23T14:30:32Z] !!! DHP L02 slot=0 rung=746496 (2^10x3^6,MIXED) tau*=748913 next=786432 !!!",
+        "[2026-10-23T14:30:32Z] !!! DHP L02 slot=3 rung=27648 (2^10x3^3,MIXED) tau*=28910 next=31104 !!!",
+        "[2026-10-23T14:30:32Z] !!! DHP L02 slot=4 rung=69984 (2^5x3^7,MIXED) tau*=75509 next=73728 !!!",
+        "[2026-10-23T14:30:32Z] !!! DHP L02 slot=4 rung=73728 (2^13x3^2,MIXED) tau*=75509 next=78732 !!!",
+        "[2026-10-23T14:30:32Z] !!! DHP L02 slot=5 rung=9216 (2^10x3^2,MIXED) tau*=9554 next=10368 !!!"
+      ],
+      "milestone_evals": [
+        "[2026-10-22T21:55:22Z] EVAL step     500 | val_bpb=2.5846 val_ppl~=3161.99 teacher_kld=0.6374 | best=2.5846@500 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-22T23:23:33Z] EVAL step    5000 | val_bpb=1.7171 val_ppl~=211.45 teacher_kld=0.3104 | best=1.7171@5000 | L00:20(c=1.44) L01:20(c=1.44) L02:20(c=1.44) | DHP=NO",
+        "[2026-10-23T01:04:17Z] EVAL step   10000 | val_bpb=1.5723 val_ppl~=134.63 teacher_kld=0.2721 | best=1.5723@10000 | L00:60(c=1.44) L01:51(c=1.44) L02:60(c=1.44) | DHP=YES",
+        "[2026-10-23T04:25:49Z] EVAL step   20000 | val_bpb=1.4421 val_ppl~=89.70 teacher_kld=0.2397 | best=1.4421@20000 | L00:559(c=1.44) L01:335(c=1.44) L02:607(c=1.44) | DHP=YES",
+        "[2026-10-23T06:06:36Z] EVAL step   25000 | val_bpb=1.4066 val_ppl~=80.30 teacher_kld=0.2318 | best=1.4066@25000 | L00:1629(c=1.44) L01:875(c=1.44) L02:1974(c=1.44) | DHP=YES",
+        "[2026-10-23T07:47:28Z] EVAL step   30000 | val_bpb=1.3897 val_ppl~=76.19 teacher_kld=0.2264 | best=1.3879@29500 | L00:4567(c=1.44) L01:2305(c=1.44) L02:6474(c=1.44) | DHP=YES",
+        "[2026-10-23T11:09:03Z] EVAL step   40000 | val_bpb=1.3655 val_ppl~=70.65 teacher_kld=0.2202 | best=1.3655@40000 | L00:34566(c=1.44) L01:15790(c=1.44) L02:69894(c=1.44) | DHP=YES",
+        "[2026-10-23T14:10:22Z] EVAL step   49000 | val_bpb=1.3612 val_ppl~=69.70 teacher_kld=0.2188 | best=1.3610@47000 | L00:211332(c=1.44) L01:88777(c=1.44) L02:590560(c=1.44) | DHP=YES",
+        "[2026-10-23T14:30:32Z] EVAL step   50000 | val_bpb=1.3605 val_ppl~=69.55 teacher_kld=0.2187 | best=1.3605@50000 | L00:257631(c=1.44) L01:107409(c=1.44) L02:748913(c=1.44) | DHP=YES"
+      ]
+    },
+    "crystal_telemetry": {
+      "L00": {
+        "geometry": "spherical",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.3126,
+        "tau_max_best": 257631.234375,
+        "tau_max_100k": 257631.234375,
+        "taus_best": [
+          6274.74853515625,
+          39.29423904418945,
+          257631.234375,
+          151626.0625,
+          1162.8656005859375,
+          45333.84765625,
+          11790.7060546875,
+          2495.585205078125
+        ],
+        "taus_100k": [
+          6274.74853515625,
+          39.29423904418945,
+          257631.234375,
+          151626.0625,
+          1162.8656005859375,
+          45333.84765625,
+          11790.7060546875,
+          2495.585205078125
+        ],
+        "purity_best": 0.5408,
+        "slot_entropy_best": 0.5349,
+        "tele_frobenius_norm": 0.0,
+        "tele_max_abs": 0.0,
+        "W_tele": null,
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 6274.74853515625,
+            "tau_100k": 6274.74853515625,
+            "top_tokens": [
+              " the",
+              " a",
+              " an",
+              " their",
+              " its",
+              " of",
+              " this",
+              " your"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 39.29423904418945,
+            "tau_100k": 39.29423904418945,
+            "top_tokens": [
+              " of",
+              "of",
+              " Of",
+              ",",
+              " and",
+              ".",
+              " for",
+              " in"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 257631.234375,
+            "tau_100k": 257631.234375,
+            "top_tokens": [
+              " of",
+              ",",
+              "-",
+              " process",
+              " level",
+              " time",
+              ".",
+              " range"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 151626.0625,
+            "tau_100k": 151626.0625,
+            "top_tokens": [
+              " of",
+              ",",
+              " to",
+              " in",
+              " and",
+              " for",
+              ".",
+              " from"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 1162.8656005859375,
+            "tau_100k": 1162.8656005859375,
+            "top_tokens": [
+              ".",
+              ",",
+              "-",
+              ":",
+              " of",
+              "?",
+              " and",
+              ";"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 45333.84765625,
+            "tau_100k": 45333.84765625,
+            "top_tokens": [
+              "iology",
+              "cology",
+              "eless",
+              "ial",
+              "etting",
+              "mental",
+              "ology",
+              "ives"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 11790.7060546875,
+            "tau_100k": 11790.7060546875,
+            "top_tokens": [
+              "\n",
+              "1",
+              " ",
+              ".",
+              "2",
+              "-",
+              ",",
+              "3"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 2495.585205078125,
+            "tau_100k": 2495.585205078125,
+            "top_tokens": [
+              ",",
+              " and",
+              ".",
+              " or",
+              "-",
+              " of",
+              ";",
+              " ("
+            ]
+          }
+        ]
+      },
+      "L01": {
+        "geometry": "spherical",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.0538,
+        "tau_max_best": 107409.5390625,
+        "tau_max_100k": 107409.5390625,
+        "taus_best": [
+          2789.62646484375,
+          11448.1611328125,
+          2644.744384765625,
+          107409.5390625,
+          698.4800415039062,
+          75011.2578125,
+          9813.2880859375,
+          1800.2547607421875
+        ],
+        "taus_100k": [
+          2789.62646484375,
+          11448.1611328125,
+          2644.744384765625,
+          107409.5390625,
+          698.4800415039062,
+          75011.2578125,
+          9813.2880859375,
+          1800.2547607421875
+        ],
+        "purity_best": 0.5076,
+        "slot_entropy_best": 0.569,
+        "tele_frobenius_norm": 19.3709,
+        "tele_max_abs": 3.8143,
+        "W_tele": [
+          [
+            0.5147,
+            -2.1346,
+            0.0385,
+            -3.8143,
+            1.6559,
+            -3.6979,
+            -2.8517,
+            2.5789
+          ],
+          [
+            0.5204,
+            -2.0697,
+            0.008,
+            -3.7068,
+            1.5854,
+            -3.6249,
+            -2.7995,
+            2.4288
+          ],
+          [
+            0.6046,
+            -2.0977,
+            0.055,
+            -3.7283,
+            1.7383,
+            -3.4987,
+            -2.695,
+            2.4427
+          ],
+          [
+            0.3973,
+            -2.0274,
+            -0.0875,
+            -3.7279,
+            1.5343,
+            -3.6619,
+            -2.8696,
+            2.5297
+          ],
+          [
+            0.6309,
+            -2.0905,
+            0.1137,
+            -3.7086,
+            1.5847,
+            -3.5981,
+            -2.7181,
+            1.9287
+          ],
+          [
+            0.8001,
+            -2.0951,
+            0.2353,
+            -3.6467,
+            1.763,
+            -3.3877,
+            -2.4753,
+            2.0263
+          ],
+          [
+            0.7175,
+            -2.1227,
+            0.2409,
+            -3.7161,
+            1.5028,
+            -3.5775,
+            -2.6803,
+            2.0622
+          ],
+          [
+            0.4726,
+            -2.0996,
+            0.0142,
+            -3.7681,
+            1.5153,
+            -3.6611,
+            -2.8163,
+            2.2585
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 2789.62646484375,
+            "tau_100k": 2789.62646484375,
+            "top_tokens": [
+              "\n",
+              ".",
+              "The",
+              "<|im_end|>",
+              "\n\n",
+              "..",
+              ",",
+              " The"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 11448.1611328125,
+            "tau_100k": 11448.1611328125,
+            "top_tokens": [
+              " the",
+              " a",
+              " The",
+              " an",
+              " their",
+              " its",
+              "the",
+              "The"
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 2644.744384765625,
+            "tau_100k": 2644.744384765625,
+            "top_tokens": [
+              ",",
+              " and",
+              " the",
+              " or",
+              " more",
+              " ",
+              "-",
+              " a"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 107409.5390625,
+            "tau_100k": 107409.5390625,
+            "top_tokens": [
+              " the",
+              " to",
+              " a",
+              " in",
+              " not",
+              " and",
+              " be",
+              ","
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 698.4800415039062,
+            "tau_100k": 698.4800415039062,
+            "top_tokens": [
+              "0",
+              "1",
+              "3",
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 75011.2578125,
+            "tau_100k": 75011.2578125,
+            "top_tokens": [
+              " and",
+              ",",
+              "-",
+              ".",
+              " or",
+              "\n",
+              " (",
+              " of"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 9813.2880859375,
+            "tau_100k": 9813.2880859375,
+            "top_tokens": [
+              "-",
+              ",",
+              " and",
+              ".",
+              "\u00a0",
+              " (",
+              "al",
+              "/"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 1800.2547607421875,
+            "tau_100k": 1800.2547607421875,
+            "top_tokens": [
+              ",",
+              " and",
+              ";",
+              " or",
+              "),",
+              "\n",
+              " And",
+              " &"
+            ]
+          }
+        ]
+      },
+      "L02": {
+        "geometry": "spherical",
+        "curvature_best": 1.4427,
+        "curvature_100k": 1.4427,
+        "router_temp": 1.2622,
+        "tau_max_best": 748913.4375,
+        "tau_max_100k": 748913.4375,
+        "taus_best": [
+          748913.4375,
+          5769.869140625,
+          1092.656005859375,
+          28910.82421875,
+          75509.484375,
+          9554.5625,
+          2897.34814453125,
+          725.3709716796875
+        ],
+        "taus_100k": [
+          748913.4375,
+          5769.869140625,
+          1092.656005859375,
+          28910.82421875,
+          75509.484375,
+          9554.5625,
+          2897.34814453125,
+          725.3709716796875
+        ],
+        "purity_best": 0.8575,
+        "slot_entropy_best": 0.2751,
+        "tele_frobenius_norm": 16.5715,
+        "tele_max_abs": 4.1597,
+        "W_tele": [
+          [
+            -4.014,
+            -0.9149,
+            1.8476,
+            -2.0925,
+            -2.9807,
+            -0.7051,
+            0.8245,
+            1.4028
+          ],
+          [
+            -3.8398,
+            -0.681,
+            1.5427,
+            -1.8372,
+            -2.7073,
+            -0.5785,
+            0.7162,
+            1.7203
+          ],
+          [
+            -3.9835,
+            -0.7707,
+            1.8768,
+            -2.0808,
+            -2.9709,
+            -0.5643,
+            0.9304,
+            1.7873
+          ],
+          [
+            -3.771,
+            -0.7338,
+            1.7372,
+            -1.9152,
+            -2.7163,
+            -0.5963,
+            0.891,
+            1.724
+          ],
+          [
+            -3.9768,
+            -0.7175,
+            1.5526,
+            -1.9031,
+            -2.8786,
+            -0.4105,
+            0.6267,
+            1.5211
+          ],
+          [
+            -3.6179,
+            -0.7401,
+            1.8973,
+            -2.0291,
+            -2.7891,
+            -0.6005,
+            1.0172,
+            1.6793
+          ],
+          [
+            -3.5541,
+            -0.5734,
+            1.4852,
+            -1.7493,
+            -2.6592,
+            -0.307,
+            0.6303,
+            1.583
+          ],
+          [
+            -4.1597,
+            -0.885,
+            1.8706,
+            -2.1591,
+            -3.1056,
+            -0.648,
+            0.9434,
+            1.7064
+          ]
+        ],
+        "slots_logit_lens": [
+          {
+            "slot": 0,
+            "expert": 0,
+            "tau_best": 748913.4375,
+            "tau_100k": 748913.4375,
+            "top_tokens": [
+              ",",
+              " and",
+              ".",
+              "-",
+              " or",
+              " in",
+              " (",
+              "\n"
+            ]
+          },
+          {
+            "slot": 1,
+            "expert": 1,
+            "tau_best": 5769.869140625,
+            "tau_100k": 5769.869140625,
+            "top_tokens": [
+              "-",
+              ",",
+              " and",
+              " ",
+              ".",
+              "\u00a0",
+              "l",
+              " ("
+            ]
+          },
+          {
+            "slot": 2,
+            "expert": 0,
+            "tau_best": 1092.656005859375,
+            "tau_100k": 1092.656005859375,
+            "top_tokens": [
+              ",",
+              " and",
+              "\n",
+              " the",
+              " or",
+              " but",
+              " ",
+              ";"
+            ]
+          },
+          {
+            "slot": 3,
+            "expert": 1,
+            "tau_best": 28910.82421875,
+            "tau_100k": 28910.82421875,
+            "top_tokens": [
+              " the",
+              " ",
+              ",",
+              " a",
+              " not",
+              " be",
+              " also",
+              " and"
+            ]
+          },
+          {
+            "slot": 4,
+            "expert": 0,
+            "tau_best": 75509.484375,
+            "tau_100k": 75509.484375,
+            "top_tokens": [
+              " the",
+              " a",
+              " ",
+              " in",
+              ",",
+              " and",
+              " of",
+              " their"
+            ]
+          },
+          {
+            "slot": 5,
+            "expert": 1,
+            "tau_best": 9554.5625,
+            "tau_100k": 9554.5625,
+            "top_tokens": [
+              " the",
+              " a",
+              " ",
+              " new",
+              " an",
+              " The",
+              " first",
+              " same"
+            ]
+          },
+          {
+            "slot": 6,
+            "expert": 0,
+            "tau_best": 2897.34814453125,
+            "tau_100k": 2897.34814453125,
+            "top_tokens": [
+              "\n",
+              ".",
+              " The",
+              "<|im_end|>",
+              "The",
+              " This",
+              " In",
+              " But"
+            ]
+          },
+          {
+            "slot": 7,
+            "expert": 1,
+            "tau_best": 725.3709716796875,
+            "tau_100k": 725.3709716796875,
+            "top_tokens": [
+              " ",
+              "1",
+              "0",
+              "2",
+              "3",
+              "5",
+              "6",
+              "4"
+            ]
+          }
+        ]
+      }
+    },
+    "fineweb_eval": {
+      "samples": 40,
+      "stu_bpb": 1.4401,
+      "tea_bpb": 0.8997,
+      "stu_ppl": 71.59,
+      "tea_ppl": 14.42,
+      "top1_agree_pct": 42.03,
+      "top5_agree_pct": 65.8,
+      "kld_T1": 1.7716
+    },
+    "smoltalk_eval": {
+      "apigen-80k": {
+        "samples": 40,
+        "stu_full_bpb": 1.9387,
+        "tea_full_bpb": 0.6932,
+        "stu_full_ppl": 157.95,
+        "tea_full_ppl": 6.11,
+        "stu_asst_bpb": 2.6331,
+        "tea_asst_bpb": 0.2263,
+        "stu_asst_ppl": 146.47,
+        "tea_asst_ppl": 1.53,
+        "asst_top1_agree_pct": 29.79,
+        "asst_top5_agree_pct": 43.73,
+        "asst_kld_T1": 4.462
+      },
+      "everyday-conversations": {
+        "samples": 40,
+        "stu_full_bpb": 1.3921,
+        "tea_full_bpb": 0.3785,
+        "stu_full_ppl": 96.73,
+        "tea_full_ppl": 3.47,
+        "stu_asst_bpb": 1.2172,
+        "tea_asst_bpb": 0.2448,
+        "stu_asst_ppl": 61.13,
+        "tea_asst_ppl": 2.29,
+        "asst_top1_agree_pct": 27.6,
+        "asst_top5_agree_pct": 51.21,
+        "asst_kld_T1": 3.146
+      },
+      "smol-constraints": {
+        "samples": 40,
+        "stu_full_bpb": 1.3546,
+        "tea_full_bpb": 0.3403,
+        "stu_full_ppl": 85.84,
+        "tea_full_ppl": 3.06,
+        "stu_asst_bpb": 1.1618,
+        "tea_asst_bpb": 0.243,
+        "stu_asst_ppl": 55.67,
+        "tea_asst_ppl": 2.32,
+        "asst_top1_agree_pct": 30.14,
+        "asst_top5_agree_pct": 53.51,
+        "asst_kld_T1": 3.1196
+      }
+    },
+    "apigen_tool_calling": {
+      "n_evaluated": 30,
+      "stu_eos_pct": 0.0,
+      "tea_eos_pct": 46.7,
+      "stu_json_valid_pct": 0.0,
+      "tea_json_valid_pct": 26.7,
+      "stu_tool_name_acc_vs_gt_pct": 0.0,
+      "tea_tool_name_acc_vs_gt_pct": 16.7,
+      "stu_tool_name_agree_tea_pct": 0.0,
+      "stu_arg_key_f1_pct": 0.0,
+      "tea_arg_key_f1_pct": 16.7,
+      "examples": [
+        {
+          "user": "Could you provide me with the restaurants located in the local authority of Liverpool?",
+          "gt": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Liverpool\"}}]</tool_call>",
+          "stu": "The first time the British government was the first to use the British government to use the British government to use the British government to use the British"
+        },
+        {
+          "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+          "gt": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 20000}}, {\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 30000}}]</tool_call>",
+          "stu": "The first time the first time the first time the first time the first time the first time the first time the first time the first time the first time the first "
+        },
+        {
+          "user": "Create a list where each number from 1 to 5 appears twice in the order they were provided.",
+          "gt": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": \"[1, 2, 3, 4, 5]\"}}]</tool_call>",
+          "stu": "The first time the first time the first time the first time the first time the first time the first time the first time the first time the first time the first "
+        }
+      ]
+    },
+    "chat_generation": {
+      "n": 25,
+      "stu_eos_pct": 0.0,
+      "tea_eos_pct": 100.0,
+      "stu_4gram_div_pct": 3.7,
+      "tea_4gram_div_pct": 100.0,
+      "teacher_scored_stu_ppl": 1.39,
+      "teacher_scored_tea_ppl": 1.56
+    },
+    "ast_and_lesions": {
+      "role_counts": {
+        "CHATML_HEADER": 301,
+        "INDENT_NEWLINE": 659,
+        "JSON_SYNTAX": 2284,
+        "SCHEMA_KEYWORD": 1095,
+        "INSTRUCT_DIRECTIVE": 108,
+        "GENERAL_PROSE": 10839
+      },
+      "routing_matrix_pct": {
+        "L00": {
+          "CHATML_HEADER": [
+            11.07,
+            12.66,
+            12.47,
+            11.91,
+            12.03,
+            15.66,
+            12.78,
+            11.41
+          ],
+          "INDENT_NEWLINE": [
+            12.0,
+            11.32,
+            9.57,
+            12.76,
+            13.89,
+            8.16,
+            19.19,
+            13.11
+          ],
+          "JSON_SYNTAX": [
+            10.93,
+            11.9,
+            12.35,
+            12.02,
+            12.93,
+            15.75,
+            11.98,
+            12.14
+          ],
+          "SCHEMA_KEYWORD": [
+            11.25,
+            12.11,
+            14.21,
+            12.06,
+            11.54,
+            15.36,
+            12.21,
+            11.27
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            11.71,
+            11.61,
+            11.32,
+            12.44,
+            12.89,
+            12.41,
+            16.02,
+            11.61
+          ],
+          "GENERAL_PROSE": [
+            12.62,
+            12.22,
+            12.3,
+            13.26,
+            12.59,
+            11.62,
+            12.9,
+            12.5
+          ]
+        },
+        "L01": {
+          "CHATML_HEADER": [
+            17.2,
+            3.79,
+            11.5,
+            1.63,
+            26.08,
+            2.12,
+            3.33,
+            34.35
+          ],
+          "INDENT_NEWLINE": [
+            22.81,
+            3.47,
+            8.95,
+            1.42,
+            23.42,
+            1.51,
+            2.48,
+            35.95
+          ],
+          "JSON_SYNTAX": [
+            17.09,
+            3.64,
+            10.26,
+            1.62,
+            24.46,
+            1.67,
+            2.73,
+            38.53
+          ],
+          "SCHEMA_KEYWORD": [
+            14.88,
+            3.93,
+            12.77,
+            1.75,
+            26.73,
+            2.24,
+            3.28,
+            34.42
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            17.31,
+            5.02,
+            11.26,
+            1.98,
+            24.2,
+            1.58,
+            2.64,
+            36.02
+          ],
+          "GENERAL_PROSE": [
+            15.16,
+            4.11,
+            11.96,
+            1.82,
+            25.95,
+            1.84,
+            2.8,
+            36.38
+          ]
+        },
+        "L02": {
+          "CHATML_HEADER": [
+            1.62,
+            9.49,
+            26.2,
+            4.12,
+            2.5,
+            8.34,
+            20.19,
+            27.54
+          ],
+          "INDENT_NEWLINE": [
+            1.17,
+            6.69,
+            27.81,
+            3.57,
+            2.04,
+            6.65,
+            28.42,
+            23.66
+          ],
+          "JSON_SYNTAX": [
+            1.36,
+            8.06,
+            29.53,
+            3.95,
+            2.46,
+            8.19,
+            20.22,
+            26.23
+          ],
+          "SCHEMA_KEYWORD": [
+            1.84,
+            8.76,
+            27.44,
+            4.39,
+            2.64,
+            8.77,
+            17.72,
+            28.44
+          ],
+          "INSTRUCT_DIRECTIVE": [
+            1.42,
+            7.02,
+            30.96,
+            5.79,
+            2.73,
+            8.84,
+            18.88,
+            24.36
+          ],
+          "GENERAL_PROSE": [
+            1.55,
+            7.87,
+            28.74,
+            4.53,
+            2.77,
+            9.21,
+            17.76,
+            27.58
+          ]
+        }
+      },
+      "telepathy_ablation_delta_bpb": {
+        "apigen-80k": 0.00163,
+        "everyday-conversations": 0.002454,
+        "fineweb-edu": 0.000871
+      },
+      "lesion_study": {
+        "baseline_bpb": {
+          "apigen-80k": 1.9618,
+          "everyday-conversations": 1.391,
+          "fineweb-edu": 1.3216
+        },
+        "lesions": {
+          "L00_S2": {
+            "tau_star": 257631.234375,
+            "expert": 0,
+            "delta_bpb_apigen": 0.012412,
+            "delta_bpb_chat": 0.006135,
+            "delta_bpb_fineweb": 0.002077
+          },
+          "L00_S3": {
+            "tau_star": 151626.0625,
+            "expert": 1,
+            "delta_bpb_apigen": 0.010772,
+            "delta_bpb_chat": 0.006628,
+            "delta_bpb_fineweb": 0.000356
+          },
+          "L00_S1": {
+            "tau_star": 39.29423904418945,
+            "expert": 1,
+            "delta_bpb_apigen": 0.010232,
+            "delta_bpb_chat": 0.005828,
+            "delta_bpb_fineweb": 0.00041
+          },
+          "L01_S3": {
+            "tau_star": 107409.5390625,
+            "expert": 1,
+            "delta_bpb_apigen": -0.000737,
+            "delta_bpb_chat": -0.001049,
+            "delta_bpb_fineweb": -0.000113
+          },
+          "L01_S5": {
+            "tau_star": 75011.2578125,
+            "expert": 1,
+            "delta_bpb_apigen": -0.001052,
+            "delta_bpb_chat": -0.001395,
+            "delta_bpb_fineweb": -7.4e-05
+          },
+          "L01_S4": {
+            "tau_star": 698.4800415039062,
+            "expert": 0,
+            "delta_bpb_apigen": -0.003909,
+            "delta_bpb_chat": -0.006301,
+            "delta_bpb_fineweb": 0.006735
+          },
+          "L02_S0": {
+            "tau_star": 748913.4375,
+            "expert": 0,
+            "delta_bpb_apigen": -4.1e-05,
+            "delta_bpb_chat": -0.001011,
+            "delta_bpb_fineweb": 0.000154
+          },
+          "L02_S4": {
+            "tau_star": 75509.484375,
+            "expert": 0,
+            "delta_bpb_apigen": 0.000504,
+            "delta_bpb_chat": -0.001455,
+            "delta_bpb_fineweb": 0.000386
+          },
+          "L02_S7": {
+            "tau_star": 725.3709716796875,
+            "expert": 1,
+            "delta_bpb_apigen": 0.017871,
+            "delta_bpb_chat": 0.008379,
+            "delta_bpb_fineweb": 0.019116
+          }
+        }
+      }
+    },
+    "eval_seconds": 80.7
+  }
+}
