@@ -1,0 +1,17 @@
+{
+  "model_type": "cdm_sublattice_v3",
+  "geometry": "lorentz",
+  "d_model": 256,
+  "n_layers": 3,
+  "n_heads": 4,
+  "K": 8,
+  "num_experts": 2,
+  "d_ff": 1024,
+  "vocab_size": 49152,
+  "max_seq_len": 512,
+  "best_val_bpb": null,
+  "best_step": 75500,
+  "total_steps": 100000,
+  "torch_dtype": "bfloat16",
+  "duoneural_lab": true
+}

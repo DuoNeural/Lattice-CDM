@@ -266,6 +266,10 @@ Evaluated across 8 probes (`512` logit positions / `504` next-token transitions;
 | **Lattice-1 107M (v1)** | `Q8_0` | **`0.261`** | **`0.000246`** | **`99.0%`** | `0.276` / `99.2%` | ⭐ **Passes all 3 strict gates on CPU & GPU (`115.4 MiB`)** |
 | **Sub-Lattice v3 18M** | `Q8_0` | **`0.392`** | **`0.000594`** | **`98.44%`** | **`0.392` / `98.44%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`20.6 MiB`)** |
 | **Sub-Lattice v3 18M** | `Q6_K` | `0.677` | **`0.002423`** | **`94.14%`** | `0.835` / `95.12%` | ⚠️ Passes 128-GPU (`0.435`), fails 512-pos Max-Err gate (`16.4 MiB`) |
+| **Sub-Lattice v3 Lorentz 18M** | `F32` | `0.000050` | `0.000000` | `100.0%` | `0.000050` / `100.0%` | ⭐ **Exact native parity across 512 positions (`74.7 MiB`)** |
+| **Sub-Lattice v3 Lorentz 18M** | `Q8_0` | — | — | — | `0.559` / **`99.22%`** | ⭐ **Passes KL (`0.00041` nats) & Top-1 (`99.2%`) gates (`21.6 MiB`)**; misses 0.5 drift gate by `0.059` |
+| **Sub-Lattice v3 BK-Exact 18M** | `F32` | `0.000099` | `0.000000` | `100.0%` | `0.000099` / `100.0%` | ⭐ **Exact native parity across 512 positions (`74.7 MiB`)** |
+| **Sub-Lattice v3 BK-Exact 18M** | `Q8_0` | — | — | — | `1.295` / **`98.05%`** | Passes KL (`0.00109` nats) & Top-1 (`98.05%`) gates (`21.6 MiB`); misses max-drift gate |
 | **Lattice-2 192M Base** | `Q8_0` | **`0.239`** | **`0.000121`** | **`99.61%`** | **`0.239` / `99.80%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`197.1 MiB`)** |
 | **Lattice-2 192M Base** | `Q6_K` | **`0.384`** | **`0.000587`** | **`98.44%`** | `0.861` / `97.46%` | ✅ **Passes all 3 gates on GPU**; CPU fails Max-Err (`0.861`) |
 | **Lattice-3 Synapse 192M** | `Q8_0` | **`0.189`** | **`0.000159`** | **`99.22%`** | **`0.189` / `99.22%`** | ⭐ **Passes all 3 strict gates on CPU & GPU (`197.1 MiB`)** |

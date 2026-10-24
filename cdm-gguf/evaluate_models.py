@@ -29,8 +29,10 @@ MODELS = {
     'lattice3_synapse': 'lattice3_synapse-pytorch_model.pt',
     'lattice2_base': 'lattice2_base-pytorch_model.pt',
     'sub18m_v3': 'sub18m_v3-pytorch_model.pt',
+    'sub18m_v3_lorentz': '../research/geometry_releases/lorentz-model.safetensors',
+    'sub18m_v3_bk_exact': '../research/geometry_releases/bk_exact-model.safetensors',
 }
-INSTRUCT_MODELS = {'sub17m', 'lattice4_nexus', 'lattice4_josephson', 'lattice3_synapse', 'sub18m_v3'}
+INSTRUCT_MODELS = {'sub17m', 'lattice4_nexus', 'lattice4_josephson', 'lattice3_synapse', 'sub18m_v3', 'sub18m_v3_lorentz', 'sub18m_v3_bk_exact'}
 THRESHOLDS = {
     'f32': {'atol': 1e-3, 'rtol': 1e-4, 'require_allclose': True},
     'quantized': {'max_abs_error': .5, 'mean_kl_nats': .01, 'top1_agreement': .9},

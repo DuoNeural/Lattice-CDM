@@ -220,3 +220,93 @@ environment and timings for 32- and 160-token workloads are in
 Artifacts are local and unpublished. The full research report is
 `cdm-gguf/README.md`; independent architecture and feasibility audits are
 `cdm-gguf/ARCHITECTURE_AUDIT.md` and `cdm-gguf/FEASIBILITY.md`.
+
+## Lorentz and Beltrami-Klein v3 export and runtime (2026-10-24)
+
+Pinned checkpoints:
+
+| Model | Hugging Face commit | Safetensors SHA-256 | Card-reported best validation BPB |
+|---|---|---|---:|
+| `Sub-Lattice-v3-Lorentz-18M` | `44646f45b5117edac2470764c9281d0784a307ab` | `f52a8bfc18f36d5e615ebde9a2da14b000d250be2b968202d9ca3dd41d0e5ec6` | 0.8914 |
+| `Sub-Lattice-v3-BK-Exact-18M` | `9fb078e74642385a07edf75eb63088a04d7d5ce7` | `520d4ec7865c494902707989d0775f24b5bef27d0053161c6bb13fa2776bbbd5` | 0.9476 |
+
+BPB values are copied from the model cards and were not independently rerun.
+Both checkpoints contain bf16 tensors in Safetensors. The new loader uses
+`safetensors.torch.load_file` rather than pickle. HF config labels BK as
+`bk_exact`; export maps that to the source implementation's `klein`. The configs
+omit `c_min`, `c_max`, and telepathy settings, so the presets explicitly use the
+v3 source defaults (`0.25`, `4.0`, `0.5`) and card evaluation scale `1.0`.
+Learned curvatures reconstructed from `theta_c` are recorded in each GGUF's
+`.config.json`. BK values (`0.2568, 0.4252, 0.2832`) agree with card values to
+rounding (`0.2569, 0.4245, 0.2833`). The Lorentz card gives no layer-curvature
+table.
+
+The native GGUF schema now includes `cdm.geometry` as `lorentz` or `klein`.
+Lorentz slots are exported as `d+1` ambient `[time, spatial...]` points; token
+queries use the source Lorentz exponential map, signed Minkowski inner product,
+and `2/sqrt(c) * acosh(c * (x0*y0 - dot(x_sp,y_sp)))`. Klein slots remain in
+the `d`-dimensional projective disk and use the exact norm/inner-product
+acosh distance. The curvature, temperature, clamps, telepathy coefficients,
+and all non-linear routing tensors stay F32. A first native Lorentz run exposed
+an ambient-view reshape assertion; switching to strided `ggml_view_3d` fixed it.
+Strict parity then caught a factor-of-two error in the Lorentz exponential-map
+spatial scale; correcting it brought F32 prefill and cached logits within
+`1e-4` max absolute error.
+
+The tokenizer is `HuggingFaceTB/SmolLM2-360M-Instruct` at immutable commit
+`a10cc1512eabd3dde888204e902eca88bddb4951`. Tokenizer-equipped F32 files are
+about 72 MiB each and Q8_0 files about 21 MiB each. Q8_0 quantizes the tied
+vocabulary embedding, attention projection matrices, and expert matrices; it
+preserves positions, normalization, routing geometry, slot mapping, and
+telepathy in F32.
+
+### Native CPU parity screen
+
+Eight authored probes, 64 tokenizer IDs each (512 positions per model), four
+threads on Kilonova's CPU, run independently in prefill and incremental-cache
+modes. These are numerical probes, not task-quality results.
+
+| Model / format | Mode | Max abs logit error | Mean KL (nats) | Top-1 agreement | Gate |
+|---|---|---:|---:|---:|---|
+| Lorentz F32 | Prefill | 0.0000415 | 5.26e-12 | 100% | Pass |
+| Lorentz F32 | Incremental | 0.0000498 | 5.46e-12 | 100% | Pass |
+| Lorentz Q8_0 | Prefill | 0.5591 | 0.000861 | 99.22% | Fail max-error gate |
+| Lorentz Q8_0 | Incremental | 0.5591 | 0.000861 | 99.22% | Fail max-error gate |
+| BK F32 | Prefill | 0.0000944 | 6.11e-12 | 100% | Pass |
+| BK F32 | Incremental | 0.0000992 | 6.45e-12 | 100% | Pass |
+| BK Q8_0 | Prefill | 1.2945 | 0.001087 | 98.05% | Fail max-error gate |
+| BK Q8_0 | Incremental | 1.2945 | 0.001087 | 98.05% | Fail max-error gate |
+
+Existing quantized gates are max absolute error `<=0.5`, mean KL `<=0.01`, and
+top-1 agreement `>=90%`. Lorentz's worst case is the conversation probe; BK's
+is unicode whitespace (case-level max KL `0.1651`, case-level top-1 `95.31%`).
+Mean next-token NLL delta is `-0.00239` for Lorentz Q8_0 and `+0.00348` for BK
+Q8_0, corresponding to relative probe perplexity `0.9976` and `1.0035`.
+
+Median four-thread Kilonova throughput, from the same 64-position runs:
+
+| Model / format | Prefill tokens/s | Incremental decode tokens/s |
+|---|---:|---:|
+| Lorentz F32 | 3,079 | 346 |
+| Lorentz Q8_0 | 3,766 | 1,217 |
+| BK F32 | 3,009 | 344 |
+| BK Q8_0 | 3,883 | 1,233 |
+
+A CPU-only build of both `llama-cli` and `llama-server` succeeded on Kilonova.
+Single-sequence HTTP completion passed for Lorentz F32 and both Q8_0 files; the
+8-token response was `Hello! How can I help you today`. This is an execution
+smoke, not a language-quality evaluation. No Kilonova GPU was used, and neither
+new geometry has been tested on the GTX 1070/CUDA backend. The built binaries
+and copied GGUFs remain in private staging at
+`/home/ai/duoneural/kestrel/cdm-gguf-geometry-validation`; no public release or
+upstream PR was made.
+
+Backward compatibility: older Poincare GGUFs without `cdm.geometry` now select
+the legacy Poincare router. After rebuilding on Kilonova, the existing
+`sub18m_v3-f32-text.gguf` loaded and completed a five-token F32 probe. Explicit
+unknown geometry values still fail closed.
+
+Detailed per-probe metrics, prompts, token IDs, and backend logs are in
+`/home/ai/duoneural/kestrel/cdm-gguf/research/geometry_releases/native-cpu-64.json`.
+Pinned checkpoint/output checksums and tokenizer provenance are in
+`/home/ai/duoneural/kestrel/cdm-gguf/research/geometry_releases/manifest.json`.

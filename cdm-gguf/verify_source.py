@@ -21,9 +21,11 @@ def source_model(path,cfg,state,v3=False):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('checkpoint');p.add_argument('--preset',choices=PRESETS,required=True);p.add_argument('--source',required=True);p.add_argument('--ids',default='1,2,3,4');p.add_argument('--output');a=p.parse_args();torch.set_num_threads(4)
- s,cfg=load(a.checkpoint,PRESETS[a.preset]);model=source_model(a.source,cfg,s);ids=torch.tensor([int(x) for x in a.ids.split(',')])
+ s,cfg=load(a.checkpoint,PRESETS[a.preset]);v3='beta_tele' in cfg;model=source_model(a.source,cfg,s,v3=v3);ids=torch.tensor([int(x) for x in a.ids.split(',')])
  with torch.inference_mode():
-  h,_,_=model(ids[None],training=False,allow_crystallize=False);actual=model.lm_head(h)[0];ours=forward(s,cfg,ids)
+  kwargs={'training':False,'allow_crystallize':False}
+  if v3:kwargs['telepathy_scale']=cfg.get('telepathy_scale',1.0)
+  h,_,_=model(ids[None],**kwargs);actual=model.lm_head(h)[0];ours=forward(s,cfg,ids)
  delta=(actual-ours).abs();result={'max_abs_error':float(delta.max()),'mean_abs_error':float(delta.mean()),'top1_agreement':float((actual.argmax(-1)==ours.argmax(-1)).float().mean()),'allclose_atol_1e-4_rtol_1e-4':bool(torch.allclose(actual,ours,atol=1e-4,rtol=1e-4))};print(json.dumps(result,indent=2))
  if a.output:pathlib.Path(a.output).write_text(json.dumps(result,indent=2)+'\n')
  if not result['allclose_atol_1e-4_rtol_1e-4']:raise SystemExit(1)

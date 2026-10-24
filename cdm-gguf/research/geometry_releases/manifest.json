@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-24",
+  "models": {
+    "lorentz": {
+      "repo": "DuoNeural/Sub-Lattice-v3-Lorentz-18M",
+      "revision": "44646f45b5117edac2470764c9281d0784a307ab",
+      "geometry": "lorentz",
+      "card_best_val_bpb": 0.8914,
+      "checkpoint": "research/geometry_releases/lorentz-model.safetensors",
+      "checkpoint_sha256": "f52a8bfc18f36d5e615ebde9a2da14b000d250be2b968202d9ca3dd41d0e5ec6",
+      "preset": "sub18m_v3_lorentz",
+      "outputs": {
+        "f32": {
+          "path": "models/sub18m_v3_lorentz-f32-text.gguf",
+          "bytes": 74703744,
+          "sha256": "9a976256ac7968981ba83a44f0c8f865cddce9a9a3635f38a0773f5a6b0e0e91"
+        },
+        "q8_0": {
+          "path": "models/sub18m_v3_lorentz-q8_0-text.gguf",
+          "bytes": 21570624,
+          "sha256": "40e72cf5cdfd24d780b103f2492fe79ce86760be06847ca67bd1e5d986cf1131"
+        }
+      },
+      "tokenizer": {
+        "repo": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "revision": "a10cc1512eabd3dde888204e902eca88bddb4951"
+      },
+      "reconstruction_assumptions": {
+        "c_min": 0.25,
+        "c_max": 4.0,
+        "beta_tele": 0.5,
+        "telepathy_scale": 1.0,
+        "basis": "v3 source defaults + model-card inference configuration"
+      }
+    },
+    "bk_exact": {
+      "repo": "DuoNeural/Sub-Lattice-v3-BK-Exact-18M",
+      "revision": "9fb078e74642385a07edf75eb63088a04d7d5ce7",
+      "geometry": "klein",
+      "hf_config_geometry": "bk_exact",
+      "card_best_val_bpb": 0.9476,
+      "checkpoint": "research/geometry_releases/bk_exact-model.safetensors",
+      "checkpoint_sha256": "520d4ec7865c494902707989d0775f24b5bef27d0053161c6bb13fa2776bbbd5",
+      "preset": "sub18m_v3_bk_exact",
+      "outputs": {
+        "f32": {
+          "path": "models/sub18m_v3_bk_exact-f32-text.gguf",
+          "bytes": 74703712,
+          "sha256": "5cf15320063085f4d44c5a5c52fe3b899f44cfc3a10c6a9a8d2d26d2fd0f594c"
+        },
+        "q8_0": {
+          "path": "models/sub18m_v3_bk_exact-q8_0-text.gguf",
+          "bytes": 21570560,
+          "sha256": "ecd68d672d50f556f3be806efcfd6c8ad553228107bf8dc6918e79e36a297651"
+        }
+      },
+      "tokenizer": {
+        "repo": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "revision": "a10cc1512eabd3dde888204e902eca88bddb4951"
+      },
+      "reconstruction_assumptions": {
+        "c_min": 0.25,
+        "c_max": 4.0,
+        "beta_tele": 0.5,
+        "telepathy_scale": 1.0,
+        "basis": "v3 source defaults + model-card inference configuration"
+      }
+    }
+  },
+  "evaluation": "research/geometry_releases/native-cpu-64.json",
+  "llama_cpp_base_commit": "d663dd3f3af4e7aa3ccbcd7f756c6692eb104577",
+  "llama_cpp_patch_sha256": "3655a6090892e7a546949ca673f90a1cabeeaee929e8745a33f8fceb4752138f",
+  "runtime_target": "Kilonova CPU-only build; no GPU offload"
+}

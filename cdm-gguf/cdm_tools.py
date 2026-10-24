@@ -14,6 +14,8 @@ PRESETS = {
  'lattice4_nexus': dict(heads=12, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Lattice-4-Nexus-253M-Poincare-Instruct README/source; telepathy_scale=1.0'),
  'lattice4_josephson': dict(heads=12, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Lattice-4-Josephson-253M-Poincare-Instruct README/source; telepathy_scale=1.0'),
  'sub18m_v3': dict(heads=4, geometry='poincare', curvature=1.4427, c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Sub-Lattice-v3-18M-Poincare-Hybrid README/source; telepathy_scale=1.0'),
+ 'sub18m_v3_lorentz': dict(heads=4, geometry='lorentz', c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Sub-Lattice-v3-Lorentz-18M pinned HF model/config; v3 geometry source defaults c_min=.25,c_max=4,beta_tele=.5; eval telepathy_scale=1.0'),
+ 'sub18m_v3_bk_exact': dict(heads=4, geometry='klein', c_min=0.25, c_max=4.0, beta_tele=0.5, telepathy_scale=1.0, source='DuoNeural/Sub-Lattice-v3-BK-Exact-18M pinned HF model/config; HF geometry=bk_exact maps to source geometry=klein; v3 geometry source defaults c_min=.25,c_max=4,beta_tele=.5; eval telepathy_scale=1.0'),
 }
 
 def expmap(v,c):
@@ -31,12 +33,34 @@ def distance(x,s,c):
  arg=1+2*c*(x-s).square().sum(-1)/((1-cx)*(1-cs)).clamp_min(1e-5)
  return (2/math.sqrt(c))*torch.acosh(arg.clamp_min(1+1e-5))
 
+def klein_expmap(v,c):
+ n=v.norm(dim=-1,keepdim=True).clamp_min(1e-12)
+ return torch.tanh((2*math.sqrt(c)*n).clamp_max(8))/(math.sqrt(c)*n)*v
+
+def lorentz_expmap(v,c):
+ n=v.norm(dim=-1,keepdim=True).clamp_min(1e-12)
+ u=(2*math.sqrt(c)*n).clamp_max(8)
+ return torch.cat((torch.cosh(u)/math.sqrt(c),torch.sinh(u)/(math.sqrt(c)*n)*v),dim=-1)
+
+def klein_distance(x,s,c):
+ x=x.unsqueeze(-2);s=s.unsqueeze(0)
+ nx=(c*x.square().sum(-1)).clamp(0,1-1e-5)
+ ns=(c*s.square().sum(-1)).clamp(0,1-1e-5)
+ arg=(1-c*(x*s).sum(-1))/(((1-nx)*(1-ns)).clamp_min(1e-5).sqrt())
+ return (2/math.sqrt(c))*torch.acosh(arg.clamp_min(1+1e-5))
+
+def lorentz_distance(x,s,c):
+ # Ambient vectors use [time, spatial...], with Minkowski signature (-,+,...,+).
+ x=x.unsqueeze(-2);s=s.unsqueeze(0)
+ inner=c*(x[...,0]*s[...,0]-(x[...,1:]*s[...,1:]).sum(-1))
+ return (2/math.sqrt(c))*torch.acosh(inner.clamp_min(1+1e-5))
+
 
 def validate_checkpoint(s, config):
  """Fail closed before deriving metadata or transforming any checkpoint tensor."""
  def fail(message): raise ValueError(message)
- if config.get('geometry') != 'poincare':
-  fail('This prototype requires explicit geometry=poincare; other geometries are unsupported')
+ if config.get('geometry') not in ('poincare','lorentz','klein'):
+  fail('geometry must be explicitly one of poincare, lorentz, or klein')
  heads=config.get('heads')
  if type(heads) is not int or heads<=0: fail('heads must be a positive integer')
  for key,value in s.items():
@@ -122,8 +146,12 @@ def validate_checkpoint(s, config):
 
 
 def load(path,config):
- ck=torch.load(path,map_location='cpu',weights_only=True)
- state=ck.get('model',ck.get('state_dict',ck))
+ if pathlib.Path(path).suffix=='.safetensors':
+  from safetensors.torch import load_file
+  state=load_file(str(path),device='cpu')
+ else:
+  ck=torch.load(path,map_location='cpu',weights_only=True)
+  state=ck.get('model',ck.get('state_dict',ck))
  if not isinstance(state,dict) or not all(isinstance(v,torch.Tensor) for v in state.values()):
   raise ValueError('Expected tensor-only state dictionary in checkpoint model/state_dict')
  validate_checkpoint(state,config)
@@ -145,15 +173,23 @@ def load(path,config):
    c=float(cfg['curvature'])
   if not math.isfinite(c) or c<=0:raise ValueError('Curvature must be finite and positive')
   cfg['curvatures'].append(c);cfg['temperatures'].append(float(s[p+'log_temp'].clamp(math.log(.5),math.log(20)).exp()))
+  tangent=s.get(p+'slots_tangent')
   slots=s.get(p+'slots',None)
-  if slots is None:slots=expmap(s[p+'slots_tangent'],c)
-  s[p+'ball_slots']=clip(slots,c)
+  if cfg['geometry']=='lorentz':
+   if tangent is None:raise ValueError('Lorentz export requires tangent-space slots')
+   s[p+'native_slots']=lorentz_expmap(tangent,c)
+  elif cfg['geometry']=='klein':
+   if tangent is None:raise ValueError('Klein export requires tangent-space slots')
+   s[p+'native_slots']=clip(klein_expmap(tangent,c),c)
+  else:
+   if slots is None:slots=expmap(tangent,c)
+   s[p+'native_slots']=clip(slots,c)
   if p+'W_tele' in s:
    if 'beta_tele' not in cfg or 'telepathy_scale' not in cfg:raise ValueError('Telepathy requires explicit beta_tele and telepathy_scale')
    beta=cfg['beta_tele']*cfg['telepathy_scale']
   else:beta=0.
   cfg['betas'].append(beta)
- cfg['slots']=s['layers.0.moe.router.ball_slots'].shape[0]
+ cfg['slots']=s['layers.0.moe.router.native_slots'].shape[0]
  cfg['experts']=len([k for k in s if k.startswith('layers.0.moe.experts.') and k.endswith('gate.weight')])
  cfg['ff']=s['layers.0.moe.experts.0.gate.weight'].shape[0]
  return s,cfg
@@ -172,8 +208,14 @@ def forward(s,cfg,ids):
   a=F.scaled_dot_product_attention(split(q),split(k),split(v),is_causal=True).squeeze(0).transpose(0,1).reshape(len(ids),-1)
   x=x+F.linear(a,s[p+'.attn.out_proj.weight'],s[p+'.attn.out_proj.bias']);h=norm(x,s,p+'.ffn_norm')
   r=p+'.moe.router.';c=cfg['curvatures'][i]
-  z=clip(expmap(F.normalize(h,dim=-1)*.3,c),c)
-  logits=-distance(z,s[r+'ball_slots'],c)*cfg['temperatures'][i]
+  tangent=F.normalize(h,dim=-1)*.3
+  if cfg['geometry']=='lorentz':
+   z=lorentz_expmap(tangent,c);dist=lorentz_distance(z,s[r+'native_slots'],c)
+  elif cfg['geometry']=='klein':
+   z=clip(klein_expmap(tangent,c),c);dist=klein_distance(z,s[r+'native_slots'],c)
+  else:
+   z=clip(expmap(tangent,c),c);dist=distance(z,s[r+'native_slots'],c)
+  logits=-dist*cfg['temperatures'][i]
   if prev is not None and cfg['betas'][i]:logits=logits+cfg['betas'][i]*(prev@s[r+'W_tele'])
   prev=logits.softmax(-1);ew=torch.zeros(len(ids),cfg['experts'])
   for j,e in enumerate(s[r+'slot_to_expert'].tolist()):ew[:,e]+=prev[:,j]
@@ -187,7 +229,7 @@ def forward(s,cfg,ids):
 def export(s,cfg,out):
  import gguf
  w=gguf.GGUFWriter(out,'cdm')
- w.add_string('tokenizer.ggml.model','none');w.add_name('DuoNeural CDM frozen inference prototype');w.add_uint32('cdm.context_length',cfg['context']);w.add_uint32('cdm.embedding_length',cfg['dim']);w.add_uint32('cdm.block_count',cfg['layers']);w.add_uint32('cdm.feed_forward_length',cfg['ff']);w.add_uint32('cdm.attention.head_count',cfg['heads']);w.add_float32('cdm.attention.layer_norm_epsilon',1e-5)
+ w.add_string('tokenizer.ggml.model','none');w.add_name('DuoNeural CDM frozen inference prototype');w.add_uint32('cdm.context_length',cfg['context']);w.add_uint32('cdm.embedding_length',cfg['dim']);w.add_uint32('cdm.block_count',cfg['layers']);w.add_uint32('cdm.feed_forward_length',cfg['ff']);w.add_uint32('cdm.attention.head_count',cfg['heads']);w.add_float32('cdm.attention.layer_norm_epsilon',1e-5);w.add_string('cdm.geometry',cfg['geometry'])
  w.add_uint32('cdm.vocab_size',cfg['vocab']);w.add_uint32('cdm.cdm.slot_count',cfg['slots']);w.add_uint32('cdm.cdm.expert_count',cfg['experts'])
  for key,val in [('curvature',cfg['curvatures']),('temperature',cfg['temperatures']),('telepathy_beta',cfg['betas'])]:w.add_array('cdm.cdm.'+key+'_per_layer',val)
  w.add_string('cdm.source.configuration',json.dumps(cfg,sort_keys=True))
@@ -202,7 +244,7 @@ def export(s,cfg,out):
   for src,dst in [('attn_norm','attn_norm'),('ffn_norm','ffn_norm'),('attn.out_proj','attn_output')]:
    for suffix in ['weight','bias']:add(b+dst+'.'+suffix,s[p+src+'.'+suffix])
   add(b+'attn_qkv.weight',s[p+'attn.in_proj_weight']);add(b+'attn_qkv.bias',s[p+'attn.in_proj_bias'])
-  r=p+'moe.router.';add(b+'cdm_slots.weight',s[r+'ball_slots'])
+  r=p+'moe.router.';add(b+'cdm_slots.weight',s[r+'native_slots'])
   add(b+'cdm_tele.weight',s.get(r+'W_tele',torch.zeros(cfg['slots'],cfg['slots'])).T)
   mapping=s[r+'slot_to_expert']
   if mapping.shape!=(cfg['slots'],) or mapping.min()<0 or mapping.max()>=cfg['experts']:raise ValueError('Invalid slot-to-expert mapping')
