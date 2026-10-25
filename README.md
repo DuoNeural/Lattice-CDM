@@ -285,6 +285,12 @@ cd cdm-gguf
 | **Lattice-4 Nexus `Q6_K`** | `201.0 MiB` | `157` | **`5,361`** | `34.15×` | `79` | **`280`** | `3.54×` |
 | **Lattice-4 Nexus `Q4_K_M`** | `164.5 MiB` | `231` | **`5,527`** | `23.93×` | `90` | **`301`** | `3.34×` |
 | **Lattice-4 Nexus `Q4_K_S`** | `139.0 MiB` | `293` | **`6,039`** | `20.61×` | `106` | **`324`** | `3.06×` |
+| **Lattice-4D Holographic `F32`** | `966.0 MiB` | `163` | — | — | `22` | — | — |
+| **Lattice-4D Holographic `Q8_0`** | `259.3 MiB` | `231` | — | — | `70` | — | — |
+| **Lattice-4D Holographic `Q4_K_M`** | `164.5 MiB` | `265` | — | — | `96` | — | — |
+| **FC-CDM-Poincare-7L `F32`** | `411.0 MiB` | `343` | — | — | `51` | — | — |
+| **FC-CDM-Poincare-7L `Q8_0`** | `111.0 MiB` | `465` | — | — | `142` | — | — |
+| **FC-CDM-Poincare-7L `Q4_K_M`** | `71.0 MiB` | `557` | — | — | `171` | — | — |
 
 ### 2. 512-Position Numerical Fidelity Screen (CUDA & CPU vs. PyTorch `F32` Reference)
 Evaluated across 8 probes (`512` logit positions / `504` next-token transitions; strict screening gates: Max Logit Drift `≤ 0.5`, Mean KL `≤ 0.01` nats, Top-1 Agreement `≥ 90.0%`). *Note: These screens measure numerical logit drift and teacher-forced timing against the frozen PyTorch `F32` reference, not held-out task quality.*
