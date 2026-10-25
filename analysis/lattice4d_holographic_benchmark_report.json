@@ -1,0 +1,1267 @@
+{
+  "model_name": "Lattice-4D-Holographic-253M-Poincare-Instruct",
+  "checkpoint_step": 100000,
+  "best_val_bpb": 0.6692129638789692,
+  "total_params": 252884366,
+  "backbone_params": 176993678,
+  "tied_params": 215135630,
+  "teacher": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "wikitext2": {
+    "chunks": 60,
+    "bpb": 1.5416,
+    "ppl": 75.74
+  },
+  "zero_shot_mc": {
+    "hellaswag": {
+      "n": 200,
+      "acc_pct": 35.5,
+      "acc_norm_pct": 36.0
+    },
+    "arc_easy": {
+      "n": 200,
+      "acc_pct": 42.5,
+      "acc_norm_pct": 41.5
+    },
+    "arc_challenge": {
+      "n": 200,
+      "acc_pct": 20.0,
+      "acc_norm_pct": 28.5
+    },
+    "piqa": {
+      "n": 200,
+      "acc_pct": 58.0,
+      "acc_norm_pct": 54.0
+    }
+  },
+  "fineweb_edu": {
+    "samples": 40,
+    "stu_bpb": 1.2406,
+    "tea_bpb": 0.7786,
+    "stu_ppl": 39.63,
+    "tea_ppl": 10.07,
+    "top1_agree_pct": 48.48,
+    "top5_agree_pct": 72.12,
+    "kld_T1": 1.5739
+  },
+  "smoltalk": {
+    "apigen-80k": {
+      "samples": 40,
+      "stu_full_bpb": 0.0997,
+      "tea_full_bpb": 0.058,
+      "stu_full_ppl": 1.3,
+      "tea_full_ppl": 1.16,
+      "stu_asst_bpb": 0.1148,
+      "tea_asst_bpb": 0.0164,
+      "stu_asst_ppl": 1.24,
+      "tea_asst_ppl": 1.03,
+      "asst_top1_agree_pct": 97.13,
+      "asst_top5_agree_pct": 98.71,
+      "asst_kld_T1": 0.1835
+    },
+    "everyday-conversations": {
+      "samples": 0,
+      "stu_full_bpb": 0.0,
+      "tea_full_bpb": 0.0,
+      "stu_full_ppl": 1.0,
+      "tea_full_ppl": 1.0,
+      "stu_asst_bpb": 0.0,
+      "tea_asst_bpb": 0.0,
+      "stu_asst_ppl": 1.0,
+      "tea_asst_ppl": 1.0,
+      "asst_top1_agree_pct": 0.0,
+      "asst_top5_agree_pct": 0.0,
+      "asst_kld_T1": 0.0
+    },
+    "smol-constraints": {
+      "samples": 40,
+      "stu_full_bpb": 0.3576,
+      "tea_full_bpb": 0.3489,
+      "stu_full_ppl": 3.24,
+      "tea_full_ppl": 3.15,
+      "stu_asst_bpb": 0.4675,
+      "tea_asst_bpb": 0.1874,
+      "stu_asst_ppl": 5.04,
+      "tea_asst_ppl": 1.91,
+      "asst_top1_agree_pct": 67.2,
+      "asst_top5_agree_pct": 88.45,
+      "asst_kld_T1": 0.9939
+    }
+  },
+  "apigen_tool_calling": {
+    "n_evaluated": 30,
+    "stu_json_valid_pct": 96.7,
+    "tea_json_valid_pct": 100.0,
+    "stu_tool_name_acc_vs_gt_pct": 93.3,
+    "tea_tool_name_acc_vs_gt_pct": 100.0,
+    "stu_tool_name_agreement_vs_tea_pct": 93.3,
+    "stu_arg_key_f1_pct": 92.2,
+    "tea_arg_key_f1_pct": 100.0,
+    "examples": [
+      {
+        "user": "Could you provide me with the restaurants located in the local authority of Live",
+        "gt_name": "search_restaurants_by_local_authority",
+        "tea_name": "search_restaurants_by_local_authority",
+        "stu_name": "search_restaurants_by_local_authority",
+        "stu_raw": "<tool_call>[{\"name\": \"search_restaurants_by_local_authority\", \"arguments\": {\"localauthority\": \"Lyon\"}}]</tool_call><|im_"
+      },
+      {
+        "user": "Return the hash of the block at index 20000 and the block at index 30000.",
+        "gt_name": "get_litecoin_block_hash",
+        "tea_name": "get_litecoin_block_hash",
+        "stu_name": "get_litecoin_block_hash",
+        "stu_raw": "<tool_call>[{\"name\": \"get_litecoin_block_hash\", \"arguments\": {\"i\": 2000}}, {\"name\": \"get_litecoin_block_hash\", \"argument"
+      },
+      {
+        "user": "Create a list where each number from 1 to 5 appears twice in the order they were",
+        "gt_name": "duplicate_list_elements",
+        "tea_name": "duplicate_list_elements",
+        "stu_name": "duplicate_list_elements",
+        "stu_raw": "<tool_call>[{\"name\": \"duplicate_list_elements\", \"arguments\": {\"l\": [1, 2, 3, 4, 5]}}]</tool_call><|im_end|>"
+      }
+    ]
+  },
+  "ast_and_lesions": {
+    "role_counts": {
+      "CHATML_HEADER": 301,
+      "INDENT_NEWLINE": 659,
+      "JSON_SYNTAX": 2284,
+      "SCHEMA_KEYWORD": 1095,
+      "INSTRUCT_DIRECTIVE": 108,
+      "GENERAL_PROSE": 10839
+    },
+    "routing_matrix_pct": {
+      "L00": {
+        "CHATML_HEADER": [
+          12.08,
+          13.29,
+          12.43,
+          12.08,
+          12.01,
+          11.98,
+          13.4,
+          12.74
+        ],
+        "INDENT_NEWLINE": [
+          11.88,
+          12.91,
+          15.34,
+          11.88,
+          11.54,
+          11.49,
+          12.47,
+          12.49
+        ],
+        "JSON_SYNTAX": [
+          11.97,
+          13.05,
+          12.07,
+          11.86,
+          13.74,
+          11.72,
+          13.01,
+          12.58
+        ],
+        "SCHEMA_KEYWORD": [
+          12.03,
+          13.2,
+          12.17,
+          12.01,
+          12.24,
+          11.97,
+          13.55,
+          12.84
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          12.09,
+          13.13,
+          12.44,
+          11.99,
+          12.18,
+          11.91,
+          13.45,
+          12.81
+        ],
+        "GENERAL_PROSE": [
+          12.17,
+          13.28,
+          12.24,
+          12.06,
+          12.05,
+          12.1,
+          13.28,
+          12.81
+        ]
+      },
+      "L01": {
+        "CHATML_HEADER": [
+          54.43,
+          3.34,
+          12.49,
+          2.84,
+          0.43,
+          13.17,
+          0.25,
+          13.06
+        ],
+        "INDENT_NEWLINE": [
+          53.17,
+          3.28,
+          14.3,
+          2.81,
+          0.41,
+          12.85,
+          0.24,
+          12.94
+        ],
+        "JSON_SYNTAX": [
+          54.8,
+          3.42,
+          12.15,
+          3.03,
+          0.42,
+          13.16,
+          0.25,
+          12.77
+        ],
+        "SCHEMA_KEYWORD": [
+          55.38,
+          3.37,
+          12.0,
+          2.86,
+          0.42,
+          13.16,
+          0.26,
+          12.54
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          54.37,
+          3.6,
+          12.42,
+          2.89,
+          0.43,
+          13.49,
+          0.25,
+          12.55
+        ],
+        "GENERAL_PROSE": [
+          55.08,
+          3.42,
+          12.04,
+          2.88,
+          0.42,
+          13.3,
+          0.25,
+          12.61
+        ]
+      },
+      "L02": {
+        "CHATML_HEADER": [
+          0.25,
+          33.22,
+          0.68,
+          8.42,
+          29.21,
+          0.23,
+          18.86,
+          9.13
+        ],
+        "INDENT_NEWLINE": [
+          0.25,
+          32.98,
+          0.69,
+          8.39,
+          29.19,
+          0.23,
+          18.84,
+          9.43
+        ],
+        "JSON_SYNTAX": [
+          0.24,
+          32.05,
+          0.65,
+          8.02,
+          31.71,
+          0.22,
+          18.26,
+          8.86
+        ],
+        "SCHEMA_KEYWORD": [
+          0.25,
+          33.33,
+          0.66,
+          8.37,
+          29.33,
+          0.23,
+          18.82,
+          9.01
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          0.25,
+          33.2,
+          0.67,
+          8.6,
+          29.19,
+          0.23,
+          18.73,
+          9.13
+        ],
+        "GENERAL_PROSE": [
+          0.25,
+          33.19,
+          0.66,
+          8.41,
+          29.32,
+          0.23,
+          18.83,
+          9.1
+        ]
+      },
+      "L03": {
+        "CHATML_HEADER": [
+          26.83,
+          12.9,
+          25.38,
+          13.6,
+          12.51,
+          8.03,
+          0.33,
+          0.43
+        ],
+        "INDENT_NEWLINE": [
+          26.57,
+          12.74,
+          25.25,
+          14.19,
+          12.46,
+          8.05,
+          0.32,
+          0.42
+        ],
+        "JSON_SYNTAX": [
+          28.39,
+          12.5,
+          24.71,
+          13.32,
+          12.38,
+          7.98,
+          0.31,
+          0.41
+        ],
+        "SCHEMA_KEYWORD": [
+          27.08,
+          12.81,
+          25.44,
+          13.41,
+          12.53,
+          7.98,
+          0.33,
+          0.43
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          26.49,
+          12.71,
+          26.02,
+          13.56,
+          12.49,
+          7.97,
+          0.32,
+          0.43
+        ],
+        "GENERAL_PROSE": [
+          26.75,
+          12.84,
+          25.59,
+          13.51,
+          12.6,
+          7.97,
+          0.32,
+          0.43
+        ]
+      },
+      "L04": {
+        "CHATML_HEADER": [
+          2.39,
+          0.49,
+          14.95,
+          1.02,
+          11.01,
+          28.37,
+          26.45,
+          15.32
+        ],
+        "INDENT_NEWLINE": [
+          2.36,
+          0.48,
+          15.78,
+          1.01,
+          10.87,
+          28.18,
+          26.34,
+          14.98
+        ],
+        "JSON_SYNTAX": [
+          2.4,
+          0.49,
+          14.94,
+          1.03,
+          10.83,
+          28.35,
+          26.66,
+          15.31
+        ],
+        "SCHEMA_KEYWORD": [
+          2.39,
+          0.5,
+          14.75,
+          1.03,
+          11.02,
+          28.47,
+          26.5,
+          15.34
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          2.36,
+          0.48,
+          14.83,
+          1.02,
+          11.3,
+          28.94,
+          26.24,
+          14.83
+        ],
+        "GENERAL_PROSE": [
+          2.39,
+          0.49,
+          14.87,
+          1.03,
+          10.99,
+          28.64,
+          26.54,
+          15.06
+        ]
+      },
+      "L05": {
+        "CHATML_HEADER": [
+          18.91,
+          4.84,
+          11.17,
+          11.23,
+          0.74,
+          13.84,
+          4.06,
+          35.21
+        ],
+        "INDENT_NEWLINE": [
+          18.84,
+          4.79,
+          11.02,
+          11.14,
+          0.73,
+          13.8,
+          3.98,
+          35.7
+        ],
+        "JSON_SYNTAX": [
+          18.96,
+          4.87,
+          11.13,
+          11.23,
+          0.74,
+          13.75,
+          4.05,
+          35.27
+        ],
+        "SCHEMA_KEYWORD": [
+          18.91,
+          4.87,
+          11.14,
+          11.23,
+          0.74,
+          13.93,
+          4.1,
+          35.08
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          19.14,
+          4.82,
+          11.01,
+          11.36,
+          0.73,
+          14.08,
+          4.04,
+          34.81
+        ],
+        "GENERAL_PROSE": [
+          18.95,
+          4.88,
+          11.02,
+          11.31,
+          0.74,
+          13.93,
+          4.07,
+          35.11
+        ]
+      },
+      "L06": {
+        "CHATML_HEADER": [
+          1.31,
+          13.7,
+          13.49,
+          3.5,
+          23.1,
+          3.49,
+          7.73,
+          33.69
+        ],
+        "INDENT_NEWLINE": [
+          1.31,
+          13.67,
+          13.42,
+          3.47,
+          22.93,
+          3.45,
+          7.67,
+          34.08
+        ],
+        "JSON_SYNTAX": [
+          1.3,
+          13.73,
+          13.47,
+          3.5,
+          23.16,
+          3.47,
+          7.71,
+          33.67
+        ],
+        "SCHEMA_KEYWORD": [
+          1.31,
+          13.71,
+          13.51,
+          3.49,
+          23.21,
+          3.48,
+          7.77,
+          33.53
+        ],
+        "INSTRUCT_DIRECTIVE": [
+          1.32,
+          13.79,
+          13.84,
+          3.52,
+          22.9,
+          3.47,
+          7.76,
+          33.4
+        ],
+        "GENERAL_PROSE": [
+          1.31,
+          13.81,
+          13.52,
+          3.52,
+          22.94,
+          3.47,
+          7.77,
+          33.66
+        ]
+      }
+    },
+    "telepathy_ablation_delta_bpb": {
+      "apigen-80k": 0.004243,
+      "everyday-conversations": 0.0,
+      "fineweb-edu": 0.013923
+    },
+    "lesion_study": {
+      "baseline_bpb": {
+        "apigen-80k": 0.0841,
+        "everyday-conversations": 0.0,
+        "fineweb-edu": 1.1511
+      },
+      "lesions": {
+        "L00_S6": {
+          "tau_star": 2265780.6842250177,
+          "expert": 2,
+          "delta_bpb_apigen": 9.3e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.000963
+        },
+        "L00_S1": {
+          "tau_star": 34002.74637431596,
+          "expert": 1,
+          "delta_bpb_apigen": 0.000191,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.001056
+        },
+        "L00_S3": {
+          "tau_star": 68.00128919590313,
+          "expert": 3,
+          "delta_bpb_apigen": 4.7e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.000556
+        },
+        "L01_S6": {
+          "tau_star": 2263676.6995809316,
+          "expert": 2,
+          "delta_bpb_apigen": 0.000109,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.000201
+        },
+        "L01_S4": {
+          "tau_star": 1103017.5644228158,
+          "expert": 0,
+          "delta_bpb_apigen": -4e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 3.4e-05
+        },
+        "L01_S0": {
+          "tau_star": 25.878132707671003,
+          "expert": 0,
+          "delta_bpb_apigen": -0.000348,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.001644
+        },
+        "L02_S5": {
+          "tau_star": 2265789.14653539,
+          "expert": 1,
+          "delta_bpb_apigen": 3.2e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 6.2e-05
+        },
+        "L02_S0": {
+          "tau_star": 633291.1231989808,
+          "expert": 0,
+          "delta_bpb_apigen": 6.2e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 1.6e-05
+        },
+        "L02_S1": {
+          "tau_star": 26.44042151664,
+          "expert": 1,
+          "delta_bpb_apigen": -0.00015,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.002593
+        },
+        "L03_S6": {
+          "tau_star": 2262996.227153053,
+          "expert": 2,
+          "delta_bpb_apigen": 3.5e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": -8e-06
+        },
+        "L03_S7": {
+          "tau_star": 1540880.9136358697,
+          "expert": 3,
+          "delta_bpb_apigen": 8.9e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 6.4e-05
+        },
+        "L03_S0": {
+          "tau_star": 62.36014027145018,
+          "expert": 0,
+          "delta_bpb_apigen": 0.000394,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.002456
+        },
+        "L04_S3": {
+          "tau_star": 95082.12897392812,
+          "expert": 3,
+          "delta_bpb_apigen": 7.2e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 5.2e-05
+        },
+        "L04_S1": {
+          "tau_star": 61432.16652689369,
+          "expert": 1,
+          "delta_bpb_apigen": 7.3e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 7e-05
+        },
+        "L04_S6": {
+          "tau_star": 141.6720074541787,
+          "expert": 2,
+          "delta_bpb_apigen": 0.000333,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.00325
+        },
+        "L05_S4": {
+          "tau_star": 140392.0822934194,
+          "expert": 0,
+          "delta_bpb_apigen": 1.6e-05,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 6.1e-05
+        },
+        "L05_S6": {
+          "tau_star": 43454.06672070385,
+          "expert": 2,
+          "delta_bpb_apigen": 0.000279,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.000306
+        },
+        "L05_S7": {
+          "tau_star": 129.97482618312094,
+          "expert": 3,
+          "delta_bpb_apigen": 0.002865,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.004489
+        },
+        "L06_S5": {
+          "tau_star": 36382.67825834697,
+          "expert": 1,
+          "delta_bpb_apigen": 0.000109,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.001296
+        },
+        "L06_S1": {
+          "tau_star": 16542.301331772953,
+          "expert": 1,
+          "delta_bpb_apigen": 0.001677,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.014307
+        },
+        "L06_S7": {
+          "tau_star": 131.79486066020237,
+          "expert": 3,
+          "delta_bpb_apigen": 0.00458,
+          "delta_bpb_chat": 0.0,
+          "delta_bpb_fineweb": 0.032249
+        }
+      }
+    }
+  },
+  "slot_lens": {
+    "L00": {
+      "c": 0.2659,
+      "tau_star": [
+        75.1,
+        34002.7,
+        83.6,
+        68.0,
+        106.2,
+        88.7,
+        2265780.7,
+        133.4
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          ",",
+          ".",
+          ",,",
+          " and",
+          " ,"
+        ],
+        [
+          " and",
+          ",",
+          " in",
+          ".",
+          " to"
+        ],
+        [
+          "\n",
+          "\r",
+          "<|endoftext|>",
+          "\n ",
+          "."
+        ],
+        [
+          ".",
+          ",",
+          ".\"",
+          ":",
+          "!"
+        ],
+        [
+          "\":",
+          "':",
+          "\":\"",
+          "\"):",
+          "**:"
+        ],
+        [
+          " the",
+          "the",
+          " The",
+          " THE",
+          " a"
+        ],
+        [
+          ".",
+          ",",
+          "\":",
+          " the",
+          " and"
+        ],
+        [
+          "1",
+          "0",
+          "2",
+          "3",
+          "5"
+        ]
+      ]
+    },
+    "L01": {
+      "c": 0.3722,
+      "tau_star": [
+        25.9,
+        242.6,
+        79.1,
+        355.8,
+        1103017.6,
+        83.8,
+        2263676.7,
+        95.2
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          " of",
+          " Of",
+          "of",
+          "Of",
+          " OF"
+        ],
+        [
+          " the",
+          "the",
+          " THE",
+          " The",
+          "The"
+        ],
+        [
+          "\n",
+          "\r",
+          "\n ",
+          "\r\n\r",
+          "\n         "
+        ],
+        [
+          " \"",
+          " {\"",
+          "{\"",
+          " \"-",
+          "=\""
+        ],
+        [
+          " a",
+          " In",
+          " and",
+          " ",
+          " is"
+        ],
+        [
+          " a",
+          " to",
+          " an",
+          "to",
+          " A"
+        ],
+        [
+          " of",
+          " various",
+          "\n   ",
+          " his",
+          " blind"
+        ],
+        [
+          ".",
+          "].",
+          "}.",
+          ").",
+          "\u3002"
+        ]
+      ]
+    },
+    "L02": {
+      "c": 0.2737,
+      "tau_star": [
+        633291.1,
+        26.4,
+        16808.8,
+        159.0,
+        68.4,
+        2265789.1,
+        68.5,
+        180.0
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          " a",
+          " the",
+          " an",
+          " to",
+          " in"
+        ],
+        [
+          " and",
+          "and",
+          " And",
+          " AND",
+          "\u548c"
+        ],
+        [
+          "\n",
+          " \"",
+          " ",
+          "{\"",
+          " {\""
+        ],
+        [
+          " the",
+          "the",
+          " The",
+          " THE",
+          "The"
+        ],
+        [
+          "\":",
+          "':",
+          " \":",
+          "}:",
+          "\":\""
+        ],
+        [
+          " and",
+          "-",
+          ",",
+          "\n\n   ",
+          "."
+        ],
+        [
+          ",",
+          ",,",
+          "\uff0c",
+          " ,",
+          ",\\"
+        ],
+        [
+          ".",
+          "\u3002",
+          "].",
+          "}.",
+          ".\u201d"
+        ]
+      ]
+    },
+    "L03": {
+      "c": 0.4342,
+      "tau_star": [
+        62.4,
+        272.2,
+        148.2,
+        1109.4,
+        152.5,
+        395.8,
+        2262996.2,
+        1540880.9
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "\":",
+          "':",
+          " \":",
+          "}:",
+          "\":\""
+        ],
+        [
+          "0",
+          "1",
+          "3",
+          "5",
+          "2"
+        ],
+        [
+          " the",
+          "the",
+          "The",
+          " The",
+          " THE"
+        ],
+        [
+          "\n",
+          "}",
+          "}}",
+          "}.",
+          "},"
+        ],
+        [
+          " and",
+          ",",
+          "and",
+          " And",
+          " AND"
+        ],
+        [
+          "{\"",
+          " {\"",
+          " \"",
+          "(\"",
+          "[\""
+        ],
+        [
+          ",",
+          ".",
+          " \"",
+          " ",
+          " and"
+        ],
+        [
+          " a",
+          " the",
+          " some",
+          " an",
+          " "
+        ]
+      ]
+    },
+    "L04": {
+      "c": 0.5085,
+      "tau_star": [
+        40185.3,
+        61432.2,
+        450.1,
+        95082.1,
+        4362.6,
+        435.8,
+        141.7,
+        3134.1
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          " ",
+          "1",
+          "0",
+          "5",
+          "2"
+        ],
+        [
+          ",",
+          ".",
+          "\n",
+          " He",
+          " group"
+        ],
+        [
+          "\n",
+          " Although",
+          " While",
+          " Depending",
+          " However"
+        ],
+        [
+          " the",
+          " The",
+          " In",
+          " what",
+          " both"
+        ],
+        [
+          " There",
+          "It",
+          "There",
+          " It",
+          " The"
+        ],
+        [
+          " the",
+          "the",
+          " The",
+          "The",
+          " THE"
+        ],
+        [
+          " and",
+          " And",
+          " although",
+          " but",
+          "and"
+        ],
+        [
+          " fertile",
+          " latter",
+          " ensuing",
+          " dreadful",
+          " preconceived"
+        ]
+      ]
+    },
+    "L05": {
+      "c": 0.4917,
+      "tau_star": [
+        2480.3,
+        12631.8,
+        7778.2,
+        518.0,
+        140392.1,
+        3783.5,
+        43454.1,
+        130.0
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          " could",
+          " unfortunately",
+          " actually",
+          " essentially",
+          " basically"
+        ],
+        [
+          " the",
+          " a",
+          " some",
+          " both",
+          " several"
+        ],
+        [
+          "\n",
+          " Although",
+          " Though",
+          " While",
+          "But"
+        ],
+        [
+          " The",
+          " the",
+          " ensuing",
+          "the",
+          "The"
+        ],
+        [
+          " military",
+          " Big",
+          " ",
+          " High",
+          " Middle"
+        ],
+        [
+          " As",
+          "\n",
+          " little",
+          " somewhat",
+          " In"
+        ],
+        [
+          ",",
+          ".",
+          " although",
+          " in",
+          " because"
+        ],
+        [
+          " Although",
+          " While",
+          " However",
+          " Because",
+          " Despite"
+        ]
+      ]
+    },
+    "L06": {
+      "c": 0.4412,
+      "tau_star": [
+        10466.6,
+        16542.3,
+        3486.7,
+        5343.0,
+        1375.3,
+        36382.7,
+        13713.5,
+        131.8
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "\n",
+          " In",
+          " The",
+          " ",
+          " and"
+        ],
+        [
+          " the",
+          " a",
+          " an",
+          " some",
+          " both"
+        ],
+        [
+          " have",
+          " can",
+          " still",
+          " also",
+          " are"
+        ],
+        [
+          " general",
+          " new",
+          " primary",
+          " main",
+          " small"
+        ],
+        [
+          "\n",
+          " \"",
+          " In",
+          " ",
+          " The"
+        ],
+        [
+          " ",
+          "-",
+          "T",
+          "\n",
+          " T"
+        ],
+        [
+          ",",
+          " in",
+          ".",
+          " and",
+          " with"
+        ],
+        [
+          " In",
+          "\n",
+          " The",
+          " Although",
+          " While"
+        ]
+      ]
+    }
+  },
+  "teacher_baseline": {
+    "wikitext2": {
+      "chunks": 60,
+      "bpb": 0.8719,
+      "ppl": 11.56
+    },
+    "zero_shot_mc": {
+      "hellaswag": {
+        "n": 200,
+        "acc_pct": 44.0,
+        "acc_norm_pct": 59.5
+      },
+      "arc_easy": {
+        "n": 200,
+        "acc_pct": 66.0,
+        "acc_norm_pct": 62.0
+      },
+      "arc_challenge": {
+        "n": 200,
+        "acc_pct": 38.5,
+        "acc_norm_pct": 42.5
+      },
+      "piqa": {
+        "n": 200,
+        "acc_pct": 72.5,
+        "acc_norm_pct": 77.0
+      }
+    },
+    "eval_seconds": 93.9
+  },
+  "total_eval_seconds": 492.5
+}

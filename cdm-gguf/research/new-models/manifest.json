@@ -1,0 +1,301 @@
+{
+  "created_utc": "2026-10-25",
+  "method": "Frozen cdm_tools.py reference vs llama.cpp custom CDM CPU logits; 8 authored probes; prefill and incremental; 128 or 512 tokens per probe.",
+  "lattice4d_holographic": {
+    "repo": "DuoNeural/Lattice-4D-Holographic-253M-Poincare-Instruct",
+    "revision": "6133c7ce731c5a155e83b72f561cb9a9dfbc09f5",
+    "checkpoint": "model.safetensors",
+    "checkpoint_bytes": 1164562832,
+    "checkpoint_sha256": "90c0b29db87c82f0dfce32c1a08fbc1982cf5f266fa63b2576957457df694e81",
+    "source_file": "cdm_lm_distill_v4d_holographic.py",
+    "source_sha256": "ca9b65f8daa7147b3135e05020f9a9655af4f366645300e4985a34e11c692350",
+    "config_file": "config.json",
+    "config_sha256": "17d4966eb2423262d6ab4fa0f12572aa2257d5aeaad918d3a7dadd7148d04da2",
+    "tokenizer": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "tokenizer_revision": "31b70e2e869a7173562077fd711b654946d38674",
+    "geometry": "Poincare",
+    "architecture": {
+      "vocab": 49152,
+      "dim": 768,
+      "layers": 7,
+      "heads": 12,
+      "slots": 8,
+      "experts": 4,
+      "ff": 3072,
+      "context": 512,
+      "telepathy_scale": 1.0,
+      "curvatures": [
+        0.26589176,
+        0.37217984,
+        0.27371049,
+        0.43421903,
+        0.5084976,
+        0.49168569,
+        0.44118497
+      ]
+    },
+    "source_parity": {
+      "probe_tokens": 16,
+      "max_abs_error": 7.62939453125e-06,
+      "mean_abs_error": 6.814400990151626e-07,
+      "top1_agreement": 1.0,
+      "allclose_atol_1e-4_rtol_1e-4": true
+    },
+    "outputs": [
+      {
+        "file": "models/lattice4d_holographic-f32-text.gguf",
+        "bytes": 1013491296,
+        "sha256": "b9443412e5efd53b9cd75c3194d619c1e41cc67309a9293ad4178b2cf8976fe1"
+      },
+      {
+        "file": "models/lattice4d_holographic-q8_0-text.gguf",
+        "bytes": 271935232,
+        "sha256": "56c4cf33c92a2db03cf6db6d27e4ebbc257838804d9b80c70b2c39e7b58dd58e"
+      },
+      {
+        "file": "models/lattice4d_holographic-q4_k_m-text.gguf",
+        "bytes": 172476160,
+        "sha256": "0db6102ff4e6986b9422a2a02d45f0296421e4f0ff6388bce8b2b13163b6efc7"
+      }
+    ],
+    "parity_reports": {
+      "128_positions": {
+        "file": "research/new-models/native-cpu-128.json",
+        "sha256": "4c7588a020a40b8b1bbcece46ded95759490533f2ee89827a2ae2c1810273784"
+      },
+      "512_positions": {
+        "file": "research/new-models/native-cpu-512.json",
+        "sha256": "76dbf765e0e2f377bec5875d05c285562b6ac6267910ca57c2f18c3c5a8c1564"
+      }
+    },
+    "hardware": "Kilonova 192.168.2.1; CPU only; 4 llama.cpp threads; no GPU offload.",
+    "thresholds": {
+      "f32": "atol=1e-3, rtol=1e-4 allclose",
+      "quantized": "aggregate max_abs_error<=0.5, mean_kl_nats<=0.01, top1_agreement>=0.9"
+    }
+  },
+  "fc_cdm": {
+    "repo": "DuoNeural/FC-CDM-Poincare-7L-108M",
+    "revision": "084571d02ab27b535521b9882139bb9b2abba433",
+    "files": {
+      "checkpoint": {
+        "path": "models/fc_cdm-pytorch_model.safetensors",
+        "bytes": 532271112,
+        "sha256": "3ed9fb6b96623f293db10c9d2a8a2c967f64b07d0cc0cd7e54be0d6327abef5a"
+      },
+      "source": {
+        "path": "/home/ai/.cache/huggingface/hub/models--DuoNeural--FC-CDM-Poincare-7L-108M/snapshots/084571d02ab27b535521b9882139bb9b2abba433/cdm_lm_distill_fc.py",
+        "bytes": 76042,
+        "sha256": "555832c8635fcacdbec5b5c8d087011f2fef687a25c881e6f5b7b8dfa614b47e"
+      },
+      "config": {
+        "path": "/home/ai/.cache/huggingface/hub/models--DuoNeural--FC-CDM-Poincare-7L-108M/snapshots/084571d02ab27b535521b9882139bb9b2abba433/config.json",
+        "bytes": 390,
+        "sha256": "c37679655d9728b4a8e6e474c1cae5385d87c2c44773e75d19b31e6391ef5b1c"
+      },
+      "tokenizer_json": {
+        "path": "/home/ai/.cache/huggingface/hub/models--Salesforce--xLAM-1b-fc-r/snapshots/20e8e2d0d15a9a26b179ec5bba0c51521a4664a4/tokenizer.json",
+        "bytes": 1368858,
+        "sha256": "3185988c4004333ce63fc05549a2fe7eb5e2a9d2ce14ca48e253099ed92d4a4d"
+      },
+      "tokenizer_provenance": {
+        "path": "models/fc_cdm_7l-tokenizer.json",
+        "bytes": 348,
+        "sha256": "8bafae91c90c1f0e95212b4755870f419eee7da03eb1312dfa5c5bbf7b2a9b54"
+      }
+    },
+    "teacher_tokenizer": "Salesforce/xLAM-1b-fc-r",
+    "teacher_tokenizer_revision": "20e8e2d0d15a9a26b179ec5bba0c51521a4664a4",
+    "architecture": {
+      "vocab": 32256,
+      "dim": 768,
+      "layers": 7,
+      "heads": 12,
+      "slots": 8,
+      "experts": 4,
+      "ff": 1024,
+      "context": 512,
+      "geometry": "poincare",
+      "telepathy_scale": 1.0,
+      "curvatures": [
+        0.30084178,
+        0.32645822,
+        0.32668117,
+        0.33852908,
+        0.33357078,
+        0.33147943,
+        0.3537643
+      ]
+    },
+    "source_parity": {
+      "probe_tokens": 16,
+      "max_abs_error": 6.67572021484375e-06,
+      "mean_abs_error": 7.13119277406804e-07,
+      "top1_agreement": 1.0,
+      "allclose_atol_1e-4_rtol_1e-4": true
+    },
+    "ggufs": [
+      {
+        "file": "models/fc_cdm-f32.gguf",
+        "bytes": 431335808,
+        "sha256": "19f7d6480fe03cdfeb53cbef83ec619a8a2ff9f4bbbfcffb2b036cee16be56b0",
+        "embedded_tokenizer": false
+      },
+      {
+        "file": "models/fc_cdm-q8_0.gguf",
+        "bytes": 116001344,
+        "sha256": "d922b9e766d567d01fcce118d8fadf891ccbc6a3003b24792802a6ade5818577",
+        "embedded_tokenizer": false
+      },
+      {
+        "file": "models/fc_cdm-q4_k_m.gguf",
+        "bytes": 74391104,
+        "sha256": "0270c2b03e36293300b5eae3bf766316047bee2f5a5d25112ecd3075122db4db",
+        "embedded_tokenizer": false
+      }
+    ],
+    "parity_reports": {
+      "128_positions": {
+        "file": "research/new-models/fc-native-cpu-128.json",
+        "sha256": "c61e3e82ed2919e1e6671dd3f24a68551d5fd23c84106441d718260c5a5e964c",
+        "runs": [
+          {
+            "format": "f32",
+            "mode": "prefill",
+            "passed": true,
+            "max_abs_error": 3.123283386230469e-05,
+            "mean_kl_nats": 9.748394373774244e-13,
+            "top1_agreement": 1.0,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "f32",
+            "mode": "incremental",
+            "passed": true,
+            "max_abs_error": 3.695487976074219e-05,
+            "mean_kl_nats": 9.383150447395899e-13,
+            "top1_agreement": 1.0,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q8_0",
+            "mode": "prefill",
+            "passed": true,
+            "max_abs_error": 0.32558751106262207,
+            "mean_kl_nats": 0.0002098188047998374,
+            "top1_agreement": 0.9921875,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q8_0",
+            "mode": "incremental",
+            "passed": true,
+            "max_abs_error": 0.2974734306335449,
+            "mean_kl_nats": 0.00020218527029971397,
+            "top1_agreement": 0.9921875,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q4_k_m",
+            "mode": "prefill",
+            "passed": false,
+            "max_abs_error": 0.9846866130828857,
+            "mean_kl_nats": 0.005687716797192697,
+            "top1_agreement": 0.9609375,
+            "worst_probe": "instruction",
+            "all_finite": true
+          },
+          {
+            "format": "q4_k_m",
+            "mode": "incremental",
+            "passed": false,
+            "max_abs_error": 0.9857242107391357,
+            "mean_kl_nats": 0.00570609805435418,
+            "top1_agreement": 0.9619140625,
+            "worst_probe": "instruction",
+            "all_finite": true
+          }
+        ]
+      },
+      "512_positions": {
+        "file": "research/new-models/fc-native-cpu-512.json",
+        "sha256": "7495a175d1b9f97b19c00af1a71361719a64cc40e1d07a698862fc663ac4f0d5",
+        "runs": [
+          {
+            "format": "f32",
+            "mode": "prefill",
+            "passed": true,
+            "max_abs_error": 3.814697265625e-05,
+            "mean_kl_nats": 8.116108660246633e-13,
+            "top1_agreement": 1.0,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "f32",
+            "mode": "incremental",
+            "passed": true,
+            "max_abs_error": 3.2901763916015625e-05,
+            "mean_kl_nats": 7.802898540979616e-13,
+            "top1_agreement": 1.0,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q8_0",
+            "mode": "prefill",
+            "passed": true,
+            "max_abs_error": 0.41750097274780273,
+            "mean_kl_nats": 0.00012485633859272004,
+            "top1_agreement": 0.9970703125,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q8_0",
+            "mode": "incremental",
+            "passed": true,
+            "max_abs_error": 0.2974858283996582,
+            "mean_kl_nats": 0.00012098627418520976,
+            "top1_agreement": 0.9970703125,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q4_k_m",
+            "mode": "prefill",
+            "passed": false,
+            "max_abs_error": 2.185335159301758,
+            "mean_kl_nats": 0.0037275382297516776,
+            "top1_agreement": 0.985107421875,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          },
+          {
+            "format": "q4_k_m",
+            "mode": "incremental",
+            "passed": false,
+            "max_abs_error": 2.2426066398620605,
+            "mean_kl_nats": 0.003759548730754848,
+            "top1_agreement": 0.986328125,
+            "worst_probe": "unicode_whitespace",
+            "all_finite": true
+          }
+        ]
+      }
+    },
+    "tokenizer_status": {
+      "embedded": false,
+      "reason": "HF AutoTokenizer uses Llama/Metaspace behavior that is not ID-equivalent to raw tokenizer.json ByteLevel BPE; the pinned llama.cpp tokenizer converter rejects the fingerprint. Numeric parity uses pinned Transformers token IDs; raw-text GGUF prompting is unvalidated."
+    },
+    "hardware": "Kilonova 192.168.2.1; CPU only; 4 llama.cpp threads; no GPU offload.",
+    "thresholds": {
+      "f32": "atol=1e-3, rtol=1e-4 allclose",
+      "quantized": "aggregate max_abs_error<=0.5, mean_kl_nats<=0.01, top1_agreement>=0.9"
+    }
+  }
+}

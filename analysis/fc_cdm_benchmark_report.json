@@ -1,0 +1,619 @@
+{
+  "model_name": "FC-CDM-Poincare-7L-108M",
+  "step": 50000,
+  "val_bpb": 0.33367136168871486,
+  "total_params": 107787662,
+  "tied_params": 83015054,
+  "backbone_params": 58242446,
+  "single_turn": {
+    "n_samples": 50,
+    "stu_tool_acc_pct": 62.0,
+    "tea_tool_acc_pct": 0.0,
+    "stu_json_valid_pct": 66.0,
+    "tea_json_valid_pct": 2.0,
+    "stu_arg_f1_pct": 59.93,
+    "tea_arg_f1_pct": 0.0
+  },
+  "parallel_call": {
+    "n_samples": 50,
+    "stu_tool_acc_pct": 38.0,
+    "tea_tool_acc_pct": 0.0,
+    "stu_json_valid_pct": 74.0,
+    "tea_json_valid_pct": 4.0,
+    "stu_arg_f1_pct": 67.1,
+    "tea_arg_f1_pct": 0.0
+  },
+  "irrelevant_detection": {
+    "n_samples": 40,
+    "stu_abstain_acc_pct": 0.0,
+    "tea_abstain_acc_pct": 100.0
+  },
+  "slot_lens": {
+    "L00": {
+      "c": 0.3008,
+      "tau_star": [
+        681264.9,
+        292.2,
+        262.8,
+        17105.1,
+        5803.6,
+        581454.1,
+        303.4,
+        132.1
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "\":\"",
+          ">",
+          "\u0120>",
+          "{\"",
+          "[\"",
+          "\",\""
+        ],
+        [
+          "description",
+          "{\"",
+          "type",
+          "*}",
+          "[\"",
+          "NAME"
+        ],
+        [
+          ">",
+          "|",
+          "<",
+          ">\u0120<",
+          "><",
+          ">$"
+        ],
+        [
+          ">",
+          ":",
+          ",",
+          "<",
+          ".",
+          "["
+        ],
+        [
+          ">",
+          "\":\"",
+          "\",\"",
+          "<",
+          "\u0120>",
+          "\","
+        ],
+        [
+          "\":\"",
+          "{\"",
+          "[\"",
+          ">",
+          "}_{",
+          "\u0109\""
+        ],
+        [
+          "\",\"",
+          "}\"",
+          ",\"",
+          "_\"",
+          "\"},",
+          "_"
+        ],
+        [
+          "\":\"",
+          "\":",
+          "}:",
+          ":\"",
+          "':",
+          "\u0109\""
+        ]
+      ]
+    },
+    "L01": {
+      "c": 0.3265,
+      "tau_star": [
+        94.9,
+        25554.5,
+        180.3,
+        58.9,
+        284.2,
+        46.1,
+        1225867.9,
+        468.3
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "\":",
+          "\":\"",
+          "\u0120tipus",
+          "description",
+          "\u00e6\u0131\u0131",
+          "':"
+        ],
+        [
+          "ethe",
+          "the",
+          "he",
+          "THE",
+          "of",
+          "The"
+        ],
+        [
+          "*\"",
+          "\u00d0\u00a3",
+          "\u00d0\u0135",
+          "\u00d0\u00b5\u00d1\u0122",
+          "\\,,",
+          "\u00d0\u00a1"
+        ],
+        [
+          "\":\"",
+          "The",
+          "\u00d0\u00a1",
+          "String",
+          "\u00e0\u00b8",
+          "\u00d0\u00b1\u00d0\u00be"
+        ],
+        [
+          ".\"",
+          ".'\"",
+          ".",
+          "\u0120,",
+          "\u00e3\u0122\u0124",
+          "\u0120."
+        ],
+        [
+          "_",
+          "_*",
+          "\u0109_",
+          "\\_",
+          "'_",
+          "_-"
+        ],
+        [
+          "\u00d1\u0138",
+          "ilities",
+          "\u00d0\u00a1",
+          "rama",
+          "itc",
+          "ncies"
+        ],
+        [
+          ">\u0120",
+          ">\u0120<",
+          "\u0120>\u0120>",
+          ">$",
+          ">\u0120\u0120\u0120\u0120<",
+          "\u00e3\u0122\u012e"
+        ]
+      ]
+    },
+    "L02": {
+      "c": 0.3267,
+      "tau_star": [
+        394.5,
+        172.7,
+        3236.6,
+        1211431.6,
+        35.6,
+        8048.2,
+        55.0,
+        151.9
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "\u0120namely",
+          "Until",
+          "\u0120Usually",
+          "Because",
+          "\u0120Unless",
+          "\u00e5\u00b1\u0127\u00e7\u0126\u00b6"
+        ],
+        [
+          "\u00d0\u0135",
+          "\u00d0\u00a3",
+          "\u00d0\u013e",
+          "\u00d0\u00b5\u00d1\u0122",
+          "\u00e4\u00b9",
+          "\u00d0\u013c\u00d0\u00be"
+        ],
+        [
+          "})}",
+          "}\\,",
+          "}))",
+          "}.}",
+          "\u0120})",
+          "\u00e2\u0122\u00b3"
+        ],
+        [
+          "\u00d0\u00a1",
+          "Forms",
+          "Assert",
+          "Generic",
+          "\u00d0\u00b0\u00d0\u00bd\u00d0\u00b0",
+          "Pan"
+        ],
+        [
+          "\u0109_",
+          "_",
+          "_*",
+          "'_",
+          "--_",
+          "*_"
+        ],
+        [
+          "\u0109_",
+          "\u00e3\u0122\u012e",
+          "Geografia",
+          "poca",
+          "\u00e5\u013e\u00be",
+          "._--"
+        ],
+        [
+          "\":\"",
+          "The",
+          "Whether",
+          "\u00d0\u00a1",
+          "Constant",
+          "Assert"
+        ],
+        [
+          "\":",
+          "\":\"",
+          "\u0120tipus",
+          "\u00e5\u00bc\u0137\u00e8\u00bf\u013d",
+          "\u00e5\u00b1\u0127\u00e7\u0126\u00b6",
+          "\u00e7\u00ab\u0141\u00e7\u0126\u00b6"
+        ]
+      ]
+    },
+    "L03": {
+      "c": 0.3385,
+      "tau_star": [
+        308.1,
+        4125.5,
+        53.7,
+        339.7,
+        914.2,
+        33.4,
+        1216027.8,
+        211.6
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "Sometimes",
+          "Besides",
+          "\u0120Sometimes",
+          "\u0120Especially",
+          "Perhaps",
+          "\u0120Usually"
+        ],
+        [
+          "\u0120comand",
+          "\u00c3\u0143stica",
+          "\u0120helic",
+          "Reset",
+          "\u0120protoc",
+          "\u0120helped"
+        ],
+        [
+          "Whether",
+          "Assert",
+          "The",
+          "Everything",
+          "Construct",
+          "Constant"
+        ],
+        [
+          "\":",
+          "Nullable",
+          "\u00d1\u0122\u00d0\u00b8\u00d1\u0123\u00d1\u0124\u00d0\u00be",
+          "NotNull",
+          "\":\"",
+          "\u00e8\u00af\u00be"
+        ],
+        [
+          "NavBarCell",
+          "administraci\u00c3\u00b3",
+          "NavBarFont",
+          "poca",
+          "._--",
+          "\u0120davall"
+        ],
+        [
+          "\u0109_",
+          "\u00d0\u00b0\u00d0\u00bd\u00d0\u00b0",
+          "--_",
+          "\u0120Lyn",
+          "\u00e7\u00b3\u00bb",
+          "ctl"
+        ],
+        [
+          "Assert",
+          "Tax",
+          "unknown",
+          "elfare",
+          "Require",
+          "Nullable"
+        ],
+        [
+          "\u0120\u00d0\u00b0\u00d1\u0122",
+          "\u00d0\u0135",
+          "\u0120Heritage",
+          "\u0120nucli",
+          "\u00c3\u0143cie",
+          "\u00d0\u013c\u00d0\u00be"
+        ]
+      ]
+    },
+    "L04": {
+      "c": 0.3336,
+      "tau_star": [
+        645.8,
+        27.9,
+        1225201.6,
+        48.5,
+        232.0,
+        497.8,
+        139.0,
+        1254.4
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "NavBarCell",
+          "NavBarFont",
+          "administraci\u00c3\u00b3",
+          "\u0120\u00d1\u0123\u00d0\u00b2\u00d0\u00b5\u00d1\u0124\u00d0\u00be\u00d0\u00b2\u00d0\u00bd\u00d0\u00b0",
+          "\u0120lluita",
+          "\u0120influ\u00c3\u00a8ncia"
+        ],
+        [
+          "\"../../../../../",
+          "\"../../../",
+          "\"../../../../",
+          "\"../../../../../../",
+          "\u0120nivell",
+          "\u0120aix\u00c3\u00b2"
+        ],
+        [
+          "Nullable",
+          "\u00d1\u0122\u00d0\u00b8\u00d1\u0123\u00d1\u0124\u00d0\u00be",
+          "Escola",
+          "\u0120seva",
+          "\"../../../../../",
+          "\u0120situada"
+        ],
+        [
+          "Whether",
+          "Returns",
+          "Give",
+          "Non",
+          "Take",
+          "Unknown"
+        ],
+        [
+          "\u0120\u00d0\u00b0\u00d1\u0122",
+          "\u0120algunes",
+          "\u0120nucli",
+          "\u00d0\u0135\u00d0\u00b5",
+          "\u00d0\u0135",
+          "\u00d0\u00b8\u00d0\u00bc"
+        ],
+        [
+          "\u0120funci\u00c3\u00b3",
+          "\u0120helped",
+          "\u0120\u00f0\u0141\u013b\u0124",
+          "Help",
+          "\u0120helic",
+          "\u0120answ"
+        ],
+        [
+          "\":\"",
+          "\":",
+          "odox",
+          "\u0120inference",
+          "\u00d0\u00b4\u00d1\u012c\u00d0\u00bb",
+          "NotNull"
+        ],
+        [
+          "Perhaps",
+          "Having",
+          "Although",
+          "Besides",
+          "Sometimes",
+          "Unfortunately"
+        ]
+      ]
+    },
+    "L05": {
+      "c": 0.3315,
+      "tau_star": [
+        2126.7,
+        99.5,
+        43.6,
+        30525.4,
+        282176.7,
+        523.8,
+        54815.8,
+        449.0
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "Help",
+          "\u0120funci\u00c3\u00b3",
+          "\u0120Help",
+          "Illustration",
+          "\u0120\u00f0\u0141\u013b\u0124",
+          "Welcome"
+        ],
+        [
+          "\":\"",
+          "\":",
+          "\u0120inference",
+          "\u00e6\u013d\u00b0",
+          "NotNull",
+          "\u00d0\u00bc\u00d0\u00b8\u00d0\u00bb\u00d0\u00b8\u00d1\u0131"
+        ],
+        [
+          "Optional",
+          "Returns",
+          "Nullable",
+          "Whether",
+          "Give",
+          "Integer"
+        ],
+        [
+          "hentic",
+          "ogn",
+          "atial",
+          "anqu",
+          "ething",
+          "ailable"
+        ],
+        [
+          "probably",
+          "particular",
+          "sometimes",
+          "certain",
+          "given",
+          "give"
+        ],
+        [
+          "\u0120l\u00c3\u0143nia",
+          "\u0120gr\u00c3\u0142fic",
+          "\u0120difer\u00c3\u00a8ncia",
+          "NavBarCell",
+          "\u0120\u00d0\u00b3\u00d1\u0122\u00d1\u0125\u00d0\u00bf\u00d0\u00b0",
+          "NavBarFont"
+        ],
+        [
+          "\":\"",
+          "\":",
+          "Without",
+          ".\"",
+          "Used",
+          "repository"
+        ],
+        [
+          "\u0120algunes",
+          "\u0120nucli",
+          "\u0120nivell",
+          "\u0120coberta",
+          "\u0120refer\u00c3\u00a8ncia",
+          "\u00c3\u0143cie"
+        ]
+      ]
+    },
+    "L06": {
+      "c": 0.3538,
+      "tau_star": [
+        482.5,
+        247.7,
+        637.2,
+        20718.3,
+        144426.6,
+        3723.7,
+        97761.4,
+        952.7
+      ],
+      "tele_norm": 0.0,
+      "slot_tokens": [
+        [
+          "|",
+          "|\u0120",
+          "><",
+          "|<",
+          "\u0120|",
+          "button"
+        ],
+        [
+          "type",
+          "default",
+          "description",
+          "alias",
+          "optional",
+          "required"
+        ],
+        [
+          "Help",
+          "This",
+          "Ass",
+          "User",
+          "Please",
+          "The"
+        ],
+        [
+          "\u010a",
+          "\u0120",
+          "\u0120(",
+          "\u0120\"",
+          "1",
+          "2"
+        ],
+        [
+          "the",
+          "first",
+          "custom",
+          "given",
+          "intern",
+          "four"
+        ],
+        [
+          ".\"",
+          "for",
+          "from",
+          ".",
+          ",",
+          "with"
+        ],
+        [
+          "\u010a",
+          "et",
+          "os",
+          "u",
+          "ot",
+          "id"
+        ],
+        [
+          "\":\"",
+          "\":",
+          "\u0120\"",
+          "}{",
+          "\"\"",
+          "\u010a"
+        ]
+      ]
+    }
+  },
+  "benchmark_comparison": {
+    "FunctionGemma-270M": {
+      "params": "270M",
+      "single_turn_acc_pct": 68.4,
+      "parallel_call_acc_pct": 29.5,
+      "irrelevant_detection_pct": 45.2,
+      "json_validity_pct": 89.2
+    },
+    "FC-CDM-Poincare-7L-108M": {
+      "params": "108M (Tied) / 134M (Untied)",
+      "single_turn_acc_pct": 62.0,
+      "parallel_call_acc_pct": 38.0,
+      "irrelevant_detection_pct": 0.0,
+      "json_validity_pct": 66.0,
+      "val_bpb": 0.3337,
+      "val_ppl": 2.33
+    },
+    "xLAM-1b-fc-r (Teacher)": {
+      "params": "1.35B",
+      "single_turn_acc_pct": 0.0,
+      "parallel_call_acc_pct": 0.0,
+      "irrelevant_detection_pct": 100.0,
+      "json_validity_pct": 2.0
+    }
+  },
+  "eval_seconds": 1163.2
+}

@@ -310,3 +310,143 @@ Detailed per-probe metrics, prompts, token IDs, and backend logs are in
 `/home/ai/duoneural/kestrel/cdm-gguf/research/geometry_releases/native-cpu-64.json`.
 Pinned checkpoint/output checksums and tokenizer provenance are in
 `/home/ai/duoneural/kestrel/cdm-gguf/research/geometry_releases/manifest.json`.
+
+## Lattice-4D-Holographic GGUFs and 128/512-position parity (2026-10-25)
+
+The pinned Hugging Face revision for `DuoNeural/Lattice-4D-Holographic-253M-Poincare-Instruct`
+is `6133c7ce731c5a155e83b72f561cb9a9dfbc09f5`. Its `model.safetensors` is
+1,164,562,832 bytes, SHA-256
+`90c0b29db87c82f0dfce32c1a08fbc1982cf5f266fa63b2576957457df694e81`.
+The frozen exporter loaded 7 layers, d=768, 12 attention heads, 8 slots, 4
+experts, d_ff=3072, vocabulary 49,152, and 512 learned absolute positions.
+Reconstructed layer curvatures are `0.265892, 0.372180, 0.273710, 0.434219,
+0.508498, 0.491686, 0.441185`. The pinned training source is
+`cdm_lm_distill_v4d_holographic.py` (SHA-256
+`ca9b65f8daa7147b3135e05020f9a9655af4f366645300e4985a34e11c692350`). An
+AST-loaded source model and the frozen PyTorch reference agree on a 16-token
+probe to `7.63e-06` max absolute error with 100% top-1 agreement. This confirms
+the exporter’s inference equations against the published source implementation.
+
+Tokenizer metadata uses `HuggingFaceTB/SmolLM2-1.7B-Instruct` at immutable
+revision `31b70e2e869a7173562077fd711b654946d38674`. The tokenizer-equipped
+artifacts are F32 1,013,491,296 bytes (966.2 MiB), Q8_0 271,935,232 bytes
+(259.4 MiB), and mixed Q4_K_M 172,476,160 bytes (164.5 MiB). Q8_0 quantizes
+embedding, attention, and expert matrices while keeping positions, norms,
+routing geometry, telepathy, and mappings F32. Q4_K_M uses Q4_K for attention
+and expert gate/up matrices, Q6_K for the embedding and expert down matrices,
+and F32 for geometry and other small tensors.
+
+Parity compares native PyTorch logits to the custom llama.cpp runner on eight
+authored probes (prose, instruction, Python, JSON, numbers, Unicode/whitespace,
+repetition boundaries, and conversation), for both prefill and incremental
+decoding. Each probe contains exactly 128 or 512 scored positions; the 512-token
+fixture extends the same authored text deterministically to fit the pinned
+SmolLM2 tokenizer. Quantized pass thresholds are unchanged: aggregate max
+absolute error <=0.5, mean KL <=0.01 nats, and top-1 agreement >=90%.
+
+| Length | Format | Mode | Max absolute logit error | Mean KL (nats) | Top-1 agreement | Gate |
+|---:|---|---|---:|---:|---:|---|
+| 128 | F32 | Prefill | 0.0000114 | 9.53e-13 | 100.00% | Pass |
+| 128 | F32 | Incremental | 0.00000954 | 9.08e-13 | 100.00% | Pass |
+| 128 | Q8_0 | Prefill | 0.176775 | 0.000164 | 99.51% | Pass |
+| 128 | Q8_0 | Incremental | 0.176775 | 0.000162 | 99.51% | Pass |
+| 128 | Q4_K_M | Prefill | 0.906936 | 0.004501 | 95.12% | Fail: max error |
+| 128 | Q4_K_M | Incremental | 0.904141 | 0.004502 | 95.12% | Fail: max error |
+| 512 | F32 | Prefill | 0.0000193 | 9.16e-13 | 100.00% | Pass |
+| 512 | F32 | Incremental | 0.0000191 | 8.75e-13 | 100.00% | Pass |
+| 512 | Q8_0 | Prefill | 0.278597 | 0.000140 | 99.63% | Pass |
+| 512 | Q8_0 | Incremental | 0.261526 | 0.000140 | 99.66% | Pass |
+| 512 | Q4_K_M | Prefill | 2.193260 | 0.004548 | 96.97% | Fail: max error |
+| 512 | Q4_K_M | Incremental | 2.144893 | 0.004596 | 96.95% | Fail: max error |
+
+All outputs were finite and all 8 cases completed in every mode. Q8_0 passes
+this numerical screen; that does not establish task-quality parity. Q4_K_M
+keeps high top-1 and low mean KL but fails the predeclared maximum-error gate,
+with its worst drift on JSON at 128 and Unicode/whitespace at 512. Treat Q4 as
+an experimental quant, not a numerically passing artifact. No task-quality,
+BPB, or held-out benchmark was rerun. Runs used Kilonova (`192.168.2.1`), four
+CPU threads, and no GPU.
+
+At the initial audit, the FC-CDM revision `03dd196d8692357142cb116c1c28ab903f4f035d`
+contained only its README and benchmark report. A new revision with weights and
+config was subsequently published and is covered below.
+
+The detailed per-probe prompts, token IDs, metrics, and backend logs are in
+`/home/ai/duoneural/kestrel/cdm-gguf/research/new-models/native-cpu-128.json`
+and `native-cpu-512.json`; checkpoint, tokenizer, output hashes, and config are
+indexed in `research/new-models/manifest.json`. GGUFs remain local and in
+private Kilonova staging; no public release was made.
+
+## FC-CDM-Poincare-7L-108M GGUF and parity (2026-10-25)
+
+After Jesse confirmed the weights had been uploaded, I pinned
+`DuoNeural/FC-CDM-Poincare-7L-108M` at `084571d02ab27b535521b9882139bb9b2abba433`.
+Its safetensors checkpoint is 532,271,112 bytes with SHA-256
+`3ed9fb6b96623f293db10c9d2a8a2c967f64b07d0cc0cd7e54be0d6327abef5a`. The
+published source is `cdm_lm_distill_fc.py` (SHA-256
+`555832c8635fcacdbec5b5c8d087011f2fef687a25c881e6f5b7b8dfa614b47e`) and the
+config reports 7 layers, d=768, 12 heads, 8 slots, 4 experts, d_ff=1024,
+vocabulary 32,256, and 512 learned positions. The checkpoint has exactly equal
+token embedding and LM-head tensors, so the exporter safely uses the backend's
+tied-output path. Curvatures reconstructed from the source defaults and
+checkpoint are `0.300842, 0.326458, 0.326681, 0.338529, 0.333571, 0.331479,
+0.353764`. An AST-loaded source model matched the frozen PyTorch implementation
+on a 16-token probe: max absolute error `6.68e-06`, mean absolute error
+`7.13e-07`, and 100% top-1 agreement.
+
+F32, Q8_0, and Q4_K_M files were exported. Sizes are 431,335,808 bytes
+(411.4 MiB), 116,001,344 bytes (110.6 MiB), and 74,391,104 bytes (71.0 MiB).
+Q8_0 quantizes embeddings, attention, and expert matrices while preserving
+positions, norms, routing geometry, telepathy, and mapping tensors in F32.
+Q4_K_M uses Q4_K for attention and expert gate/up matrices, Q6_K for the tied
+embedding and expert down matrices, and F32 for small and geometric tensors.
+
+Parity uses the pinned teacher tokenizer `Salesforce/xLAM-1b-fc-r` at revision
+`20e8e2d0d15a9a26b179ec5bba0c51521a4664a4`. Eight authored text probes were
+tokenized with Transformers and compared against the numeric-token llama.cpp
+runner in prefill and incremental modes. Each probe contains 128 or 512
+positions. Gates remain F32 allclose `atol=1e-3, rtol=1e-4`; quantized
+aggregate max absolute error <=0.5, mean KL <=0.01 nats, and top-1 agreement
+>=90%.
+
+| Length | Format | Mode | Max absolute logit error | Mean KL (nats) | Top-1 agreement | Gate |
+|---:|---|---|---:|---:|---:|---|
+| 128 | F32 | Prefill | 0.0000312 | 9.75e-13 | 100.00% | Pass |
+| 128 | F32 | Incremental | 0.0000370 | 9.38e-13 | 100.00% | Pass |
+| 128 | Q8_0 | Prefill | 0.325588 | 0.000210 | 99.22% | Pass |
+| 128 | Q8_0 | Incremental | 0.297473 | 0.000202 | 99.22% | Pass |
+| 128 | Q4_K_M | Prefill | 0.984687 | 0.005688 | 96.09% | Fail: max error |
+| 128 | Q4_K_M | Incremental | 0.985724 | 0.005706 | 96.19% | Fail: max error |
+| 512 | F32 | Prefill | 0.0000381 | 8.12e-13 | 100.00% | Pass |
+| 512 | F32 | Incremental | 0.0000329 | 7.80e-13 | 100.00% | Pass |
+| 512 | Q8_0 | Prefill | 0.417501 | 0.000125 | 99.71% | Pass |
+| 512 | Q8_0 | Incremental | 0.297486 | 0.000121 | 99.71% | Pass |
+| 512 | Q4_K_M | Prefill | 2.185340 | 0.003728 | 98.51% | Fail: max error |
+| 512 | Q4_K_M | Incremental | 2.242610 | 0.003760 | 98.63% | Fail: max error |
+
+All outputs were finite and all probes completed. Q8_0 passes the numerical
+screen at both lengths; this does not establish function-calling quality. Q4_K_M
+has high top-1 agreement and mean KL below threshold but fails the fixed
+max-error gate, worst on instruction at 128 and Unicode/whitespace at 512. No
+function-calling, irrelevance-detection, FunctionGemma head-to-head, BPB, or
+held-out task benchmark was rerun. Aura's published quality comparison remains
+author-reported.
+
+Text tokenizer attachment is not validated. The pinned Transformers tokenizer
+uses Llama/Metaspace behavior, while the raw `tokenizer.json` exposes a
+ByteLevel-BPE profile; for the sample “The quick brown fox jumps over 13 lazy
+dogs.”, Transformers emits `[546, 25021, 65, 3354, 2305, 87, 73, 2990, 671,
+329, 16, 18, 1419, 89, 4516, 20892, 13]`, while direct raw-tokenizer/llama.cpp
+ByteLevel conversion emits a different sequence. The existing converter also
+rejects the pre-tokenizer fingerprint (`be10f827…`) rather than guessing. To
+keep the tested IDs faithful, these GGUFs are currently ID-only: they run in the
+custom numeric-token backend but are not ready for raw-text `llama-cli`, LM
+Studio, or Ollama prompting until the tokenizer mapping is implemented and
+validated.
+
+Runs used Kilonova (`192.168.2.1`), four CPU threads, no GPU. Final GGUFs remain
+in private staging; the temporary tokenizer-probe file and server were removed.
+No public release was made. Detailed probes and logs are in
+`/home/ai/duoneural/kestrel/cdm-gguf/research/new-models/fc-native-cpu-128.json`
+and `fc-native-cpu-512.json`; checkpoint, tokenizer, GGUF hashes, and source
+parity are in `research/new-models/manifest.json`.
