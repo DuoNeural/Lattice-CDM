@@ -60,7 +60,9 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 | **Lattice-3-Synapse** | `191.56M` (`153.42M`) | `5L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6369`** ⭐ | **`6.92`** ⭐ | **Complete (100k)** | `DuoNeural/Lattice-3-Synapse-192M-Poincare-Instruct` |
 | **Lattice-4-Josephson (`L4A`)** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6746`** | **`7.52`** | **Complete (100k)** | `DuoNeural/Lattice-4-Josephson-253M-Poincare-Instruct` |
 | **Lattice-4-Nexus (`L4B`)** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6854`** | **`8.45`** | **Complete (100k)** | `DuoNeural/Lattice-4-Nexus-253M-Poincare-Instruct` |
-| **Lattice-4D-Holographic** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v3`) | `SmolLM2-1.7B-Instruct` | **`0.6816`** | **`7.70`** | Training (~69k) | Beats L4B at 69k; AdS init + DHP floor |
+| **Lattice-4D-Holographic** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4d AdS`) | `SmolLM2-1.7B-Instruct` | **`0.6692`** 🏆 | **`7.18`** 🏆 | **Released (100k + GGUF)** | [Lattice-4D-Holographic-253M-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-4D-Holographic-253M-Poincare-Instruct) |
+| **Lattice-4E-Lorentz** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `SmolLM2-1.7B-Instruct` | **`0.7011`** | **`8.23`** | **Released (100k + GGUF)** | [Lattice-4E-Lorentz-Holographic-253M-Instruct](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct) |
+| **FC-CDM-Poincare-7L** | `107.49M` (`82.71M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.1873`** 🏆 | **`2.04`** 🏆 | **Released (100k + GGUF)** | [FC-CDM-Poincare-7L-108M](https://huggingface.co/DuoNeural/FC-CDM-Poincare-7L-108M) |
 | **Lattice-6-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | `0.7231` | `10.61` | Training (~39k) | `2²⁸ = 2.69×10⁸ τ*` crossed in L00/L03 |
 | **Lattice-7-Hermes** | `283.6M` (`245.5M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | `0.7879` | `11.20` | Training (~37k) | Sub-0.79 BPB / Qwen-4B distillation |
 | **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `1.0251` | `23.40` | Training (~28k) | `2¹⁷` DHP storm across all 7 layers |
@@ -196,10 +198,11 @@ On the Lorentz hyperboloid H_c^d = {x in R^(1,d) : <x,x>_L = -1/c}, the geodesic
 Unlike the curved, singular boundary of the Poincare ball, scaling of Riemannian gradients during Harmonic rungs leaves the linear hyperplane equation strictly invariant. A cluster of 5 slots across layers L00–L02 (L00 4+7, L01 1+6, L02 2) forms an isometry-invariant rigid 4-simplex that glides through 7 consecutive PURE Harmonic rungs in macroscopic phase coherence.
 
 ### 12. Flagship Twin: Lattice-4E-Lorentz-Holographic-253M (96.7% APIGen & Juvenile Criticality)
-- **New Tool Accuracy Record:** Achieved **96.7% APIGen Tool Name Accuracy** (beating L4D's 93.3% and approaching 1.7B teacher's 100%) and **95.6% Argument Key F1** with 96.7% strict JSON validity rate.
-- **The Juvenile Criticality Principle:** Single-slot zero-weight ablation revealed that younger, rapidly evolving slots (`tau* = 50–110`) in UV layers (`L04–L06`) are the most load-bearing in the network (`L06_S6` ablation degrades FineWeb by `+0.024 BPB` and tool calling by `+0.004 BPB`), while mature macroscopic rungs (`tau* > 500k`) exhibit superfluid redundancy.
-- **2x2 Factorial Completion:** Confirms that while Poincaré ball geometry minimizes continuous cross-entropy loss (`0.6692 BPB` in L4D), the Lorentz hyperboloid's planar Voronoi boundaries produce sharper discrete decision boundaries for tool routing (`96.7%` tool accuracy in L4E).
-- **Hugging Face Release:** [`DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct`](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct)
+- **New All-Time Tool Accuracy Record:** Achieved **`96.7%` APIGen Tool Name Accuracy** (setting the all-time DuoNeural record, beating L4D's `93.3%` and approaching the 1.7B teacher's `100.0%`), **`95.6%` Argument Key F1**, and **`96.7%` strict JSON validity**.
+- **Discovery of the Juvenile Criticality Principle:** Systematic single-slot causal lesioning across all 56 slots revealed that younger, rapidly evolving slots (`tau* = 50–110`) in UV bulk layers (`L04–L06`) are the primary load-bearing cognitive circuits of the network. Lesioning slot `L06_S6` (`tau* = 110`) degrades FineWeb by `+0.02410 BPB` and tool calling by `+0.00398 BPB`. Conversely, mature macroscopic slots with high harmonic rungs (`tau* > 500k`, such as `L00_S4` at `tau* = 553,413`) form distributed, isometry-invariant "superfluid condensates" that easily absorb single-slot damage (`+0.00017 BPB`). Compact non-Euclidean architectures maintain a dual thermodynamic phase: frozen IR boundaries guarantee topological stability, while plastic UV juvenile slots execute dynamic System 2 tool routing.
+- **The 2x2 Factorial Resolution:** Completes the factorial matrix comparing geometry (Poincaré vs. Lorentz) against distillation objective (Generalist Chat vs. Function Calling). Poincaré geometry minimizes continuous language modeling loss (`0.6692 BPB` in L4D), while the Lorentz hyperboloid's planar Voronoi boundaries in ambient Minkowski space eliminate radial distortion and produce sharper discrete decision boundaries for tool selection (`96.7%` tool accuracy in L4E).
+- **Native GGUF Support:** Released with full precision `F32` (exact parity, `7.51e-6` max error), `Q8_0` (passes all strict screening gates: `0.228` drift, `99.51%` top-1 agreement at 512 positions, `618.5` prompt t/s on Kilonova CPU), and experimental `Q4_K_M` (`96.68%` top-1 agreement at 512 positions, `742.2` prompt t/s).
+- **Hugging Face Model & GGUFs:** [`DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct`](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct)
 
 ---
 
@@ -297,6 +300,9 @@ cd cdm-gguf
 | **Lattice-4D Holographic `F32`** | `966.0 MiB` | `163` | — | — | `22` | — | — |
 | **Lattice-4D Holographic `Q8_0`** | `259.3 MiB` | `231` | — | — | `70` | — | — |
 | **Lattice-4D Holographic `Q4_K_M`** | `164.5 MiB` | `265` | — | — | `96` | — | — |
+| **Lattice-4E Lorentz `F32`** | `966.5 MiB` | `400` | — | — | `22` | — | — |
+| **Lattice-4E Lorentz `Q8_0`** | `259.3 MiB` | `366` | — | — | `73` | — | — |
+| **Lattice-4E Lorentz `Q4_K_M`** | `164.5 MiB` | `473` | — | — | `101` | — | — |
 | **FC-CDM-Poincare-7L `F32`** | `411.0 MiB` | `343` | — | — | `51` | — | — |
 | **FC-CDM-Poincare-7L `Q8_0`** | `111.0 MiB` | `465` | — | — | `142` | — | — |
 | **FC-CDM-Poincare-7L `Q4_K_M`** | `71.0 MiB` | `557` | — | — | `171` | — | — |
@@ -317,6 +323,9 @@ Evaluated across 8 probes (`512` logit positions / `504` next-token transitions;
 | **Lattice-4D Holographic 253M** | `F32` | — | — | — | `0.000019` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`966 MiB`)** |
 | **Lattice-4D Holographic 253M** | `Q8_0` | — | — | — | **`0.2786` / `99.66%`** | ⭐ **Passes all 3 strict gates on CPU (`259.3 MiB`)** |
 | **Lattice-4D Holographic 253M** | `Q4_K_M` | — | — | — | `2.193` / **`96.95%`** | High top-1 agreement (`97.0%`); misses max-drift gate (`165 MiB`) |
+| **Lattice-4E-Lorentz Holographic 253M** | `F32` | — | — | — | `0.000028` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`966 MiB`)** |
+| **Lattice-4E-Lorentz Holographic 253M** | `Q8_0` | — | — | — | **`0.2282` / `99.51%`** | ⭐ **Passes all 3 strict gates on CPU (`259.3 MiB`)** |
+| **Lattice-4E-Lorentz Holographic 253M** | `Q4_K_M` | — | — | — | `1.526` / **`96.68%`** | High top-1 agreement (`96.7%`); misses max-drift gate (`165 MiB`) |
 | **FC-CDM-Poincare-7L 108M** | `F32` | — | — | — | `0.000038` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`411 MiB`)** |
 | **FC-CDM-Poincare-7L 108M** | `Q8_0` | — | — | — | **`0.4175` / `99.71%`** | ⭐ **Passes all 3 strict gates on CPU (`111 MiB`)** |
 | **FC-CDM-Poincare-7L 108M** | `Q4_K_M` | — | — | — | `2.242` / **`98.63%`** | Exceptional top-1 agreement (`98.6%`) at 71 MiB SRAM scale |
