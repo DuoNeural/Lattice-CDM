@@ -55,7 +55,7 @@ datasets:
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Manifold Geometry** | Lorentz Hyperboloid (H²) | Poincaré Ball (B²) | Beltrami-Klein Disk (K²) | Poincaré Ball (B²) | Euclidean Flat (ℝ²) | Spherical Hypersphere (S²) | Euclidean Transformer |
 | **Conformal Angle Preservation?** | No (Isometry on Hyperboloid) | Yes (Conformal ds²) | No (Projective Geodesics) | Yes (Conformal ds²) | Yes (Trivial) | No (Positive Curvature) | Trivial Attention |
-| **Training Hardware** | RTX 4090 (24 GB CUDA) | RTX 4090 (24 GB CUDA) | RTX 4090 (24 GB CUDA) | AMD Radeon 780M APU (ROCm) | RTX 4090 (24 GB CUDA) | RTX 4090 (24 GB CUDA) | Teacher Checkpoint |
+| **Training Hardware** | RTX 5070 Ti (16 GB CUDA) | RTX 5070 Ti (16 GB CUDA) | RTX 5070 Ti (16 GB CUDA) | AMD Radeon 780M APU (ROCm) | RTX 5070 Ti (16 GB CUDA) | RTX 5070 Ti (16 GB CUDA) | Teacher Checkpoint |
 | **Active Unique Parameters** | 18,226,310 (18.23M) | 18,226,310 (18.23M) | 18,226,310 (18.23M) | 17,053,214 (17.05M) | 17,046,659 (17.05M) | 17,046,659 (17.05M) | 361,821,120 (361.8M) |
 | **Non-Embedding Backbone Params** | 5,512,326 (5.51M) | 5,512,326 (5.51M) | 5,512,326 (5.51M) | 4,332,574 (4.33M) | 4,332,675 (4.33M) | 4,332,675 (4.33M) | 361.8M (Full Model) |
 | **SwiGLU FFN Width (d_ff)** | 1024 | 1024 | 1024 | 768 | 768 | 768 | 2048 |
@@ -223,7 +223,7 @@ Driven by telepathy, `L00 Slot 5` (`τ* = 1,991,413`) and `L01 Slot 7` (`τ* = 2
 
 ## 🧮 Hardware, Training & Parameter Breakdown
 
-- **Hardware:** NVIDIA RTX 4090 (24 GB VRAM), CUDA 12.4, FP32
+- **Hardware:** NVIDIA GeForce RTX 5070 Ti (16 GB CUDA), CUDA 12.4, FP32
 - **Curriculum:** 50/50 Hybrid `FineWeb-Edu` + `SmolTalk`, `seq_len = 512`, `batch = 2`, `grad_accum = 2`, 100k steps
 - **Parameters:**
   - Unique Active Parameters: `18,226,310` (`18.23M`)
