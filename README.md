@@ -195,12 +195,21 @@ On the Lorentz hyperboloid H_c^d = {x in R^(1,d) : <x,x>_L = -1/c}, the geodesic
   `<x, u_i - u_j>_L = 0`
 Unlike the curved, singular boundary of the Poincare ball, scaling of Riemannian gradients during Harmonic rungs leaves the linear hyperplane equation strictly invariant. A cluster of 5 slots across layers L00–L02 (L00 4+7, L01 1+6, L02 2) forms an isometry-invariant rigid 4-simplex that glides through 7 consecutive PURE Harmonic rungs in macroscopic phase coherence.
 
+### 12. Flagship Twin: Lattice-4E-Lorentz-Holographic-253M (96.7% APIGen & Juvenile Criticality)
+- **New Tool Accuracy Record:** Achieved **96.7% APIGen Tool Name Accuracy** (beating L4D's 93.3% and approaching 1.7B teacher's 100%) and **95.6% Argument Key F1** with 96.7% strict JSON validity rate.
+- **The Juvenile Criticality Principle:** Single-slot zero-weight ablation revealed that younger, rapidly evolving slots (`tau* = 50–110`) in UV layers (`L04–L06`) are the most load-bearing in the network (`L06_S6` ablation degrades FineWeb by `+0.024 BPB` and tool calling by `+0.004 BPB`), while mature macroscopic rungs (`tau* > 500k`) exhibit superfluid redundancy.
+- **2x2 Factorial Completion:** Confirms that while Poincaré ball geometry minimizes continuous cross-entropy loss (`0.6692 BPB` in L4D), the Lorentz hyperboloid's planar Voronoi boundaries produce sharper discrete decision boundaries for tool routing (`96.7%` tool accuracy in L4E).
+- **Hugging Face Release:** [`DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct`](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct)
+
 ---
 
 ## 🏛️ Repository Structure & Training Engines
 
 - [`scripts/cdm_lm_distill_v4d_holographic.py`](scripts/cdm_lm_distill_v4d_holographic.py) — **Lattice-4D-Holographic Engine** with two-zone AdS/CFT curvature initialization, DHP floor law (>=0.20), and SmolLM2-1.7B distillation.
 - [`scripts/eval_l4d_holographic_suite.py`](scripts/eval_l4d_holographic_suite.py) — Comprehensive 8-benchmark verification suite for Lattice-4D-Holographic (APIGen, JSON validity, FineWeb, SmolTalk, ARC, PIQA, HellaSwag).
+- [`scripts/cdm_lm_distill_v4e_lorentz.py`](scripts/cdm_lm_distill_v4e_lorentz.py) — **Lattice-4E-Lorentz Engine** implementing upper Minkowski hyperboloid geometry, planar Voronoi bisectors, and depth-scaled AdS initialization.
+- [`scripts/eval_l4e_lorentz_suite.py`](scripts/eval_l4e_lorentz_suite.py) — Full verification and causal lesion suite for Lattice-4E-Lorentz-Holographic-253M.
+- [`analysis/lattice4e_lorentz_benchmark_report.json`](analysis/lattice4e_lorentz_benchmark_report.json) — Verified empirical telemetry for Lattice-4E-Lorentz-Holographic-253M.
 - [`scripts/cdm_lm_distill_fc.py`](scripts/cdm_lm_distill_fc.py) — **FC-CDM-Poincare-7L Engine** for ultra-compact function calling and schema crystallization distilling xLAM-1b-fc-r.
 - [`scripts/eval_fc_cdm_suite.py`](scripts/eval_fc_cdm_suite.py) — Multi-turn, parallel-call, and negative control benchmark suite comparing FC-CDM against FunctionGemma-270M.
 - [`analysis/lattice4d_holographic_benchmark_report.json`](analysis/lattice4d_holographic_benchmark_report.json) — Verified empirical telemetry for Lattice-4D-Holographic-253M.
