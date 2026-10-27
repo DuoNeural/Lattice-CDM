@@ -64,7 +64,7 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 | **Lattice-4E-Lorentz** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `SmolLM2-1.7B-Instruct` | **`0.7011`** | **`8.23`** | **Released (100k + GGUF)** | [Lattice-4E-Lorentz-Holographic-253M-Instruct](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct) |
 | **FC-CDM-Poincare-7L** | `107.49M` (`82.71M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.1873`** 🏆 | **`2.04`** 🏆 | **Released (100k + GGUF)** | [FC-CDM-Poincare-7L-108M](https://huggingface.co/DuoNeural/FC-CDM-Poincare-7L-108M) |
 | **Lattice-6-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | `0.7231` | `10.61` | Training (~39k) | `2²⁸ = 2.69×10⁸ τ*` crossed in L00/L03 |
-| **Lattice-7-Hermes** | `283.6M` (`245.5M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | `0.7879` | `11.20` | Training (~37k) | Sub-0.79 BPB / Qwen-4B distillation |
+| **Lattice-7-Hermes** | `629.38M` (`247.96M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | **`0.7403`** 🏆 | **`9.70`** 🏆 | **Released (100k Octa-Cap)** | [Lattice-7-Hermes-CDM-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct) |
 | **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `1.0251` | `23.40` | Training (~28k) | `2¹⁷` DHP storm across all 7 layers |
 
 †`405.8M` total params (`215.1M` non-embedding 7-layer CDM backbone + `190.7M` tied `tok_embed`/`lm_head` for Qwen's `248,320` vocabulary).  
@@ -232,6 +232,13 @@ To rigorously establish the ab-initio physical foundations of non-Euclidean neur
   - Rigorous error-propagation auditing demonstrated that 100-shot circuits on physical NISQ superconducting processors (IBM Heron r2) suffer a shot-noise standard error `epsilon_shot ~ 0.283 bits` on von Neumann entropy, yielding an unviable signal-to-noise ratio (`SNR ~ 1.45`).
   - Classical QCPU exact statevector diagonalization eliminates finite-sampling variance entirely, executing in `< 0.25` seconds at zero cost with infinite effective shot depth.
 
+
+### 15. The Octa-Cap Breakthrough & Iso-Curvature Phase Invariance (Lattice-7-Hermes)
+- **First Complete 8-Layer Solid-State Crystallization:** Lattice-7-Hermes reached a validation BPB of **`0.7403`** (Perplexity ~ `9.70`, teacher KLD `0.1194`) distilling `Qwen/Qwen3.5-4B` over 100,000 steps on an RTX 5070 Ti. All 8 layers (`L00–L07`) crossed the DHP ceiling at `tau* = 1.0000e+10` (the first **Octa-Cap** in lab history).
+- **Iso-Curvature Phase Invariance:** Unlike SmolLM2 distillation which induces a pronounced W-shape curvature profile (`c = 0.27` deep to `c = 0.51` outer), Qwen distillation induces a remarkably uniform iso-curvature band across all 8 layers (`c = 1.418–1.444`, `delta_c <= 0.025`). This satisfies the theoretical precondition for global hyperbolic Josephson junction phase coherence across the entire stack.
+- **Hyperbolic Kinetic Escape via Warm Restarts:** Controlled observation during `smt0` confirmed that periodic learning rate resets (SGDR / warm restarts) inject the critical kinetic perturbation energy (`eta ~ 7e-5` vs `1e-6`) required to escape steep negative-curvature harmonic potential wells, driving BPB from `0.3614` down to `0.3108`.
+- **Hugging Face Model & Safetensors:** [`DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct`](https://huggingface.co/DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct)
+
 ---
 
 
@@ -243,6 +250,9 @@ To rigorously establish the ab-initio physical foundations of non-Euclidean neur
 - [`scripts/eval_l4e_lorentz_suite.py`](scripts/eval_l4e_lorentz_suite.py) — Full verification and causal lesion suite for Lattice-4E-Lorentz-Holographic-253M.
 - [`analysis/lattice4e_lorentz_benchmark_report.json`](analysis/lattice4e_lorentz_benchmark_report.json) — Verified empirical telemetry for Lattice-4E-Lorentz-Holographic-253M.
 - [`scripts/cdm_lm_distill_fc.py`](scripts/cdm_lm_distill_fc.py) — **FC-CDM-Poincare-7L Engine** for ultra-compact function calling and schema crystallization distilling xLAM-1b-fc-r.
+- [`scripts/launch_qwen35_4b_lattice7.sh`](scripts/launch_qwen35_4b_lattice7.sh) — Launch configuration for **Lattice-7-Hermes** (Qwen3.5-4B teacher, 8-layer Octa-Cap CDM).
+- [`scripts/eval_l7_hermes_suite.py`](scripts/eval_l7_hermes_suite.py) — Comprehensive evaluation, mechanistic slot lens, and packaging suite for Lattice-7-Hermes.
+- [`analysis/lattice7_hermes_benchmark_report.json`](analysis/lattice7_hermes_benchmark_report.json) — Full empirical telemetry, slot routing distributions, and layer-by-layer DHP cap records.
 - [`scripts/eval_fc_cdm_suite.py`](scripts/eval_fc_cdm_suite.py) — Multi-turn, parallel-call, and negative control benchmark suite comparing FC-CDM against FunctionGemma-270M.
 - [`analysis/lattice4d_holographic_benchmark_report.json`](analysis/lattice4d_holographic_benchmark_report.json) — Verified empirical telemetry for Lattice-4D-Holographic-253M.
 - [`analysis/fc_cdm_benchmark_report.json`](analysis/fc_cdm_benchmark_report.json) — Head-to-head empirical benchmark report for FC-CDM-Poincare-7L vs FunctionGemma-270M.

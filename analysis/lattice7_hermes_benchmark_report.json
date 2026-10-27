@@ -1,0 +1,1467 @@
+{
+  "model_name": "Lattice-7-Hermes-CDM-Poincare-Instruct",
+  "evaluation_timestamp": "2026-10-27T06:50:30Z",
+  "architecture": {
+    "d_model": 768,
+    "n_layers": 8,
+    "n_heads": 12,
+    "K_slots": 8,
+    "num_experts": 4,
+    "geometry": "poincare",
+    "teacher": "Qwen/Qwen3.5-4B",
+    "total_untied_params": 629378832,
+    "backbone_params": 247959312,
+    "tie_word_embeddings": true
+  },
+  "training_performance": {
+    "best_step": 63000,
+    "best_val_bpb": 0.7403,
+    "final_teacher_kld": 0.1194,
+    "total_steps": 100000,
+    "octa_cap": true,
+    "dhp_caps_logged": {
+      "L03": {
+        "first_cap_slot": 2,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-24T21:13:43Z] !!! DHP L03 slot=2 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L07": {
+        "first_cap_slot": 3,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-24T23:34:08Z] !!! DHP L07 slot=3 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L04": {
+        "first_cap_slot": 2,
+        "tau": 9986600000.0,
+        "log_entry": "[2026-10-25T00:09:18Z] !!! DHP L04 slot=2 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=9.9866e+09 next=MAX !!!"
+      },
+      "L05": {
+        "first_cap_slot": 3,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-25T00:09:18Z] !!! DHP L05 slot=3 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L06": {
+        "first_cap_slot": 4,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-25T00:09:18Z] !!! DHP L06 slot=4 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L02": {
+        "first_cap_slot": 3,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-25T08:21:57Z] !!! DHP L02 slot=3 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L00": {
+        "first_cap_slot": 4,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-25T10:42:14Z] !!! DHP L00 slot=4 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      },
+      "L01": {
+        "first_cap_slot": 3,
+        "tau": 10000000000.0,
+        "log_entry": "[2026-10-25T12:27:12Z] !!! DHP L01 slot=3 rung=9.7955e+09 (2^11x3^14,MIXED) tau*=1.0000e+10 next=MAX !!!"
+      }
+    }
+  },
+  "slot_lens": {
+    "L00": {
+      "curvature": 1.4435,
+      "tau_max": 9999220736.0,
+      "purity": 0.814,
+      "slot_entropy": 0.2877,
+      "telepathy_norm": 0.0,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 662700032.0,
+          "top_tokens": [
+            " V",
+            " \"",
+            " D",
+            " E",
+            "\n",
+            " B",
+            " G",
+            " "
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 1187840.0,
+          "top_tokens": [
+            " the",
+            " a",
+            " V",
+            " E",
+            " G",
+            " T",
+            " D",
+            " B"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 1610612736.0,
+          "top_tokens": [
+            " \"",
+            " V",
+            "\n",
+            " D",
+            " ",
+            " U",
+            " E",
+            " T"
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 333824.0,
+          "top_tokens": [
+            "\n",
+            " V",
+            " A",
+            " An",
+            " ",
+            " Mon",
+            " B",
+            " \""
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            " \"",
+            " V",
+            " of",
+            " African",
+            " D",
+            " E",
+            " U",
+            " "
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 22528.0,
+          "top_tokens": [
+            " of",
+            " and",
+            "\n",
+            " in",
+            " (",
+            " o",
+            " \u2014",
+            " l"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 9699328.0,
+          "top_tokens": [
+            " of",
+            ",",
+            " and",
+            " V",
+            " (",
+            " E",
+            " de",
+            "."
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 28416.0,
+          "top_tokens": [
+            "\n",
+            " \"",
+            " \u201c",
+            " V",
+            " E",
+            " ",
+            " D",
+            " T"
+          ]
+        }
+      ]
+    },
+    "L01": {
+      "curvature": 1.434,
+      "tau_max": 8489271296.0,
+      "purity": 0.7476,
+      "slot_entropy": 0.3334,
+      "telepathy_norm": 1.75,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 198180864.0,
+          "top_tokens": [
+            " &",
+            " and",
+            "-focused",
+            "-al",
+            "**:",
+            "-guid",
+            " or",
+            "\\"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 16121856.0,
+          "top_tokens": [
+            "**:",
+            " &",
+            " and",
+            ":**",
+            "-al",
+            "\".",
+            "-guid",
+            "\";"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 309248.0,
+          "top_tokens": [
+            "\".",
+            ".\".",
+            "!\\",
+            "\n",
+            "**.",
+            "!\".",
+            ".\"]",
+            "/."
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 8489271296.0,
+          "top_tokens": [
+            " &",
+            "-focused",
+            "*,",
+            "-l",
+            "**.",
+            "-b",
+            "-G",
+            ","
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 1376256.0,
+          "top_tokens": [
+            " Naples",
+            " An",
+            " &",
+            " Sp",
+            "-al",
+            " and",
+            " Sc",
+            "-guid"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 2483027968.0,
+          "top_tokens": [
+            "-focused",
+            " and",
+            " &",
+            "-efficient",
+            "-centric",
+            "-guid",
+            "-aware",
+            "-friendly"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 2576.0,
+          "top_tokens": [
+            " and",
+            " or",
+            " &",
+            "-al",
+            "-and",
+            "-guid",
+            " alongside",
+            "-focused"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 166723584.0,
+          "top_tokens": [
+            " &",
+            " and",
+            "-focused",
+            "-guid",
+            "-al",
+            "**:",
+            " or",
+            "-pl"
+          ]
+        }
+      ]
+    },
+    "L02": {
+      "curvature": 1.434,
+      "tau_max": 9999220736.0,
+      "purity": 0.4967,
+      "slot_entropy": 0.3545,
+      "telepathy_norm": 1.0234,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 42991616.0,
+          "top_tokens": [
+            "!\\",
+            "},{\"",
+            "\r\n\r\n",
+            "<|im_end|>",
+            "!\",",
+            " \ufffd",
+            "trusted",
+            " skillet"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 40894464.0,
+          "top_tokens": [
+            "-focused",
+            "-centric",
+            " alongside",
+            "-themed",
+            "-friendly",
+            " vina",
+            "-efficient",
+            "-packed"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 7424.0,
+          "top_tokens": [
+            "=\"",
+            "\\\"\\",
+            " ...\"",
+            "\\\"\",",
+            "\";",
+            "**:",
+            "\\\",\\",
+            " \",\""
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "-focused",
+            "!\",",
+            "-centric",
+            "-conscious",
+            "!',",
+            "?\",",
+            "-inspired",
+            "/\","
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "-focused",
+            "-centric",
+            "!\",",
+            "-friendly",
+            "-themed",
+            "-efficient",
+            "!\\",
+            "\\\",\\"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 24903680.0,
+          "top_tokens": [
+            " \",\"",
+            "=\"",
+            " \"\\\\",
+            " vina",
+            "\"?",
+            " grilled",
+            "\\\",\\",
+            " \"!"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 65280.0,
+          "top_tokens": [
+            "!\",",
+            ".\".",
+            "!\\",
+            "\\\"\",",
+            ".\"]",
+            ".\"",
+            "'}}",
+            "!\"."
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 23592960.0,
+          "top_tokens": [
+            "!\",",
+            "\\\"\",",
+            "\\\",\\",
+            "\"?",
+            "?\",",
+            "**:",
+            "\";",
+            ",\""
+          ]
+        }
+      ]
+    },
+    "L03": {
+      "curvature": 1.434,
+      "tau_max": 9999220736.0,
+      "purity": 0.9431,
+      "slot_entropy": 0.1363,
+      "telepathy_norm": 1.5859,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 212860928.0,
+          "top_tokens": [
+            "!\\",
+            "!\",",
+            "eran",
+            " prefers",
+            " \ufffd",
+            "!\".",
+            " reminds",
+            " Handles"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 31195136.0,
+          "top_tokens": [
+            " **\"",
+            "!\",",
+            "!\\",
+            "\\\",\\",
+            "=\"",
+            " (\\",
+            "\"?",
+            " \",\""
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "!',",
+            "-centric",
+            "-focused",
+            "!\",",
+            "-conscious",
+            "!\".",
+            " enthusiast",
+            "!."
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 5177344.0,
+          "top_tokens": [
+            "!\\",
+            " Simulator",
+            " Offers",
+            " Requires",
+            " \ufffd",
+            "eran",
+            " prefers",
+            " \ufffd"
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 301989888.0,
+          "top_tokens": [
+            " \"!",
+            " **\"",
+            " grilled",
+            " \"\\\\",
+            " \",\"",
+            " Handles",
+            "=\"",
+            " \ufffd"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 46137344.0,
+          "top_tokens": [
+            "trusted",
+            "<|im_end|>",
+            "},{\"",
+            "!\\",
+            " Allowed",
+            "\r\n\r\n",
+            " Alternatively",
+            "\r\n"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 5373952.0,
+          "top_tokens": [
+            " reminds",
+            " Tracker",
+            "!\\",
+            " }),",
+            " Simulator",
+            " reminded",
+            " Validator",
+            "\r\n\r\n"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 72192.0,
+          "top_tokens": [
+            "!\\",
+            "!\",",
+            ".\"]",
+            "'}}",
+            "\\\"\",",
+            "\"]}",
+            "\\\\.",
+            "\\\",\\"
+          ]
+        }
+      ]
+    },
+    "L04": {
+      "curvature": 1.4277,
+      "tau_max": 9999220736.0,
+      "purity": 0.4921,
+      "slot_entropy": 0.3739,
+      "telepathy_norm": 1.75,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 2097152.0,
+          "top_tokens": [
+            "!\\",
+            " Alternatively",
+            " Regardless",
+            " Sadly",
+            " Ideally",
+            " :)",
+            " Hopefully",
+            " Enjoy"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 23461888.0,
+          "top_tokens": [
+            " Regardless",
+            " Alternatively",
+            "!\\",
+            " **\"",
+            "trusted",
+            ";\"",
+            " Typically",
+            " Optionally"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "!.",
+            ".||",
+            ".uk",
+            "**.",
+            "/.",
+            ".au",
+            ".While",
+            ".**"
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 1360.0,
+          "top_tokens": [
+            "!\\",
+            " Accordingly",
+            " Regardless",
+            "/'.",
+            " Alternatively",
+            ".\"]",
+            "\\\\.",
+            " Meanwhile"
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 5832704.0,
+          "top_tokens": [
+            " Alternatively",
+            " Sadly",
+            " Regardless",
+            " Ideally",
+            " Accordingly",
+            " Unfortunately",
+            " Generally",
+            " Obviously"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            " Alternatively",
+            " Sadly",
+            " Regardless",
+            " Anyway",
+            " Usually",
+            " Besides",
+            " Hopefully",
+            " Enjoy"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 67108864.0,
+          "top_tokens": [
+            " \ud83d\ude42",
+            "!\\",
+            " Alternatively",
+            " Usually",
+            " Regardless",
+            " \ufffd",
+            " \ufffd",
+            "\uff01"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 223346688.0,
+          "top_tokens": [
+            " Sadly",
+            " \"!",
+            " Surely",
+            " Thankfully",
+            " \ud83d\ude42",
+            " Regardless",
+            " \"\\\\",
+            " \"\\\""
+          ]
+        }
+      ]
+    },
+    "L05": {
+      "curvature": 1.4182,
+      "tau_max": 9999220736.0,
+      "purity": 0.5324,
+      "slot_entropy": 0.407,
+      "telepathy_norm": 1.8359,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 20224.0,
+          "top_tokens": [
+            " Sadly",
+            " Simply",
+            " Quite",
+            " Essentially",
+            " Regardless",
+            " Besides",
+            " Accordingly",
+            " Generally"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 20992.0,
+          "top_tokens": [
+            "nThe",
+            "Incre",
+            " Kompas",
+            " Sadly",
+            " Needless",
+            " Simply",
+            " Either",
+            " Surely"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 8120172544.0,
+          "top_tokens": [
+            " Sadly",
+            "Otherwise",
+            "Obviously",
+            " Whilst",
+            " Luckily",
+            " Nonetheless",
+            " Occasionally",
+            " Nevertheless"
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "\u2026the",
+            "nThe",
+            " Sadly",
+            "-scenes",
+            " Whilst",
+            "ocalyptic",
+            ".\u2026",
+            ":The"
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 44040192.0,
+          "top_tokens": [
+            " Either",
+            " Sadly",
+            "nThe",
+            " Simply",
+            " Watching",
+            " Surely",
+            " Removing",
+            " Against"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 189792256.0,
+          "top_tokens": [
+            " Either",
+            " Sadly",
+            " Simply",
+            " Regardless",
+            " Obviously",
+            " Surely",
+            " Usually",
+            " Whilst"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 4718592.0,
+          "top_tokens": [
+            "nThe",
+            " Either",
+            " Simply",
+            "Incre",
+            " Usually",
+            "Specify",
+            " Quite",
+            " Sadly"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 423624704.0,
+          "top_tokens": [
+            " Sadly",
+            " Needless",
+            "Normally",
+            " Surely",
+            " Ultimately",
+            " Obviously",
+            "Indeed",
+            " Either"
+          ]
+        }
+      ]
+    },
+    "L06": {
+      "curvature": 1.4277,
+      "tau_max": 9999220736.0,
+      "purity": 0.8505,
+      "slot_entropy": 0.2885,
+      "telepathy_norm": 1.5469,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 29312.0,
+          "top_tokens": [
+            "nThe",
+            "\u201cThe",
+            "\u201cOur",
+            "Following",
+            " Kompas",
+            " Brave",
+            " SQLite",
+            " Following"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 492830720.0,
+          "top_tokens": [
+            ".The",
+            ".It",
+            ".\u201c",
+            " ().",
+            ".When",
+            ".**",
+            "!!!",
+            ".There"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 9856.0,
+          "top_tokens": [
+            " Sadly",
+            " Unfortunately",
+            " Ultimately",
+            " Thankfully",
+            " Below",
+            " Fortunately",
+            " Certainly",
+            " Simply"
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 68681728.0,
+          "top_tokens": [
+            " THE",
+            "Following",
+            " Chronic",
+            " Following",
+            " Seeking",
+            " Facing",
+            "\u2026the",
+            " Artificial"
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "\u201cThe",
+            "\u2026the",
+            " Growing",
+            " Political",
+            "\u201cThere",
+            "\u201cWhat",
+            " Sadly",
+            "\"The"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 34340864.0,
+          "top_tokens": [
+            " Sadly",
+            "Following",
+            " Following",
+            " Unfortunately",
+            "Experts",
+            " Indeed",
+            " Ultimately",
+            "Earlier"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 893386752.0,
+          "top_tokens": [
+            "Experts",
+            "\u201cThere",
+            " HAVE",
+            " Sadly",
+            "Normally",
+            " Really",
+            "Still",
+            " Ultimately"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 268435456.0,
+          "top_tokens": [
+            " Sadly",
+            " Obviously",
+            " Ideally",
+            " Regardless",
+            " Unfortunately",
+            " Following",
+            " Ultimately",
+            "Normally"
+          ]
+        }
+      ]
+    },
+    "L07": {
+      "curvature": 1.4435,
+      "tau_max": 9999220736.0,
+      "purity": 0.9182,
+      "slot_entropy": 0.1846,
+      "telepathy_norm": 1.1797,
+      "slots": [
+        {
+          "slot_idx": 0,
+          "expert_idx": 0,
+          "tau_star": 38797312.0,
+          "top_tokens": [
+            " **",
+            " I",
+            " S",
+            " F",
+            " P",
+            " T",
+            " M",
+            "\n"
+          ]
+        },
+        {
+          "slot_idx": 1,
+          "expert_idx": 1,
+          "tau_star": 306184192.0,
+          "top_tokens": [
+            " Japanese",
+            " Indian",
+            " U",
+            " Chinese",
+            " F",
+            " P",
+            " Russian",
+            " H"
+          ]
+        },
+        {
+          "slot_idx": 2,
+          "expert_idx": 2,
+          "tau_star": 249856.0,
+          "top_tokens": [
+            "\n",
+            " \n",
+            "\n\n",
+            "<|im_end|>",
+            " \n\n",
+            "  \n",
+            " For",
+            "  \n\n"
+          ]
+        },
+        {
+          "slot_idx": 3,
+          "expert_idx": 3,
+          "tau_star": 9999220736.0,
+          "top_tokens": [
+            "\n",
+            " L",
+            " V",
+            " U",
+            " Ch",
+            " P",
+            " F",
+            " H"
+          ]
+        },
+        {
+          "slot_idx": 4,
+          "expert_idx": 0,
+          "tau_star": 29622272.0,
+          "top_tokens": [
+            " F",
+            " S",
+            " L",
+            " U",
+            " P",
+            " T",
+            " O",
+            " M"
+          ]
+        },
+        {
+          "slot_idx": 5,
+          "expert_idx": 1,
+          "tau_star": 104333312.0,
+          "top_tokens": [
+            "\n",
+            " **",
+            " \n",
+            "  \n",
+            " \n\n",
+            " I",
+            "\n\n",
+            " F"
+          ]
+        },
+        {
+          "slot_idx": 6,
+          "expert_idx": 2,
+          "tau_star": 411041792.0,
+          "top_tokens": [
+            " \u2014",
+            ".",
+            " .",
+            " (",
+            " program",
+            " rules",
+            "\u2014",
+            " -"
+          ]
+        },
+        {
+          "slot_idx": 7,
+          "expert_idx": 3,
+          "tau_star": 626688.0,
+          "top_tokens": [
+            " conversation",
+            " final",
+            " general",
+            " original",
+            " **",
+            " current",
+            " Great",
+            " main"
+          ]
+        }
+      ]
+    }
+  },
+  "routing_distribution": {
+    "L00": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L01": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L02": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L03": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L04": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L05": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L06": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "L07": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "qualitative_generations": [
+    {
+      "prompt": "Explain how hyperbolic geometry models hierarchical tree structures better than Euclidean space.",
+      "completion": ""
+    },
+    {
+      "prompt": "Write a concise Python function to check if a number is prime.",
+      "completion": "What is the factorial of a number?"
+    },
+    {
+      "prompt": "What is the physical meaning of an entanglement entropy Ryu-Takayanagi cut?",
+      "completion": ""
+    },
+    {
+      "prompt": "Output a valid JSON object with keys 'lab', 'discovery', and 'status':",
+      "completion": "'completed'.\n<tool_call>[{\"name\": \"answer\", \"arguments\": {\"question\": \"What is the best way to prepare for a job interview?\"}}]</tool_call>"
+    }
+  ],
+  "eval_trajectory_sample": [
+    {
+      "step": 500,
+      "val_bpb": 1.9347,
+      "val_ppl": 377.34,
+      "teacher_kld": 0.3539,
+      "curvatures": {}
+    },
+    {
+      "step": 5500,
+      "val_bpb": 1.1005,
+      "val_ppl": 29.22,
+      "teacher_kld": 0.1652,
+      "curvatures": {}
+    },
+    {
+      "step": 10500,
+      "val_bpb": 0.9777,
+      "val_ppl": 20.05,
+      "teacher_kld": 0.1468,
+      "curvatures": {}
+    },
+    {
+      "step": 15500,
+      "val_bpb": 0.9087,
+      "val_ppl": 16.23,
+      "teacher_kld": 0.1389,
+      "curvatures": {}
+    },
+    {
+      "step": 20500,
+      "val_bpb": 0.8723,
+      "val_ppl": 14.51,
+      "teacher_kld": 0.1335,
+      "curvatures": {}
+    },
+    {
+      "step": 25500,
+      "val_bpb": 0.8337,
+      "val_ppl": 12.89,
+      "teacher_kld": 0.1299,
+      "curvatures": {}
+    },
+    {
+      "step": 30500,
+      "val_bpb": 0.8206,
+      "val_ppl": 12.38,
+      "teacher_kld": 0.128,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 35500,
+      "val_bpb": 0.7983,
+      "val_ppl": 11.57,
+      "teacher_kld": 0.1255,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 40500,
+      "val_bpb": 0.776,
+      "val_ppl": 10.8,
+      "teacher_kld": 0.1234,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 45500,
+      "val_bpb": 0.7639,
+      "val_ppl": 10.41,
+      "teacher_kld": 0.1215,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 50500,
+      "val_bpb": 0.7539,
+      "val_ppl": 10.1,
+      "teacher_kld": 0.1207,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 55500,
+      "val_bpb": 0.7424,
+      "val_ppl": 9.75,
+      "teacher_kld": 0.1193,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 60500,
+      "val_bpb": 0.7407,
+      "val_ppl": 9.69,
+      "teacher_kld": 0.1193,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 65500,
+      "val_bpb": 0.7406,
+      "val_ppl": 9.69,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 70500,
+      "val_bpb": 0.7408,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 75500,
+      "val_bpb": 0.7408,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 80500,
+      "val_bpb": 0.7408,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 85500,
+      "val_bpb": 0.7407,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 91500,
+      "val_bpb": 0.7408,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    },
+    {
+      "step": 96500,
+      "val_bpb": 0.7408,
+      "val_ppl": 9.7,
+      "teacher_kld": 0.1194,
+      "curvatures": {
+        "L00": 1.44,
+        "L01": 1.43,
+        "L02": 1.43,
+        "L03": 1.43,
+        "L04": 1.43,
+        "L05": 1.42,
+        "L06": 1.43,
+        "L07": 1.44
+      }
+    }
+  ]
+}
