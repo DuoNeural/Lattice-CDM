@@ -1,0 +1,106 @@
+{
+  "benchmark_suite": "DuoNeural Commonsense & Knowledge Retention",
+  "timestamp": "2026-10-27T07:44:59Z",
+  "models": {
+    "student": "Lattice-7-Hermes-CDM-Poincare-Instruct (248M Backbone / 629M Untied)",
+    "teacher": "Qwen/Qwen3.5-4B (NF4 4-bit reference)"
+  },
+  "student_to_teacher_parameter_ratio": "6.2% (248M backbone vs 4B)",
+  "task_results": {
+    "hellaswag": {
+      "student_norm_acc": 33.5,
+      "teacher_norm_acc": 57.0,
+      "retention_percentage": 58.77
+    },
+    "arc_challenge": {
+      "student_norm_acc": 21.0,
+      "teacher_norm_acc": 52.0,
+      "retention_percentage": 40.38
+    },
+    "piqa": {
+      "student_norm_acc": 55.5,
+      "teacher_norm_acc": 82.5,
+      "retention_percentage": 67.27
+    },
+    "boolq": {
+      "student_norm_acc": 63.5,
+      "teacher_norm_acc": 79.5,
+      "retention_percentage": 79.87
+    },
+    "winogrande": {
+      "student_norm_acc": 53.0,
+      "teacher_norm_acc": 62.5,
+      "retention_percentage": 84.8
+    },
+    "mmlu": {
+      "student_norm_acc": 20.0,
+      "teacher_norm_acc": 66.5,
+      "retention_percentage": 30.08
+    }
+  },
+  "student_raw_scores": {
+    "hellaswag": {
+      "total": 200,
+      "raw_acc": 34.5,
+      "norm_acc": 33.5
+    },
+    "arc_challenge": {
+      "total": 200,
+      "raw_acc": 21.5,
+      "norm_acc": 21.0
+    },
+    "piqa": {
+      "total": 200,
+      "raw_acc": 55.5,
+      "norm_acc": 55.5
+    },
+    "boolq": {
+      "total": 200,
+      "raw_acc": 63.5,
+      "norm_acc": 63.5
+    },
+    "winogrande": {
+      "total": 200,
+      "raw_acc": 52.0,
+      "norm_acc": 53.0
+    },
+    "mmlu": {
+      "total": 200,
+      "raw_acc": 20.0,
+      "norm_acc": 20.0
+    }
+  },
+  "teacher_raw_scores": {
+    "hellaswag": {
+      "total": 200,
+      "raw_acc": 47.5,
+      "norm_acc": 57.0
+    },
+    "arc_challenge": {
+      "total": 200,
+      "raw_acc": 53.0,
+      "norm_acc": 52.0
+    },
+    "piqa": {
+      "total": 200,
+      "raw_acc": 78.0,
+      "norm_acc": 82.5
+    },
+    "boolq": {
+      "total": 200,
+      "raw_acc": 79.5,
+      "norm_acc": 79.5
+    },
+    "winogrande": {
+      "total": 200,
+      "raw_acc": 63.5,
+      "norm_acc": 62.5
+    },
+    "mmlu": {
+      "total": 200,
+      "raw_acc": 66.5,
+      "norm_acc": 66.5
+    }
+  },
+  "duration_seconds": 665.25
+}
