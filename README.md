@@ -358,6 +358,7 @@ Evaluated across 8 probes (`512` logit positions / `504` next-token transitions;
 | **Lattice-4D Holographic 253M** | `Q4_K_M` | — | — | — | `2.193` / **`96.95%`** | High top-1 agreement (`97.0%`); misses max-drift gate (`165 MiB`) |
 | **Lattice-4D Holographic 253M** | `Q4_K_M (imatrix)` | — | — | — | `1.722` / **`97.51%`** | 🆕 **World's first CDM imatrix quant**; cuts peak drift -21.5%, top-1 climbs to `97.51%` (`165 MiB`) |
 | **Lattice-4D Holographic 253M** | `Q6_K (imatrix)` | — | — | — | **`0.411` / `96.58%` (128 pos)** | ⭐ **Passes strict `<= 0.50` gate at 128 pos** (`0.411 / 0.422`); `0.678 / 97.51%` at 512 pos (`201 MiB`) |
+| **Lattice-4D Holographic 253M** | `Q8 Attn + Q6 (imatrix)` | — | — | — | **`0.4559` / `98.63%` (512 pos)** | ⭐ **Context-Invariant Floor**: Passes strict gate at **both 128 & 512 pos** (`0.4559` flat, `204.8 MiB`) |
 | **Lattice-4E-Lorentz Holographic 253M** | `F32` | — | — | — | `0.000028` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`966 MiB`)** |
 | **Lattice-4E-Lorentz Holographic 253M** | `Q8_0` | — | — | — | **`0.2282` / `99.51%`** | ⭐ **Passes all 3 strict gates on CPU (`259.3 MiB`)** |
 | **Lattice-4E-Lorentz Holographic 253M** | `Q4_K_M` | — | — | — | `1.526` / **`96.68%`** | High top-1 agreement (`96.7%`); misses max-drift gate (`165 MiB`) |
