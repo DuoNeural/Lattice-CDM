@@ -300,6 +300,7 @@ cd cdm-gguf
 | **Lattice-4D Holographic `F32`** | `966.0 MiB` | `163` | — | — | `22` | — | — |
 | **Lattice-4D Holographic `Q8_0`** | `259.3 MiB` | `231` | — | — | `70` | — | — |
 | **Lattice-4D Holographic `Q4_K_M`** | `164.5 MiB` | `265` | — | — | `96` | — | — |
+| **Lattice-4D Holographic `Q4_K_M (imatrix)`** | `164.5 MiB` | `265` | — | — | `96` | — | — |
 | **Lattice-4E Lorentz `F32`** | `966.5 MiB` | `400` | — | — | `22` | — | — |
 | **Lattice-4E Lorentz `Q8_0`** | `259.3 MiB` | `366` | — | — | `73` | — | — |
 | **Lattice-4E Lorentz `Q4_K_M`** | `164.5 MiB` | `473` | — | — | `101` | — | — |
@@ -323,6 +324,7 @@ Evaluated across 8 probes (`512` logit positions / `504` next-token transitions;
 | **Lattice-4D Holographic 253M** | `F32` | — | — | — | `0.000019` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`966 MiB`)** |
 | **Lattice-4D Holographic 253M** | `Q8_0` | — | — | — | **`0.2786` / `99.66%`** | ⭐ **Passes all 3 strict gates on CPU (`259.3 MiB`)** |
 | **Lattice-4D Holographic 253M** | `Q4_K_M` | — | — | — | `2.193` / **`96.95%`** | High top-1 agreement (`97.0%`); misses max-drift gate (`165 MiB`) |
+| **Lattice-4D Holographic 253M** | `Q4_K_M (imatrix)` | — | — | — | `1.722` / **`97.51%`** | 🆕 **World's first CDM imatrix quant**; cuts peak drift -21.5%, top-1 climbs to `97.51%` (`165 MiB`) |
 | **Lattice-4E-Lorentz Holographic 253M** | `F32` | — | — | — | `0.000028` / **`100.0%`** | ⭐ **Exact native parity across 512 positions (`966 MiB`)** |
 | **Lattice-4E-Lorentz Holographic 253M** | `Q8_0` | — | — | — | **`0.2282` / `99.51%`** | ⭐ **Passes all 3 strict gates on CPU (`259.3 MiB`)** |
 | **Lattice-4E-Lorentz Holographic 253M** | `Q4_K_M` | — | — | — | `1.526` / **`96.68%`** | High top-1 agreement (`96.7%`); misses max-drift gate (`165 MiB`) |
