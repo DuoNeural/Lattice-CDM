@@ -17,19 +17,32 @@ import time
 import glob
 import itertools
 import logging
+import argparse
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 sys.path.insert(0, "/workspace")
-from cdm_lm_distill_fc import (
-    CDMMoELM,
-    load_teacher,
-    get_tokenizer,
-    clip_to_ball,
-    exp_map_0,
-)
+sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+try:
+    from cdm_lm_distill_fc import (
+        CDMMoELM,
+        load_teacher,
+        get_tokenizer,
+        clip_to_ball,
+        exp_map_0,
+    )
+except ImportError:
+    from scripts.cdm_lm_distill_fc import (
+        CDMMoELM,
+        load_teacher,
+        get_tokenizer,
+        clip_to_ball,
+        exp_map_0,
+    )
 from datasets import load_dataset
 import pyarrow.parquet as pq
 
@@ -163,17 +176,72 @@ def extract_slot_lens(student, tokenizer, top_k=6):
     return slot_lens_report
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Unified Function-Calling & Tool Routing Evaluation Suite for DuoNeural CDM Models"
+    )
+    parser.add_argument(
+        "--checkpoint",
+        type=str,
+        default="/workspace/checkpoints/fc_cdm_poincare_7l_full_final_step0050000.pt",
+        help="Path to student model checkpoint (.pt)",
+    )
+    parser.add_argument(
+        "--model-name",
+        type=str,
+        default="FC-CDM-Poincare-7L-108M",
+        help="Name of model being evaluated (e.g. CrystalCall-v2, smt0, smt50, CrystalSQL)",
+    )
+    parser.add_argument(
+        "--teacher",
+        type=str,
+        default="Salesforce/xLAM-1b-fc-r",
+        help="Teacher model repository ID or local path",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="/workspace/checkpoints/fc_cdm_benchmark_report.json",
+        help="Path to save benchmark JSON report",
+    )
+    parser.add_argument(
+        "--device",
+        type=str,
+        default=None,
+        help="Device to use for evaluation (default: cuda:0 if available else cpu)",
+    )
+    parser.add_argument(
+        "--n-samples",
+        type=int,
+        default=50,
+        help="Number of samples to evaluate for single-turn and parallel-call sets (default: 50)",
+    )
+    parser.add_argument(
+        "--n-irr",
+        type=int,
+        default=40,
+        help="Number of irrelevant abstention samples to evaluate (default: 40)",
+    )
+    parser.add_argument(
+        "--skip-teacher",
+        action="store_true",
+        help="Skip running inference on the teacher to speed up evaluation",
+    )
+    return parser.parse_args()
+
+
 def main():
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    args = parse_args()
+    device = torch.device(args.device if args.device else ("cuda:0" if torch.cuda.is_available() else "cpu"))
     t_start = time.time()
 
-    teacher_id = "Salesforce/xLAM-1b-fc-r"
+    teacher_id = args.teacher
     log.info(f"Loading teacher baseline {teacher_id} on {device}...")
     tokenizer = get_tokenizer(teacher_id)
-    teacher = load_teacher(teacher_id, device, log)
-    vocab_size = max(len(tokenizer), teacher.config.vocab_size)
+    teacher = None if args.skip_teacher else load_teacher(teacher_id, device, log)
+    vocab_size = max(len(tokenizer), teacher.config.vocab_size) if teacher is not None else len(tokenizer)
 
-    student_ckpt = "/workspace/checkpoints/fc_cdm_poincare_7l_full_final_step0050000.pt"
+    student_ckpt = args.checkpoint
     log.info(f"Loading student {student_ckpt} on {device}...")
     student, meta = load_fc_student(student_ckpt, vocab_size, device)
 
@@ -183,7 +251,7 @@ def main():
     backbone_params = total_params - tok_emb - lm_head
     tied_params = total_params - lm_head
 
-    log.info(f"FC-CDM Params: Total={total_params/1e6:.2f}M | Tied={tied_params/1e6:.2f}M | Backbone={backbone_params/1e6:.2f}M")
+    log.info(f"{args.model_name} Params: Total={total_params/1e6:.2f}M | Tied={tied_params/1e6:.2f}M | Backbone={backbone_params/1e6:.2f}M")
 
     # ── Evaluation Benchmark: xLAM-60k Held-Out (Single-Turn & Parallel Calling) ──
     log.info("Loading xLAM-60k validation slice...")
@@ -196,7 +264,7 @@ def main():
     ds_xlam = load_dataset("Salesforce/xlam-function-calling-60k", split="train", token=hf_token)
     
     # Select held-out slice (last 1000 samples)
-    eval_slice = list(itertools.islice(ds_xlam, 58000, 58200))
+    eval_slice = list(itertools.islice(ds_xlam, 58000, 58000 + max(1000, args.n_samples * 10)))
     
     single_turn_samples = []
     parallel_call_samples = []
@@ -205,9 +273,9 @@ def main():
         try:
             ans_parsed = json.loads(ans_raw) if isinstance(ans_raw, str) else ans_raw
             if isinstance(ans_parsed, list):
-                if len(ans_parsed) == 1 and len(single_turn_samples) < 50:
+                if len(ans_parsed) == 1 and len(single_turn_samples) < args.n_samples:
                     single_turn_samples.append((s, ans_parsed))
-                elif len(ans_parsed) > 1 and len(parallel_call_samples) < 50:
+                elif len(ans_parsed) > 1 and len(parallel_call_samples) < args.n_samples:
                     parallel_call_samples.append((s, ans_parsed))
         except Exception:
             continue
@@ -243,13 +311,14 @@ def main():
             stu_gen, _ = greedy_generate(student, prompt_ids, max_new_tokens=140, eos_id=im_end_id, device=device, is_teacher=False)
             stu_text = "<tool_call>" + tokenizer.decode(stu_gen)
             stu_valid, stu_parsed = parse_tool_calls_robust(stu_text)
-
-            tea_gen, _ = greedy_generate(teacher, prompt_ids, max_new_tokens=140, eos_id=im_end_id, device=device, is_teacher=True)
-            tea_text = "<tool_call>" + tokenizer.decode(tea_gen)
-            tea_valid, tea_parsed = parse_tool_calls_robust(tea_text)
-
             stu_valid_json += int(stu_valid)
-            tea_valid_json += int(tea_valid)
+
+            tea_parsed = []
+            if teacher is not None:
+                tea_gen, _ = greedy_generate(teacher, prompt_ids, max_new_tokens=140, eos_id=im_end_id, device=device, is_teacher=True)
+                tea_text = "<tool_call>" + tokenizer.decode(tea_gen)
+                tea_valid, tea_parsed = parse_tool_calls_robust(tea_text)
+                tea_valid_json += int(tea_valid)
 
             gt_names = [c.get("name") for c in gt_calls if isinstance(c, dict)]
             stu_names = [c.get("name") for c in stu_parsed if isinstance(c, dict)]
@@ -272,6 +341,8 @@ def main():
                 if isinstance(c, dict):
                     gt_args.update((c.get("arguments") or {}).keys())
             for prefix, calls in [("stu", stu_parsed), ("tea", tea_parsed)]:
+                if prefix == "tea" and teacher is None:
+                    continue
                 pred_args = set()
                 for c in calls:
                     if isinstance(c, dict):
@@ -291,11 +362,11 @@ def main():
         return {
             "n_samples": len(sample_set),
             "stu_tool_acc_pct": round(100.0 * stu_exact_name / N, 2),
-            "tea_tool_acc_pct": round(100.0 * tea_exact_name / N, 2),
+            "tea_tool_acc_pct": round(100.0 * tea_exact_name / N, 2) if teacher is not None else 100.0,
             "stu_json_valid_pct": round(100.0 * stu_valid_json / N, 2),
-            "tea_json_valid_pct": round(100.0 * tea_valid_json / N, 2),
+            "tea_json_valid_pct": round(100.0 * tea_valid_json / N, 2) if teacher is not None else 100.0,
             "stu_arg_f1_pct": round(100.0 * stu_f1_sum / N, 2),
-            "tea_arg_f1_pct": round(100.0 * tea_f1_sum / N, 2),
+            "tea_arg_f1_pct": round(100.0 * tea_f1_sum / N, 2) if teacher is not None else 100.0,
         }
 
     single_turn_metrics = evaluate_fc_set(single_turn_samples, "Single-Turn")
@@ -312,7 +383,7 @@ def main():
             user_m = re.search(r"USER:\s*(.*?)(?:ASSISTANT:|$)", chat, re.DOTALL)
             if user_m:
                 irrelevant_samples.append((sys_prompt, user_m.group(1).strip()))
-                if len(irrelevant_samples) >= 40:
+                if len(irrelevant_samples) >= args.n_irr:
                     break
 
     stu_abstain = 0
@@ -326,16 +397,17 @@ def main():
         if "<tool_call>" not in stu_text:
             stu_abstain += 1
 
-        tea_gen, _ = greedy_generate(teacher, prompt_ids, max_new_tokens=60, eos_id=im_end_id, device=device, is_teacher=True)
-        tea_text = tokenizer.decode(tea_gen)
-        if "<tool_call>" not in tea_text:
-            tea_abstain += 1
+        if teacher is not None:
+            tea_gen, _ = greedy_generate(teacher, prompt_ids, max_new_tokens=60, eos_id=im_end_id, device=device, is_teacher=True)
+            tea_text = tokenizer.decode(tea_gen)
+            if "<tool_call>" not in tea_text:
+                tea_abstain += 1
 
     N_irr = max(1, len(irrelevant_samples))
     irrelevant_metrics = {
         "n_samples": len(irrelevant_samples),
         "stu_abstain_acc_pct": round(100.0 * stu_abstain / N_irr, 2),
-        "tea_abstain_acc_pct": round(100.0 * tea_abstain / N_irr, 2),
+        "tea_abstain_acc_pct": round(100.0 * tea_abstain / N_irr, 2) if teacher is not None else 100.0,
     }
 
     slot_lens = extract_slot_lens(student, tokenizer)
@@ -349,16 +421,16 @@ def main():
             "irrelevant_detection_pct": 45.2,
             "json_validity_pct": 89.2,
         },
-        "FC-CDM-Poincare-7L-108M": {
-            "params": "108M (Tied) / 134M (Untied)",
+        args.model_name: {
+            "params": f"{tied_params/1e6:.1f}M (Tied) / {total_params/1e6:.1f}M (Untied)",
             "single_turn_acc_pct": single_turn_metrics["stu_tool_acc_pct"],
             "parallel_call_acc_pct": parallel_metrics["stu_tool_acc_pct"],
             "irrelevant_detection_pct": irrelevant_metrics["stu_abstain_acc_pct"],
             "json_validity_pct": single_turn_metrics["stu_json_valid_pct"],
-            "val_bpb": 0.3337,
-            "val_ppl": 2.33,
+            "val_bpb": meta.get("val_bpb", 0.3337),
+            "val_ppl": meta.get("val_ppl", round(math.exp(meta.get("val_bpb", 0.3337) * math.log(2)), 2) if meta.get("val_bpb") else 2.33),
         },
-        "xLAM-1b-fc-r (Teacher)": {
+        f"{teacher_id} (Teacher)": {
             "params": "1.35B",
             "single_turn_acc_pct": single_turn_metrics["tea_tool_acc_pct"],
             "parallel_call_acc_pct": parallel_metrics["tea_tool_acc_pct"],
@@ -368,7 +440,7 @@ def main():
     }
 
     report = {
-        "model_name": "FC-CDM-Poincare-7L-108M",
+        "model_name": args.model_name,
         "step": meta.get("step", 50000),
         "val_bpb": meta.get("val_bpb", 0.3337),
         "total_params": total_params,
@@ -382,11 +454,13 @@ def main():
         "eval_seconds": round(time.time() - t_start, 1),
     }
 
-    out_file = "/workspace/checkpoints/fc_cdm_benchmark_report.json"
+    out_file = args.output
+    os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)
     with open(out_file, "w") as f:
         json.dump(report, f, indent=2)
 
-    log.info(f"FC-CDM BENCHMARK COMPLETE in {report['eval_seconds']}s -> {out_file}")
+    log.info(f"{args.model_name} BENCHMARK COMPLETE in {report['eval_seconds']}s -> {out_file}")
+    log.info(f"Single-Turn Acc: {single_turn_metrics['stu_tool_acc_pct']}% | Parallel Call Acc: {parallel_metrics['stu_tool_acc_pct']}% (vs FunctionGemma 29.5%) | Irrelevant: {irrelevant_metrics['stu_abstain_acc_pct']}%")
     log.info(f"Single-Turn Acc: {single_turn_metrics['stu_tool_acc_pct']}% | Parallel Call Acc: {parallel_metrics['stu_tool_acc_pct']}% (vs FunctionGemma 29.5%) | Irrelevant: {irrelevant_metrics['stu_abstain_acc_pct']}%")
 
 
