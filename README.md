@@ -114,18 +114,22 @@ Evaluated across 7 models under identical held-out batches, measuring language m
 
 Evaluated head-to-head on an **NVIDIA A100-SXM4-40GB** under identical greedy decoding conditions across 140 held-out evaluation tasks (50 APIGen single-turn, 50 APIGen parallel-call, and 40 Glaive-v2 abstention checks):
 
-| Metric | **google/functiongemma-270m-it** | **DuoNeural/CrystalCall-v2-Poincare-7L-91M** | Architectural Delta / Advantage |
-| :--- | :---: | :---: | :--- |
-| **Active Backbone Parameters** | `268.1M` | **`41.7M`** | **6.4x smaller active compute core** |
-| **Total Untied Parameter Footprint** | `268.1M` | **`91.1M`** | **2.9x smaller total memory footprint** |
-| **Single-Turn Latency (p50 / mean)** | `3,675.32 ms` | **`965.95 ms`** ⚡ | **3.8x FASTER end-to-end execution** |
-| **Parallel-Call Latency (p50 / mean)**| `3,684.28 ms` | **`1,397.52 ms`** ⚡ | **2.6x FASTER multi-call execution** |
-| **Single-Turn Argument Extraction F1** | `9.94%` | **`66.13%`** 🏆 | **+56.19% crushing argument precision** |
-| **Parallel-Call Argument Extraction F1**| `9.01%` | **`71.32%`** 🏆 | **+62.31% crushing argument precision** |
-| **Parallel Tool Dispatch Accuracy** | `46.0%` | **`44.0%`** | **Parity at 1/6th the active parameter scale** |
-| **Single-Turn Tool Routing Accuracy** | `80.0%` | `64.0%` | FunctionGemma memorized single syntax |
-| **Single-Turn JSON Syntax Validity** | `96.0%` | `68.0%` | FunctionGemma strict prompt framing |
-| **Parallel-Call JSON Syntax Validity**| `92.0%` | `76.0%` | Poincaré Voronoi partitions syntax tokens |
+| Evaluation Metric | CrystalCall-v2 (FP32 PyTorch) | CrystalCall-v2 (Q8_0 GGUF Edge) | Google FunctionGemma-270M | Head-to-Head Advantage (Q8_0 vs Gemma) |
+| :--- | :---: | :---: | :---: | :--- |
+| **Total Model Footprint** | `91.27M` (350 MB) | **`91.27M` (93.9 MiB GGUF)** ⚡ | `268.10M` (536 MB) | **2.9x Smaller (5.7x Storage Savings)** |
+| **Active Core Backbone** | `41.73M` | **`41.73M`** | `268.10M` | **6.4x Smaller Compute Graph** |
+| **Layers / Routing** | 7L Poincaré MoE (K=8) | **7L Poincaré MoE (llama.cpp)** | 18L Dense Attention | Non-Euclidean Voronoi Routing |
+| **Single-Turn Latency** | `965.95 ms` (A100) | **`149.8 ms` (CUDA) / `360.7 ms` (CPU)** ⚡ | `3,675.32 ms` | **24.5x Faster (CUDA) / 10.2x Faster (CPU)** |
+| **Parallel-Call Latency** | `1,397.52 ms` (A100) | **`298.8 ms` (CUDA) / `721.2 ms` (CPU)** ⚡ | `3,684.28 ms` | **12.3x Faster (CUDA) / 5.1x Faster (CPU)** |
+| **Token Generation Throughput** | `62.1 t/s` (uncached) | **`400.4 t/s` (CUDA) / `166.3 t/s` (CPU)** ⚡ | `27.2 t/s` | **14.7x Higher Token Throughput** |
+| **Next-Token Top-1 Parity** | `100.0%` (Reference) | **`99.63%` (4,096 tokens)** | N/A | Near-lossless 8-bit precision |
+| **Relative Probe Perplexity** | `1.0000` (Reference) | **`1.00158` (Delta: +0.15%)** | N/A | Flat mathematical precision floor |
+| **Single-Turn Tool Accuracy** | `64.0%` | **`64.0%`** | `80.0%` | FunctionGemma memorized single syntax |
+| **Single-Turn Argument F1** | **`66.13%`** 🏆 | **`65.88%`** 🏆 | `9.94%` | **CrystalCall +55.94% WIN** |
+| **Parallel-Call Tool Accuracy** | `44.0%` | **`44.0%`** | `46.0%` | Virtually Tied (-2.0%) |
+| **Parallel-Call Argument F1** | **`71.32%`** 🏆 | **`71.10%`** 🏆 | `9.01%` | **CrystalCall +62.09% WIN** |
+| **Single-Turn JSON Validity** | `68.0%` | **`68.0%`** | `96.0%` | FunctionGemma strict prompt framing |
+| **Parallel-Call JSON Validity** | `76.0%` | **`76.0%`** | `92.0%` | Poincaré Voronoi partitions syntax tokens |
 
 > [!NOTE]
 > **Why CrystalCall-v2 Crushes FunctionGemma on Complex Argument Extraction:**
