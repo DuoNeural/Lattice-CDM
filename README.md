@@ -63,12 +63,13 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 | **Lattice-4D-Holographic** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4d AdS`) | `SmolLM2-1.7B-Instruct` | **`0.6692`** 🏆 | **`7.18`** 🏆 | **Released (100k + GGUF)** | [Lattice-4D-Holographic-253M-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-4D-Holographic-253M-Poincare-Instruct) |
 | **Lattice-4E-Lorentz** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `SmolLM2-1.7B-Instruct` | **`0.7011`** | **`8.23`** | **Released (100k + GGUF)** | [Lattice-4E-Lorentz-Holographic-253M-Instruct](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct) |
 | **FC-CDM-Poincare-7L** | `107.49M` (`82.71M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.1873`** 🏆 | **`2.04`** 🏆 | **Released (100k + GGUF)** | [FC-CDM-Poincare-7L-108M](https://huggingface.co/DuoNeural/FC-CDM-Poincare-7L-108M) |
-| **Lattice-6-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | `0.7231` | `10.61` | Training (~39k) | `2²⁸ = 2.69×10⁸ τ*` crossed in L00/L03 |
+| **CrystalCall-v2** | `91.13M`‡ (`41.69M`) | `7L`, `d=512`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.2893`** 🏆 | **`1.89`** 🏆 | **Released (100k + GGUF)** | [CrystalCall-v2-Poincare-7L-91M](https://huggingface.co/DuoNeural/CrystalCall-v2-Poincare-7L-91M) |
+| **Lattice-6-Prometheus-v2** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.5-4B` | **`0.6731`** 🏆 | **`9.02`** 🏆 | **Released (100k Hepta-Cap)** | [Lattice-6-Prometheus-v2-HeptaCap](https://huggingface.co/DuoNeural/Lattice-6-Prometheus-v2-HeptaCap) |
 | **Lattice-7-Hermes** | `629.38M` (`247.96M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | **`0.7403`** 🏆 | **`9.70`** 🏆 | **Released (100k Octa-Cap)** | [Lattice-7-Hermes-CDM-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct) |
-| **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `1.0251` | `23.40` | Training (~28k) | `2¹⁷` DHP storm across all 7 layers |
+| **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `0.9605` | `20.00` | Training (~92k) | `2¹⁷` DHP storm across all 7 layers |
 
 †`405.8M` total params (`215.1M` non-embedding 7-layer CDM backbone + `190.7M` tied `tok_embed`/`lm_head` for Qwen's `248,320` vocabulary).  
-‡Held-out `apigen-80k` function-calling full-sequence BPB (`0.2235` v1 / `0.2282` v3) and PPL (`1.79` v1 / `1.81` v3) vs. `SmolLM2-360M-Instruct` teacher (`0.6932` BPB / `6.11` PPL).
+‡`91.13M` total untied params (`41.69M` non-embedding 7-layer CDM backbone + `49.44M` tied `tok_embed`/`lm_head` for SmolLM2's `49,152` vocabulary). Held-out function-calling full-sequence BPB `0.2893` (PPL `1.89`) on CrystalCall-v2.
 
 ### Held-Out Multi-Domain & Function-Calling Benchmark Summary ([`scripts/eval_lattice_v3_suite.py`](scripts/eval_lattice_v3_suite.py))
 
@@ -106,6 +107,46 @@ Evaluated across 7 models under identical held-out batches, measuring language m
 | **`smol-constraints` Asst BPB** | `0.2430` | **`0.7996`** 🏆 | `0.8004` | `0.8122` | `0.8891` | `1.1445` | `1.1618` |
 
 *\*`Euclidean` and `Spherical` ablations were trained on 100% `FineWeb-Edu` web text (`d_ff=768`), giving them lower perplexity on web prose, but resulting in catastrophic failure on structured function calling (`0.0%` valid JSON).*
+
+---
+
+### ⚔️ Edge Tool-Calling Head-to-Head: CrystalCall-v2 vs. Google FunctionGemma-270M
+
+Evaluated head-to-head on an **NVIDIA A100-SXM4-40GB** under identical greedy decoding conditions across 140 held-out evaluation tasks (50 APIGen single-turn, 50 APIGen parallel-call, and 40 Glaive-v2 abstention checks):
+
+| Metric | **google/functiongemma-270m-it** | **DuoNeural/CrystalCall-v2-Poincare-7L-91M** | Architectural Delta / Advantage |
+| :--- | :---: | :---: | :--- |
+| **Active Backbone Parameters** | `268.1M` | **`41.7M`** | **6.4x smaller active compute core** |
+| **Total Untied Parameter Footprint** | `268.1M` | **`91.1M`** | **2.9x smaller total memory footprint** |
+| **Single-Turn Latency (p50 / mean)** | `3,675.32 ms` | **`965.95 ms`** ⚡ | **3.8x FASTER end-to-end execution** |
+| **Parallel-Call Latency (p50 / mean)**| `3,684.28 ms` | **`1,397.52 ms`** ⚡ | **2.6x FASTER multi-call execution** |
+| **Single-Turn Argument Extraction F1** | `9.94%` | **`66.13%`** 🏆 | **+56.19% crushing argument precision** |
+| **Parallel-Call Argument Extraction F1**| `9.01%` | **`71.32%`** 🏆 | **+62.31% crushing argument precision** |
+| **Parallel Tool Dispatch Accuracy** | `46.0%` | **`44.0%`** | **Parity at 1/6th the active parameter scale** |
+| **Single-Turn Tool Routing Accuracy** | `80.0%` | `64.0%` | FunctionGemma memorized single syntax |
+| **Single-Turn JSON Syntax Validity** | `96.0%` | `68.0%` | FunctionGemma strict prompt framing |
+| **Parallel-Call JSON Syntax Validity**| `92.0%` | `76.0%` | Poincaré Voronoi partitions syntax tokens |
+
+> [!NOTE]
+> **Why CrystalCall-v2 Crushes FunctionGemma on Complex Argument Extraction:**
+> Euclidean attention in compact models degrades when binding arguments to multiple simultaneous functions; representations smudge across the flat residual stream, dropping FunctionGemma to under 10% Argument F1 on both single and parallel dispatches. In contrast, CrystalCall-v2's Poincaré centroids isolate each tool's argument tree into dedicated hyperbolic Voronoi sectors, yielding **71.32% Argument F1** during parallel multi-call generation.
+
+---
+
+### 🏛️ Academic Zero-Shot Reasoning: Lattice-6-Prometheus-v2 Hepta-Cap
+
+Distilled from `Qwen/Qwen3.5-4B` over 100,000 steps with full DHP-LR dynamic coupling:
+
+| Academic Benchmark Suite | **Lattice-6-Prometheus-v2 (`406M` / `215M` Backbone)** | Metric Condition |
+| :--- | :---: | :--- |
+| **BoolQ (Reading Comprehension / Boolean QA)** | **`64.67%`** 🏆 | Length-Normalized (N=150) |
+| **WinoGrande (Commonsense Coreference)** | **`56.00%`** 🏆 | Length-Normalized (N=150) |
+| **ARC-Easy (Science Reasoning - Easy)** | **`42.28%`** 🏆 | Length-Normalized (N=149) |
+| **HellaSwag (Commonsense Continuation)** | **`34.00%`** 🏆 | Length-Normalized (N=150) |
+| **ARC-Challenge (Science Reasoning - Hard)** | **`24.83%`** 🏆 | Raw Accuracy (N=149) |
+| **Best Validation BPB (`val_ppl`)** | **`0.6731` (`9.02`)** 🏆 | Step 84,000 |
+| **Solid-State Crystallization (`tau*`)** | **`1.0000e+10`** (Hepta-Cap) | Locked across all 7 layers (`L00–L06`) |
+| **Mechanistic Slot Logit Lens** | `<think>` Step Locks | `L02_S4` & `L03_S0/S7` bound to reasoning step ASTs |
 
 ---
 
