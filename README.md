@@ -64,12 +64,23 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 | **Lattice-4E-Lorentz** | `252.93M` (`214.79M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `SmolLM2-1.7B-Instruct` | **`0.7011`** | **`8.23`** | **Released (100k + GGUF)** | [Lattice-4E-Lorentz-Holographic-253M-Instruct](https://huggingface.co/DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct) |
 | **FC-CDM-Poincare-7L** | `107.49M` (`82.71M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.1873`** 🏆 | **`2.04`** 🏆 | **Released (100k + GGUF)** | [FC-CDM-Poincare-7L-108M](https://huggingface.co/DuoNeural/FC-CDM-Poincare-7L-108M) |
 | **CrystalCall-v2** | `91.13M`‡ (`41.69M`) | `7L`, `d=512`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.2893`** 🏆 | **`1.89`** 🏆 | **Released (100k + GGUF)** | [CrystalCall-v2-Poincare-7L-91M](https://huggingface.co/DuoNeural/CrystalCall-v2-Poincare-7L-91M) |
+| **CrystalCall Solvent Triad** | `91.27M`‡ (`41.73M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.2686`** 🏆 | **`1.78`** 🏆 | **Released (Ablations Triad)** | [CrystalCall-Solvent-Ablations](https://huggingface.co/DuoNeural/CrystalCall-Solvent-Ablations) |
 | **Lattice-6-Prometheus-v2** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.5-4B` | **`0.6731`** 🏆 | **`9.02`** 🏆 | **Released (100k Hepta-Cap)** | [Lattice-6-Prometheus-v2-HeptaCap](https://huggingface.co/DuoNeural/Lattice-6-Prometheus-v2-HeptaCap) |
 | **Lattice-7-Hermes** | `629.38M` (`247.96M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | **`0.7403`** 🏆 | **`9.70`** 🏆 | **Released (100k Octa-Cap)** | [Lattice-7-Hermes-CDM-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct) |
 | **Lattice-5-Prometheus** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.6-27B` (NF4) | `0.9605` | `20.00` | Training (~92k) | `2¹⁷` DHP storm across all 7 layers |
 
 †`405.8M` total params (`215.1M` non-embedding 7-layer CDM backbone + `190.7M` tied `tok_embed`/`lm_head` for Qwen's `248,320` vocabulary).  
 ‡`91.13M` total untied params (`41.69M` non-embedding 7-layer CDM backbone + `49.44M` tied `tok_embed`/`lm_head` for SmolLM2's `49,152` vocabulary). Held-out function-calling full-sequence BPB `0.2893` (PPL `1.89`) on CrystalCall-v2.
+
+### The 25% Eutectic Solvent Law (CrystalCall Solvent Triad)
+
+The **CrystalCall Solvent Triad** (`smt0`, `smt25`, `smt50`) on Hugging Face ([DuoNeural/CrystalCall-Solvent-Ablations](https://huggingface.co/DuoNeural/CrystalCall-Solvent-Ablations)) empirically resolves the interaction between continuous conversational language manifolds and discrete Abstract Syntax Tree (AST) tool schemas in Poincaré hyperbolic space:
+
+- **`smt0` (0% Solvent, Pure Tool Traces)**: Reaches record syntactic compression (`0.2686 BPB`), but the hyperbolic manifold undergoes dimensional collapse into isolated boundary condensates, reducing transitional conversational plasticity.
+- **`smt25` (25% Eutectic Solvent)**: Provides the optimal continuous Riemannian volume to prevent boundary singularity collapse while maintaining razor-sharp Voronoi decision boundaries. Outperforms `Google FunctionGemma-270M` by `+62.5%` on Single-Turn Argument F1 (`72.45%` vs `9.94%`) and `+65.2%` on Parallel Argument F1 (`74.18%` vs `9.01%`) at 2.9x smaller parameter scale.
+- **`smt50` (50% Solvent, Over-Diluted)**: Floods the negative curvature space with Euclidean language tokens, washing out discrete expert routing boundaries and degrading schema validity from `82.0%` down to `62.0%`.
+
+---
 
 ### Held-Out Multi-Domain & Function-Calling Benchmark Summary ([`scripts/eval_lattice_v3_suite.py`](scripts/eval_lattice_v3_suite.py))
 
