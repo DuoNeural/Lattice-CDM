@@ -66,9 +66,9 @@ Standard Euclidean Transformers and conventional linear-router Mixture-of-Expert
 | **CrystalCall-v2** | `91.13M`‡ (`41.69M`) | `7L`, `d=512`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.2893`** 🏆 | **`1.89`** 🏆 | **Released (100k + GGUF)** | [CrystalCall-v2-Poincare-7L-91M](https://huggingface.co/DuoNeural/CrystalCall-v2-Poincare-7L-91M) |
 | **CrystalCall Solvent Triad** | `91.27M`‡ (`41.73M`) | `7L`, `d=768`, `E=4` (`v3 FC`) | `Salesforce/xLAM-1b-fc-r` | **`0.2686`** 🏆 | **`1.78`** 🏆 | **Released (Triad + GGUF)** | [CrystalCall-Solvent-Ablations](https://huggingface.co/DuoNeural/CrystalCall-Solvent-Ablations) |
 | **Lattice-6-Prometheus-v2** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.5-4B` | **`0.6731`** 🏆 | **`9.02`** 🏆 | **Released (100k Hepta-Cap)** | [Lattice-6-Prometheus-v2-HeptaCap](https://huggingface.co/DuoNeural/Lattice-6-Prometheus-v2-HeptaCap) |
-| **Lattice-5-Prometheus-v2** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | **`0.9605`** 🏆 | **`20.00`** 🏆 | **Released (100k Hepta-Cap)** | [Lattice-5-Prometheus-v2](https://huggingface.co/DuoNeural/Lattice-5-Prometheus-v2) |
-| **CrystalCall-v5-DCG** | `116.09M` (`91.32M`) | `7L`, `d=768`, `E=4` (`v5 DCG`) | `Salesforce/xLAM-1b-fc-r` | **`0.0659`** 🏆 | **`1.18`** 🏆 | **Released (DCG Gated)** | [CrystalCall-v5-DCG](https://huggingface.co/DuoNeural/CrystalCall-v5-DCG) |
-| **CrystalCall-Lorentz-ADS-7L** | `239.91M` (`215.14M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `Salesforce/xLAM-1b-fc-r` | **`0.0117`** 🏆 | **`1.01`** 🏆 | **Complete (100k Full ILC)** | [CrystalCall-Lorentz-ADS-7L](https://huggingface.co/DuoNeural/CrystalCall-Lorentz-ADS-7L) |
+| **Lattice-5-Prometheus-v2** | `405.8M`† (`215.1M`) | `7L`, `d=768`, `E=4` (`v4`) | `Qwen/Qwen3.8-27B` (NF4) | **`0.9605`** 🏆 | **`20.00`** 🏆 | **Released (100k + GGUF)** | [Lattice-5-Prometheus-v2](https://huggingface.co/DuoNeural/Lattice-5-Prometheus-v2) |
+| **CrystalCall-v5-DCG** | `116.09M` (`91.32M`) | `7L`, `d=768`, `E=4` (`v5 DCG`) | `Salesforce/xLAM-1b-fc-r` | **`0.0659`** 🏆 | **`1.18`** 🏆 | **Released (DCG Gated + GGUF)** | [CrystalCall-v5-DCG](https://huggingface.co/DuoNeural/CrystalCall-v5-DCG) |
+| **CrystalCall-Lorentz-ADS-7L** | `239.91M` (`215.14M`) | `7L`, `d=768`, `E=4` (`v4e Lorentz`) | `Salesforce/xLAM-1b-fc-r` | **`0.0117`** 🏆 | **`1.01`** 🏆 | **Released (100k ILC + GGUF)** | [CrystalCall-Lorentz-ADS-7L](https://huggingface.co/DuoNeural/CrystalCall-Lorentz-ADS-7L) |
 | **Lattice-7-Hermes** | `629.38M` (`247.96M`) | `8L`, `d=768`, `E=4` (`v3`) | `Qwen/Qwen3.5-4B` | **`0.7403`** 🏆 | **`9.70`** 🏆 | **Released (100k Octa-Cap)** | [Lattice-7-Hermes-CDM-Poincare-Instruct](https://huggingface.co/DuoNeural/Lattice-7-Hermes-CDM-Poincare-Instruct) |
 
 †`405.8M` total params (`215.1M` non-embedding 7-layer CDM backbone + `190.7M` tied `tok_embed`/`lm_head` for Qwen's `248,320` vocabulary).  
@@ -461,7 +461,7 @@ Evaluated across 8 probes (`512` logit positions / `504` next-token transitions;
 
 ### 1. Dynamic Cardinality Gating (DCG) & The Simple-Parallel Tradeoff Resolution
 - **The Discrete Slot Pathology:** In pure hyperbolic Voronoi routing, K = 8 slots force multi-token representations, producing extraordinary parallel function calling (+24.6pp to +26.8pp over FunctionGemma-270M) but overcalling tools on simple single-call queries.
-- **The DCG Solution:** CrystalCall-v5-DCG introduces a 3,843-parameter cardinality bottleneck MLP (`768 -> 4 -> 3`) operating on layer L05 hidden representations.
+- **The DCG Solution:** CrystalCall-v5-DCG introduces a 3,843-parameter direct linear classification layer (`Linear(768, 3)` with preceding `LayerNorm(768)`) operating on layer L05 hidden representations.
 - **Empirical Results:** Reaches **98.5% overall cardinality accuracy** on held-out xLAM splits (100.0% parallel precision, 97.06% single-call precision, and 99.997% confidence in abstention on irrelevant queries). On tool execution, it achieves **90.0% all-names parallel routing** and **100.0% single routing**, resolving the slot pollution dilemma with +0.003% parameter overhead.
 
 ### 2. Full 7-Layer Inter-Layer Cascade (ILC) on Lorentz ADS-7L
@@ -474,6 +474,17 @@ Forensic analysis across 103,600+ continuous steps on our A4000 compute node est
 2. **Dynamic Ordering 7/7 Law:** Cross-layer propagation followed a strict invariant sequence: `L04 -> L06 -> L02 -> L00 -> L01 -> L03 -> L05`, proving that semantic representations originate in bulk layer L04 before propagating outward to boundary layers.
 3. **True Wave Final Convergence:** Interior layers condense into coherent superfluid macro-states as global learning rates decay toward the phase floor.
 4. **The L04-L05 Laggard Spread:** Layer L05 exhibited an extended relaxation time (spread = 645 rungs behind L04), serving as an entropy buffer absorbing high-frequency syntactic variance before boundary closure.
+
+### 4. Native GGUF Numerical Parity Screen (October 30, 2026 Audit)
+Teacher-forced numerical parity screening executed on Kilonova CPU across 128 and 512 context positions (evaluating teacher-forced logit drift and top-1 agreement against frozen FP32 PyTorch references):
+
+| Model | GGUF Artifact | Size | Max Drift (128 / 512 pos) | Top-1 Agreement (128 / 512 pos) | Architectural & Precision Notes |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Lattice-5-Prometheus-v2** | `lattice5_prometheus_v2-q8-attn-q6-rest-text.gguf` | 912 MiB | 0.170 / 0.265 | **100.0% / 99.22%** | Hybrid: Q8_0 attention (Q/K/V/O), Q6_K experts, unquantized F32 embedding (248,320 x 768, 762.8 MB) + geometry/norms |
+| **CrystalCall-Lorentz-ADS-7L** | `crystalcall_lorentz_ads7l-q8_0.gguf` | 244.5 MiB | 0.207 / 0.207 | **100.0% / 100.0%** | Full Q8_0 quantization, exact top-1 logit parity across all 512 context positions |
+| **CrystalCall-v5-DCG** | `crystalcall_v5_dcg-q8_0.gguf` | 119.0 MiB | 0.374 / 0.485 | **99.22% / 99.61%** | Full Q8_0 quantization, passes strict max-drift gate (<= 0.50) across both 128 and 512 positions |
+
+*Note: Parity screens verify numerical logit fidelity against the PyTorch reference implementation and do not measure downstream task accuracy or generation speed.*
 
 ---
 
